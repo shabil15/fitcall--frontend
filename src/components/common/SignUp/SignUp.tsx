@@ -8,12 +8,12 @@ const Signup = () => {
   return (
     <>
       <section>
-        <div className="flex h-screen">
+        <div className="flex h-screen ">
           {/* Left Pane */}
           <img
             
-            src="/images/FlexifyBlack.png"
-            className="absolute w-28 m-8 lg:block hidden"
+            src="../../../src/assets/Group 880.png"
+            className="absolute  w-28 m-8 lg:block hidden"
             alt=""
           />
           <div className="w-full bg-white lg:w-1/2 flex items-center justify-end sm:justify-center">
@@ -27,11 +27,11 @@ const Signup = () => {
                       className="w-52 mx-auto sm:mb-12 lg:hidden"
                       alt=""
                     />
-                    <h1 className="text-xl lg:text-2xl m-0 p-0 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
-                      Welcome Back 
+                    <h1 className="text-xl lg:text-4xl text-center  m-0 p-0 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+                      Welcome to FitCall 
                     </h1>
                     <p
-                      className="font-poppins text-lg font-light"
+                      className="font-poppins text-center text-lg font-light"
                       style={{ marginTop: "0.5rem" }}
                     >
                       Begin Your Transformation
