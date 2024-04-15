@@ -2,13 +2,13 @@ import { useState } from "react";
 
 
 interface FormData {
-  email: string;
+  username: string;
   password: string;
 }
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -63,7 +63,7 @@ const Login: React.FC = () => {
                           </label>
                           <input
                             type="text"
-                            
+                            value={formData.username}
                             name="username"
                             onChange={handleChange}
                             className="bg-cyan-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

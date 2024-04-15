@@ -20,9 +20,9 @@ function Hero() {
     <div className="max-w-xl  ltr:sm:text-left rtl:sm:text-right "  data-aos="fade-right"
      data-aos-offset="400"
      data-aos-easing="ease-in-sine">
-      <h1 className="text-7xl font-extrabold text-primary sm:text-9xl ">
-        Be Your 
-        <strong className="text-customFont text-white"> Best Self </strong>
+      <h1 className="text-5xl font-extrabold text-primary sm:text-8xl ">
+      Impact
+        <span className="text-customFont block text-white">More Lives</span>
       </h1>
 
       <p className="mt-4 max-w-lg text-white text-2xl sm:text-xl/relaxed">

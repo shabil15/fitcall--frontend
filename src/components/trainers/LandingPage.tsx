@@ -6,8 +6,8 @@ function LandingPage() {
       <div className='' data-aos="fade-up">
 
       <h1 className=' text-white text-5xl pt-9  px-16 font-extrabold font-customFont  text-center'>Your Personal</h1>
-      <h1 className='text-primary text-5xl pt-5 px-16 font-extrabold font-customFont text-center '>Fitness Companion</h1>
-      <p className=' text-white sm:text-2xl  text-center py-8 md:px-16 '>At fitCall, we're more than a fitness platform. We're your dedicated partner, providing personalized support, expert guidance, and comprehensive resources to help you achieve your goals. Access tailored training plans, expert trainers, and community support. Start your journey with fitCall today.</p>
+      <h1 className='text-primary text-5xl pt-5 px-16 font-extrabold font-customFont text-center '>Training Hub</h1>
+      <p className=' text-white sm:text-2xl  text-center py-8 md:px-16 '>As a dedicated fitness professional, your unwavering passion for guiding others toward their fitness aspirations fuels your every endeavor. Here at fitCall, we recognize and honor that dedication by equipping you with an arsenal of cutting-edge tools and unwavering support. With our platform, you're empowered to forge profound transformations in the lives of your clients, turning their fitness dreams into tangible realities.</p>
       </div>
 
       {/* {Categories} */}
@@ -55,10 +55,10 @@ function LandingPage() {
         </div>
         <div className="w-full md:w-2/5 lg:w-1/2 px-6 text-center md:text-left lg:pl-12">
             <h3 className="font-bold mt-8 text-3xl md:mt-0 md:text-4xl sm:text-2xl">
-            Tailored training <span className='text-primary block'>experience</span>
+            Empower Your  <span className='text-primary block'>Clients</span>
             </h3>
             <p className="sm:text-lg mt-6">
-            Personalized training plans tailored to your goals and preferences. Guided by expert trainers every step of the way. 
+            With fitCall, you have the opportunity to empower your clients to reach their full potential. Tailor training plans to their unique needs and guide them every step of the way towards success.
             </p>
         </div>
     </div>
@@ -69,10 +69,10 @@ function LandingPage() {
         </div>
         <div className="w-full md:w-2/5 lg:w-1/2 px-4 md:order-first text-center md:text-left lg:pr-12">
             <h3 className="font-bold mt-8 text-3xl md:mt-0 md:text-4xl ">
-            Flexible Fitness <span className='block text-primary'>Solutions</span>
+            Seamless  <span className='block text-primary'>Communication</span>
              </h3>
             <p className="sm:text-lg text-white mt-6">
-            Access a diverse range of workouts and nutrition programs tailored to your lifestyle. Whether it's gym sessions, outdoor workouts, or home exercises, fitCall offers adaptable solutions for every preference            </p>
+            Stay connected with your clients effortlessly through our intuitive platform. Engage with them in-app, provide real-time support, and keep them motivated to achieve their goals. </p>
         </div>
     </div>
 
@@ -82,9 +82,9 @@ function LandingPage() {
         </div>
         <div className="w-full md:w-2/5 lg:w-1/2 px-4 text-center md:text-left lg:pl-12">
             <h3 className="font-bold mt-8 text-3xl md:mt-0 md:text-4xl">
-            Video Call Sessions <span className='block text-primary'>with Trainer</span>            </h3>
+            Grow Your <span className='block text-primary'>Business</span></h3>
             <p className="sm:text-lg mt-6">
-            Start video calls with your fitness trainer via fitCall for personalized guidance. Receive support and stay accountable, all within the convenience of the app, helping you achieve your fitness goals effectively.
+            Expand your reach and grow your business with fitCall. Gain access to a diverse pool of clients and showcase your expertise <span className='block'>to a wider audience.</span>
             </p>
         </div>
     </div>
