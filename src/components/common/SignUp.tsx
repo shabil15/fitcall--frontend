@@ -82,16 +82,16 @@ function SignUp() {
           <div className="flex flex-wrap px-3 -mx-3 sm:px-6 xl:px-12 justify-center">
            
           </div>
-          <div className="flex-auto">
-            <form role="form text-left" className="md:w-80" onSubmit={handleSubmit}>
-            <div className="mb-4">
+          <div className="flex-auto ">
+            <form role="form text-left " className="md:w-80" onSubmit={handleSubmit}>
+            <div className="mb-4  ">
                   <input
                     name="name"
                     value={values.name}
                     onChange={handleChange}
                     placeholder="Name"
                     type="text"
-                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-secondary focus:text-gray-700 focus:outline-none focus:transition-shadow"                  />
+                    className="text-sm  focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal  transition-all  focus:bg-secondary  focus:outline-none focus:transition-shadow"                  />
                   {errors.name && touched.name && (
                     <div className="text-red-500">{errors.name}</div>
                   )}
@@ -103,7 +103,7 @@ function SignUp() {
                     onChange={handleChange}
                     placeholder="Mobile"
                     type="text"
-                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-secondary focus:text-gray-700 focus:outline-none focus:transition-shadow"                  />
+                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal  transition-all  focus:bg-secondary  focus:outline-none focus:transition-shadow"                  />
                   {errors.mobile && touched.mobile && (
                     <div className="text-red-500">{errors.mobile}</div>
                   )}
@@ -115,7 +115,7 @@ function SignUp() {
                     onChange={handleChange}
                     placeholder="Email"
                     type="email"
-                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-secondary focus:text-gray-700 focus:outline-none focus:transition-shadow"                  />
+                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal  transition-all  focus:bg-secondary  focus:outline-none focus:transition-shadow"                  />
                   {errors.email && touched.email && (
                     <div className="text-red-500">{errors.email}</div>
                   )}
@@ -127,7 +127,7 @@ function SignUp() {
                     onChange={handleChange}
                     placeholder="Password"
                     type="password"
-                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-secondary focus:text-gray-700 focus:outline-none focus:transition-shadow"                  />
+                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal  transition-all  focus:bg-secondary  focus:outline-none focus:transition-shadow"                  />
                   {errors.password && touched.password && (
                     <div className="text-red-500">{errors.password}</div>
                   )}
@@ -139,7 +139,7 @@ function SignUp() {
                     onChange={handleChange}
                     placeholder="Confirm password"
                     type="password"
-                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-secondary focus:text-gray-700 focus:outline-none focus:transition-shadow"/>
+                    className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-secondary bg-clip-padding py-2 px-3 font-normal  transition-all  focus:bg-secondary  focus:outline-none focus:transition-shadow"/>
                   {errors.cpassword && touched.cpassword && (
                     <div className="text-red-500">{errors.cpassword}</div>
                   )}

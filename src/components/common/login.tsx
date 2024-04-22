@@ -185,43 +185,43 @@ function Login() {
             />
                   {/* Other login options */}
                   <div className="relative w-full max-w-full px-3 mt-2 text-center shrink-0">
-                    <p className="z-20 inline px-4 mb-2 font-semibold leading-normal bg-secondary text-sm text-slate-400">
+                    <p className="z-20 inline px-4 mb-2 font-semibold leading-normal bg-secondary text-sm text-white">
                       or
                     </p>
                   </div>
                 </div>
                 <div className="flex-auto p-4">
-                  <div className="mb-4">
+                  <div className="mb-4 text-white">
                     <input
                       name="email"
                       value={loginValues.email}
                       onChange={loginHandleChange}
                       placeholder="Email"
                       type="email"
-                      className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-white-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-white-700 transition-all focus:border-fuchsia-300 focus:bg-secondary focus:text-white-700 focus:outline-none focus:transition-shadow"
+                      className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-white-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-white-700 transition-all  focus:bg-secondary focus:text-white-700 focus:outline-none focus:transition-shadow"
                     />
                     {loginErrors.email && loginTouched.email && (
                       <div className="text-red-500">{loginErrors.email}</div>
                     )}
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 text-white">
                     <input
                       name="password"
                       value={loginValues.password}
                       onChange={loginHandleChange}
                       placeholder="Password"
                       type="password"
-                      className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-white-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-white-700 transition-all focus:border-fuchsia-300 focus:bg-secondary focus:text-white-700 focus:outline-none focus:transition-shadow"
+                      className="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-white-300 bg-secondary bg-clip-padding py-2 px-3 font-normal text-white-700 transition-all  focus:bg-secondary  focus:outline-none focus:transition-shadow"
                     />
                     {loginErrors.password && loginTouched.password && (
                       <div className="text-red-500">{loginErrors.password}</div>
                     )}
                   </div>
                   <div className="flex justify-end mb-3">
-                    <button onClick={() => setForgot(true)} className="text-sm font-medium hover:underline text-blue-600">Forgot password?</button>
+                    <button onClick={() => setForgot(true)} className="text-sm font-medium hover:underline text-primary">Forgot password?</button>
                   </div>
                   <div className="text-center">
-                    <button className="bg-primary hover:bg-black w-full text-secondary p-2 rounded-md">
+                    <button className="bg-primary hover:bg-black hover:text-primary w-full text-secondary text-bold p-2 rounded-md">
                       Sign in
                     </button>
                   </div>
