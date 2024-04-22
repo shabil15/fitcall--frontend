@@ -77,7 +77,8 @@ function SignUp() {
       <div className="w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0 font-customFont">
         <div className="relative z-0 flex flex-col min-w-0 break-words bg-secondary border-0 shadow-soft-xl rounded-2xl bg-clip-border">
           <div className="p-6 mb-0 text-center font-Sans font-semibold text-2xl text-primary bg-secondary border-b-0 rounded-t-2xl">
-            <h5>Register</h5>
+            <h1 className="text-2xl">Register</h1>
+              <h6 className="text-white text-lg">Begin Your Transformation</h6>
           </div> 
           <div className="flex flex-wrap px-3 -mx-3 sm:px-6 xl:px-12 justify-center">
            

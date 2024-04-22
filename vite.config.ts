@@ -7,9 +7,10 @@ dotenv.config()
 const {BASE_URL} = process.env;
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react()], 
   server:{
     port:4000,
+    
     proxy: {
       '/api':{
         target:BASE_URL,

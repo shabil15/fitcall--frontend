@@ -116,7 +116,7 @@ function Login() {
                   <h5>Find Your Account</h5>
                 </div>
                 <div className="flex justify-center">
-                  <span className="text-white text-sm">Enter the email address associated <br />with your Fixit account.</span>
+                  <span className="text-white text-sm">Enter the email address associated <br />with your FitCall account.</span>
                 </div>
                 <div className="p-4">
                   <div className="mb-4">
@@ -144,6 +144,7 @@ function Login() {
               <form onSubmit={loginHandleSubmit}>
                 <div className="p-6 mb-0 text-center text-customFont font-semibold text-2xl text-primary bg-secondary border-b-0 rounded-t-2xl">
                   <h5>Login</h5>
+                  <h1 className="text-white text-lg">Welcome to fitcall</h1>
                 </div>
                 <div className="flex flex-wrap px-3 -mx-3 sm:px-6 xl:px-12 justify-center">
                 <GoogleLogin 
