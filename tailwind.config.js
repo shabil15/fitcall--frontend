@@ -12,7 +12,7 @@ export default {
     },
     fontFamily: {
       customFont: ['"Mulish"', "sans-serif"],
-      
+
     },
   },
   plugins: [

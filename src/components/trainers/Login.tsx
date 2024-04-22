@@ -47,13 +47,13 @@ const Login: React.FC = () => {
                       alt=""
                     />
                     <h1 className="text-xl text-center lg:text-2xl m-0 p-0 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                      Welcome Back 
+                      Welcome to FitCall 
                     </h1>
                     <p
                       className="font-poppins text-lg text-center font-light"
                       style={{ marginTop: "0.5rem" }}
                     >
-                      Sign in now
+                      Trainer Sign In
                     </p>
                     <form className="space-y-3" onSubmit={handleSubmit}>
                       <div className="w-4/5 mx-auto flex justify-between mt-4">
