@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 300px;
+  background-color:#241F20 ;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.message {
+  color: #3BE48B;
+  font-size: 14px;
+  margin-top: 4px;
+  text-align: center
+}
+
+.inputs {
+  margin-top: 10px
+}
+
+.inputs input:focus {
+  border-bottom: 1.5px solid #3BE48B;
+  outline: none;
+}
+
+.action {
+  margin-top: 24px;
+  padding: 6px;
+  border-radius: 4px;
+  border: none;
+  color: rgb(244, 244, 244);
+  cursor: pointer;
+  width: 100%;
+}
