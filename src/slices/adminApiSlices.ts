@@ -11,11 +11,27 @@ export const adminApiSlice = apiSlice.injectEndpoints({
         method:"POST",
         body:data,
       })
-    })
+    }),
+
+    getUsersData: builder.mutation({
+      query: () => ({
+        url: `${ADMIN_URL}/getUsers`,
+        method: "GET",
+      }),
+    }),
+
+    putBlockUser: builder.mutation({
+      query: (data) => ({
+        url: `${ADMIN_URL}/users/unblock-block?id=${data}`,
+        method: "PATCH",
+      }),
+    }),
   })
 })
 
 
 export const {
-  useAdminLoginMutation
+  useAdminLoginMutation,
+  useGetUsersDataMutation,
+  usePutBlockUserMutation,
 }= adminApiSlice;
