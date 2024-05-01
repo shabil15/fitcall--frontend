@@ -25,3 +25,11 @@ export interface forgetValues {
   cpassword: string;
 }
 
+// Interface for worker join
+export interface ITrainerJoin extends FormValues{
+  language : string,
+  specialisation: string;
+  certificate:string;
+  profile_img: string;
+  description : string
+}

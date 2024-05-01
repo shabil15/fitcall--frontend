@@ -168,7 +168,7 @@ function OTP() {
                     onChange={handleChange}
                     placeholder="Confirm password"
                     type="password"
-                    className="w-full border-b border-gray-300 focus:border-blue-500 outline-none"
+                    className="w-full border-b  border-gray-300 focus:border-blue-500 outline-none"
                   />
                   {errors.cpassword && touched.cpassword && (
                     <div className="text-red-500">{errors.cpassword}</div>
@@ -197,7 +197,7 @@ function OTP() {
                 onChange={(e) => setOtp(e.target.value)}
                 type="text"
                 placeholder="Enter OTP"
-                className="border-b border-gray-300 focus:border-blue-500 outline-none"
+                className="border-b text-black border-gray-300 focus:border-blue-500 outline-none"
               />
             </div>
             {showResendButton ? (

@@ -33,6 +33,7 @@ const AppBar = styled(MuiAppBar, {
   }),
   ...(open && {
     marginLeft: drawerWidth,
+    backgroundColor: '#3BE48B',
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -51,7 +52,10 @@ export default function Navbar() {
   const darkTheam = useMemo(()=>createTheme({
     palette:{
         mode : dark ? 'dark' : 'light',
-    }
+    },
+    typography: {
+      fontFamily: 'Mulish, sans-serif', 
+  },
   }),[dark])
 
   const handleDrawerOpen = () => {
@@ -63,7 +67,10 @@ export default function Navbar() {
     <ThemeProvider theme={darkTheam}>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open}  sx={{
+              
+              backgroundColor: '#3BE48B', 
+            }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -72,6 +79,7 @@ export default function Navbar() {
             edge="start"
             sx={{
               marginRight: 5,
+              
               ...(open && { display: 'none' }),
             }}
           >
@@ -82,8 +90,8 @@ export default function Navbar() {
                 </IconButton>
             </Tooltip>
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{flexGrow:1}}>
-            Dashboard
+          <Typography variant="h6" noWrap component="div" sx={{flexGrow:1,  }}>
+            FitCall
           </Typography>
           <IconButton onClick={()=>setDark(!dark)}>
             {dark ? <Brightness7/> : <Brightness4/>}

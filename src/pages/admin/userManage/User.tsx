@@ -50,7 +50,7 @@ const UsersManagement: React.FC<Selected> = ({ setSelectedLink, link }) => {
       { field: "mobile", headerName: "Mobile", width: 200 },
       {
         field: "createdAt",
-        headerName: "Created At",
+        headerName: "Joined at",
         width: 200,
         renderCell: (params: GridCellParams) =>
           moment(params.row.createdAt).format(" DD-MM-YYYY"),
@@ -80,7 +80,7 @@ const UsersManagement: React.FC<Selected> = ({ setSelectedLink, link }) => {
       <Typography
         variant="h4"
         component="h4"
-        sx={{ textAlign: "center", mt: 2, mb: 3 }}
+        sx={{ textAlign: "center", mt: 2, mb: 3 , }}
       >
         Manage Users
       </Typography>

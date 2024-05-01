@@ -8,9 +8,16 @@ export interface UserInfo {
   password?: string;
 }
 
+export interface TrainerInfo extends UserInfo{
+  img:string,
+  joinDate:string
+}
+
+
 interface InitialState {
   userInfo: UserInfo | null;
   registerInfo: UserInfo | null;
+  trainerInfo:TrainerInfo |null;
   adminInfo: UserInfo | null;
   forgotEmailInfo: string | null;
 }
@@ -18,6 +25,7 @@ interface InitialState {
 const userInfoFromLocalStorage = localStorage.getItem("userInfo");
 const registerInfoFromLocalStorage = localStorage.getItem("registerInfo");
 const adminInfoFromLocalStorage = localStorage.getItem("adminInfo");
+const trainerInfoFromLocalStorage = localStorage.getItem("trainerInfo");
 const forgotEmailInfoFromLocalStorage = localStorage.getItem("forgotEmailInfo");
 
 const initialState: InitialState = {
@@ -28,6 +36,10 @@ const initialState: InitialState = {
   registerInfo: registerInfoFromLocalStorage
     ? JSON.parse(registerInfoFromLocalStorage)
     : null,
+
+    trainerInfo: trainerInfoFromLocalStorage
+    ? JSON.parse(trainerInfoFromLocalStorage)
+    : null, 
 
   adminInfo: adminInfoFromLocalStorage
     ? JSON.parse(adminInfoFromLocalStorage)
@@ -57,6 +69,11 @@ const authSlice = createSlice({
       localStorage.removeItem("registerInfo");
     },
 
+    setTrainerCredential: (state, action) => {
+      state.trainerInfo = action.payload;
+      localStorage.setItem("trainerInfo", JSON.stringify(action.payload));
+    },
+
     setAdminCredentials: (state, action) => {
       state.adminInfo = action.payload;
       localStorage.setItem("adminInfo", JSON.stringify(action.payload));
@@ -78,6 +95,7 @@ export const {
   setCredential,
   setRegister,
   clearRegister,
+  setTrainerCredential,
   setForgotEmail,
   clearForgotEmail,
   setAdminCredentials,

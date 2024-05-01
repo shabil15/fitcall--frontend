@@ -9,7 +9,6 @@ import { Box, IconButton, Theme, styled } from "@mui/material";
 import { ChevronLeft, Dashboard, PeopleAlt } from "@mui/icons-material";
 import { CSSObject } from "@emotion/react";
 import { useMemo, useState } from "react";
-import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
 import Person3Icon from '@mui/icons-material/Person3';
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
@@ -17,6 +16,7 @@ import UserMangement from '../../pages/admin/userManage/User';
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Open } from "../../@types/Props";
 import Admin_Dashboard from '../../pages/admin/Dashboard/Dashboard';
+import JoinRequests from "../../pages/admin/JoinRequests/JoinRequests";
 
 const drawerWidth = 240;
 
@@ -107,7 +107,7 @@ function SideBar({ open, setOpen }: Open) {
         title: "Join Requests",
         icon: <FiberNewIcon />,
         link: "joinRequests",
-        // component: <JoinRequests {...{setSelectedLink,link:'joinRequests'}}/>,
+        component: <JoinRequests {...{setSelectedLink,link:'joinRequests'}}/>,
       },
     ],
     []

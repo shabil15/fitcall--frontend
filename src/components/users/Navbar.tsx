@@ -7,11 +7,12 @@ import { RootState } from "../../app/store";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  // const { userInfo } = useSelector((state:RootState) => state.auth);
+  const { userInfo } = useSelector((state:RootState) => state.auth);
 
   const handleLoginButtonClick = () => {
     dispatch(openLoginModal());
   };
+
 
   return (
     <div className="absolute">
@@ -28,12 +29,22 @@ export default function Navbar() {
             </span>
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            {userInfo?(
+              <button
+              onClick={handleLoginButtonClick}
+              className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary "
+            >
+              {userInfo?.name || 'user'}
+            </button>
+            ):
             <button
               onClick={handleLoginButtonClick}
               className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary "
             >
               Get started
             </button>
+            }
+            
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"

@@ -26,6 +26,22 @@ export const adminApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
       }),
     }),
+
+    getJoinRequests : builder.mutation({
+      query:() => ({
+        url:`${ADMIN_URL}/getJoinRequests`,
+        method:"GET",
+      })
+    }),
+
+    reviewRequests: builder.mutation({
+      query:(data) => ({
+        url:`${ADMIN_URL}/reviewRequests`,
+        method:"PATCH",
+        body:data,
+      }),
+    })
+
   })
 })
 
@@ -33,5 +49,7 @@ export const adminApiSlice = apiSlice.injectEndpoints({
 export const {
   useAdminLoginMutation,
   useGetUsersDataMutation,
+  useGetJoinRequestsMutation,
   usePutBlockUserMutation,
+  useReviewRequestsMutation,
 }= adminApiSlice;
