@@ -7,7 +7,6 @@ import { Selected } from "../../../@types/Props";
 import { useGetJoinRequestsMutation } from "../../../slices/adminApiSlices";
 import { ITrainer } from "../../../@types/schema"; 
 import ViewRequestDetails from "./ViewRequestDetails";
-import { toast } from "react-toastify";
 
 
 const JoinRequests: React.FC<Selected> = ({ setSelectedLink, link }) => {

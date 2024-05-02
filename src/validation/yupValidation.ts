@@ -77,8 +77,6 @@ export const validationTrainerJoin = Yup.object({
   description: Yup.string().required("Please type description"),
   language: Yup.string().required("Please select language"),
   profile_img: Yup.mixed().required("Please upload your profile pic"),
-  certificate: Yup.mixed(),
-
-  district: Yup.string().required("Please select districts"),
+  certificate: Yup.mixed().required("Please upload your certificate"),
   specialisation: Yup.string().required("Please select specialisation"),
 });

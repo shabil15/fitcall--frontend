@@ -116,7 +116,7 @@ function TrainerLogin() {
           </div>
         </div>
       </div>
-      <div className="relative hidden h-screen select-non bg-[url('../../src/assets/pexels-li-sun-2294361.jpg')] bg-gradient-to-br md:block md:w-1/2">
+      <div className="relative hidden h-screen select-non bg-[url('../../../src/assets/pexels-li-sun-2294361.jpg')] bg-gradient-to-br md:block md:w-1/2">
         <div className="py-16 px-8 text-white xl:w-[40rem]">
           
           <p className="mb-4">

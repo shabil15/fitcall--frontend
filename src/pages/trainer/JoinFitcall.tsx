@@ -39,8 +39,8 @@ function JoinFitcall() {
       onSubmit: async (values) => {
         console.log('button submit clicked')
         setSubmit(true);
-        const profile = values.profile_img;
-        const certificate = values.certificate;
+        const profile:any = values.profile_img;
+        let certificate:any = values.certificate;
 
         const profileFileName = `profile.${Date.now()}.jpg`;
         const certificateName= `certificate.${Date.now()}.jpg`;
@@ -51,7 +51,7 @@ function JoinFitcall() {
         );
         const certificateStorageRef = ref(
           storage,
-          `/images/trainer/idCard/${certificateName}`
+          `/images/trainer/certificate/${certificateName}`
         );
         // Upload the file
         const profilesnapshot = await uploadBytes(profileStorageRef, profile);
@@ -62,7 +62,7 @@ function JoinFitcall() {
         const certificateDownloadURL = await getDownloadURL(certificateSnapshot.ref);
 
         const profile_img = profileDownloadURL;
-        const certificate_img = certificateDownloadURL;
+         certificate = certificateDownloadURL;
 
         try {
           const {
@@ -85,7 +85,7 @@ function JoinFitcall() {
             language,
             description,
             specialisation,
-            certificate_img,
+            certificate,
             profile_img,
           }).unwrap();
           navigate("/trainer");
@@ -102,13 +102,17 @@ function JoinFitcall() {
 
     const handleProfileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.currentTarget.files?.[0];
+      console.log(file,"pro")
       setFieldValue("profile_img", file || null);
     };
   
     const handleCertificateImage = (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.currentTarget.files?.[0];
-      setFieldValue("certificate_img", file || null);
+      console.log(file,"cert");
+      setFieldValue("certificate", file || null);
     };
+
+    
 
     const Goals: string[] = [
       "Weight Loss", "Muscle Gain", "Cardio Fitness",
@@ -283,7 +287,7 @@ function JoinFitcall() {
                 </div>
                 <div className="">
   <label htmlFor="certificate" className="block text-gray-400 mb-1">
-    Id Card
+    Certificate
   </label>
   <input
     type="file"
