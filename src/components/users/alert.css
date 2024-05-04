@@ -1,0 +1,12 @@
+.swal-custom-background {
+  background-color: #241F20 !important; 
+}
+
+.swal2-title,
+.swal2-content {
+  color: white; /* Set the text color */
+}
+
+.swal2-confirm {
+  color: black; /* Set the text color */
+}

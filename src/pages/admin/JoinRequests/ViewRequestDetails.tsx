@@ -62,9 +62,9 @@ const ViewRequestDetails: React.FC<ViewRequestDetailsProps> = ({
             <Typography variant="body1" color="textSecondary" gutterBottom>
               Mobile: {trainer.mobile}
             </Typography>
-            <Typography variant="body1" color="textSecondary" gutterBottom>
+            {/* <Typography variant="body1" color="textSecondary" gutterBottom>
               {trainer.description}
-            </Typography>
+            </Typography> */}
             <Typography variant="body1" color="textSecondary" gutterBottom>
               Language: {trainer.language}
             </Typography>

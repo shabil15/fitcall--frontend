@@ -1,18 +1,66 @@
 import React from "react";
-// import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 import { openLoginModal } from "../../slices/modalSlices/loginModal";
 import Login from "../../components/common/login";
 import { RootState } from "../../app/store";
+import {userLogout} from '../../slices/authSlice';
+import {useLogoutMutation} from '../../slices/userApiSlice';
+import "./alert.css";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state:RootState) => state.auth);
+  const navigate = useNavigate()
+ const { userInfo } = useSelector((state:RootState) => state.auth);
+  const [logOut] = useLogoutMutation();
 
   const handleLoginButtonClick = () => {
     dispatch(openLoginModal());
   };
 
+  // const handleLogout = async () => {
+  //   try {
+  //     navigate('/')
+  //     dispatch(userLogout())
+  //     await logOut('').unwrap()
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+  const handleLogout = async () => {
+    // Display a confirmation dialog
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be logged out.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3BE48B',
+      cancelButtonColor: '#3d3636',
+      confirmButtonText: 'Yes, log me out!',
+      customClass: {
+        popup: 'swal-custom-background',
+        title:'swal2-title',
+        content:'swal2-content',
+        confirmButton:'swal2-confirm'
+         // Apply the custom CSS class
+      }
+    });
+  
+    // If user confirms, proceed with logout
+    if (result.isConfirmed) {
+      try {
+        // Navigate to home page
+        navigate('/');
+        // Dispatch the logout action
+        dispatch(userLogout());
+        // Call the logout mutation
+        await logOut('').unwrap();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 
   return (
     <div className="absolute">
@@ -31,10 +79,10 @@ export default function Navbar() {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {userInfo?(
               <button
-              onClick={handleLoginButtonClick}
+              onClick={handleLogout}
               className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary "
             >
-              {userInfo?.name || 'user'}
+              Log Out
             </button>
             ):
             <button

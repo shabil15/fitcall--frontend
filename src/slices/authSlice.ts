@@ -69,6 +69,11 @@ const authSlice = createSlice({
       localStorage.removeItem("registerInfo");
     },
 
+    userLogout:(state) => {
+      state.userInfo = null;
+      localStorage.removeItem("userInfo")
+    },
+
     setTrainerCredential: (state, action) => {
       state.trainerInfo = action.payload;
       localStorage.setItem("trainerInfo", JSON.stringify(action.payload));
@@ -97,6 +102,7 @@ export const {
   clearRegister,
   setTrainerCredential,
   setForgotEmail,
+  userLogout,
   clearForgotEmail,
   setAdminCredentials,
 } = authSlice.actions;

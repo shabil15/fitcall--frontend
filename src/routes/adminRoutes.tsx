@@ -6,7 +6,7 @@ import Navbar from "../pages/admin/Navbar";
 function AdminRoutes() {
   return (
     <Routes>
-      <Route path="/adminLogin" element={<AdminLogin/>}/>
+      <Route path="/login" element={<AdminLogin/>}/>
       <Route path='*' element={<AdminPrivateRoute/>}>
         <Route path='*' element={<Navbar/>}/>
       </Route>
