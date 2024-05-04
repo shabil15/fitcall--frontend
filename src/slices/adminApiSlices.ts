@@ -40,6 +40,13 @@ export const adminApiSlice = apiSlice.injectEndpoints({
         method:"PATCH",
         body:data,
       }),
+    }),
+
+    blockTrainer:builder.mutation({
+      query:(data) => ({
+        url:`${ADMIN_URL}/trainer/unblock-block?id=${data}`,
+        method:"PATCH",
+      })
     })
 
   })
@@ -52,4 +59,5 @@ export const {
   useGetJoinRequestsMutation,
   usePutBlockUserMutation,
   useReviewRequestsMutation,
+  useBlockTrainerMutation,
 }= adminApiSlice;

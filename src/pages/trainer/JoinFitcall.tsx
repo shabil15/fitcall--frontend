@@ -144,7 +144,7 @@ function JoinFitcall() {
                         className="w-52 mx-auto sm:mb-12 lg:hidden"
                         alt=""
                       />
-                      <h1 className="text-xl text-center lg:text-2xl m-0 p-0 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                      <h1 className="text-xl text-center lg:text-2xl m-0 p-0 font-bold leading-tight tracking-tight text-secondary md:text-2xl">
                         Welcome to FitCall 
                       </h1>
                       <p
@@ -154,7 +154,7 @@ function JoinFitcall() {
                         Trainer Sign In
                       </p>
                       <form onSubmit={handleSubmit}>
-            <div className="mb-6 mt-5">
+            <div className="mb-6 mt-5 text-black">
               <div className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
                 <div>
                   <input
@@ -186,7 +186,7 @@ function JoinFitcall() {
                   <input
                     type="text"
                     id="email"
-                    className="w-full rounded-lg border py-2 px-3"
+                    className="w-full rounded-lg text-black border py-2 px-3"
                     placeholder="Email"
                     value={values.email}
                     onChange={handleChange}
@@ -198,7 +198,7 @@ function JoinFitcall() {
                 <div className="text-gray-400">
                   <select
                     id="language"
-                    className="w-full rounded-lg border py-2 px-3"
+                    className="w-full rounded-lg border text-black py-2 px-3"
                     value={values.language}
                     onChange={handleChange}
                   >
@@ -216,7 +216,7 @@ function JoinFitcall() {
                 <div className="text-gray-400">
                   <select
                     id="specialisation"
-                    className="w-full rounded-lg border py-2 px-3"
+                    className="w-full rounded-lg  text-black border py-2 px-3"
                     value={values.specialisation}
                     onChange={handleChange}
                   >
@@ -235,7 +235,7 @@ function JoinFitcall() {
                   <input
                     type="text"
                     id="description"
-                    className="w-full rounded-lg border py-2 px-3"
+                    className="w-full rounded-lg text-black border py-2 px-3"
                     placeholder="Description "
                     value={values.description}
                     onChange={handleChange}

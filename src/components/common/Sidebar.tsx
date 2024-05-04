@@ -17,6 +17,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { Open } from "../../@types/Props";
 import Admin_Dashboard from '../../pages/admin/Dashboard/Dashboard';
 import JoinRequests from "../../pages/admin/JoinRequests/JoinRequests";
+import Trainers from "../../pages/admin/trainerManage/Trainers";
 
 const drawerWidth = 240;
 
@@ -94,8 +95,9 @@ function SideBar({ open, setOpen }: Open) {
       {
         title: "Trainers",
         icon: <Person3Icon />,
-        link: "workers",
-        // component: <Trainers {...{setSelectedLink,link:'trainers'}}/>,
+        link: "trainers",
+        component: <Trainers {...{setSelectedLink,link:'trainers'}}/>,
+        // component:<Trainers {...{setSelectedLink,link:'trainers'}}/>
       },
       {
         title: "Transactions",

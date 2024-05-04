@@ -43,6 +43,7 @@ const ViewRequestDetails: React.FC<ViewRequestDetailsProps> = ({
   };
   return (
     <Dialog open={open} onClose={onClose}>
+      <Box sx={{ maxHeight: '80vh', overflowY: 'auto', scrollbarWidth: 'none', '-ms-overflow-style': 'none' }}>
       <Card>
         <CardContent
           sx={{
@@ -51,7 +52,7 @@ const ViewRequestDetails: React.FC<ViewRequestDetailsProps> = ({
             justifyContent: "space-between",
           }}
         >
-          <Box>
+          <Box >
             <Typography variant="h5" gutterBottom>
               {trainer.name}
             </Typography>
@@ -114,6 +115,7 @@ const ViewRequestDetails: React.FC<ViewRequestDetailsProps> = ({
           </div>
         </CardActions>
       </Card>
+      </Box>
     </Dialog>
   );
 };
