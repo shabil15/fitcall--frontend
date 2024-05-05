@@ -47,6 +47,13 @@ export const adminApiSlice = apiSlice.injectEndpoints({
         url:`${ADMIN_URL}/trainer/unblock-block?id=${data}`,
         method:"PATCH",
       })
+    }),
+
+    logoutAdmin : builder.mutation({
+      query: () =>({
+        url:`${ADMIN_URL}/logout`,
+        method:'POST'
+      })
     })
 
   })
@@ -60,4 +67,5 @@ export const {
   usePutBlockUserMutation,
   useReviewRequestsMutation,
   useBlockTrainerMutation,
+  useLogoutAdminMutation,
 }= adminApiSlice;

@@ -93,6 +93,16 @@ const authSlice = createSlice({
       state.forgotEmailInfo = null;
       localStorage.removeItem("forgotEmailInfo");
     },
+
+    adminLogout: (state) => {
+      state.adminInfo = null;
+      localStorage.removeItem("adminInfo")
+    },
+
+    trainerLogout: (state) => {
+      state.trainerInfo = null;
+      localStorage.removeItem("trainerInfo")
+    }
   },
 });
 
@@ -105,6 +115,8 @@ export const {
   userLogout,
   clearForgotEmail,
   setAdminCredentials,
+  adminLogout,
+  trainerLogout,
 } = authSlice.actions;
 
 export default authSlice.reducer;

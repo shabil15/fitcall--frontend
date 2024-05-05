@@ -8,6 +8,7 @@ import { RootState } from "../../app/store";
 import {userLogout} from '../../slices/authSlice';
 import {useLogoutMutation} from '../../slices/userApiSlice';
 import "./alert.css";
+import {toast} from 'react-toastify';
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -55,7 +56,8 @@ export default function Navbar() {
         // Dispatch the logout action
         dispatch(userLogout());
         // Call the logout mutation
-        await logOut('').unwrap();
+       const res = await logOut('').unwrap();
+       toast.success(res.message);
       } catch (error) {
         console.error(error);
       }

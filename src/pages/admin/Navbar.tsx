@@ -9,9 +9,16 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useMemo,useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
-import {  Brightness4, Brightness7, Home } from '@mui/icons-material';
+import {  Brightness4, Brightness7, Home ,ExitToApp} from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import SideBar from '../../components/common/Sidebar';
+import { useDispatch } from 'react-redux';
+import { adminLogout } from '../../slices/authSlice';
+import { useLogoutAdminMutation } from '../../slices/adminApiSlices';
+import {Link,useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
+import {toast} from 'react-toastify';
+
 
 
 
@@ -46,6 +53,9 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Navbar() {
 //   const theme = useTheme();
+  const dispatch = useDispatch();
+  const [logoutAdmin] = useLogoutAdminMutation()
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(true)
 
@@ -62,6 +72,40 @@ export default function Navbar() {
     setOpen(true);
   };
 
+  const handleAdminLogout = async () => {
+    // Display a confirmation dialog
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be logged out.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3BE48B',
+      cancelButtonColor: '#3d3636',
+      confirmButtonText: 'Yes, log me out!',
+      customClass: {
+        popup: 'swal-custom-background',
+        title:'swal2-title',
+        content:'swal2-content',
+        confirmButton:'swal2-confirm'
+         // Apply the custom CSS class
+      }
+    });
+
+    // If user confirms, proceed with logout
+    if (result.isConfirmed) {
+      try {
+        // Navigate to home page
+        navigate('/admin/login');
+        // Dispatch the logout action
+        dispatch(adminLogout());
+        // Call the logout mutation
+      const res= await logoutAdmin('').unwrap();
+      toast.success(res.message);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 
   return (
     <ThemeProvider theme={darkTheam}>
@@ -93,9 +137,16 @@ export default function Navbar() {
           <Typography variant="h6" noWrap component="div" sx={{flexGrow:1,  }}>
             FitCall
           </Typography>
+          <Tooltip title="Change Theme">
           <IconButton onClick={()=>setDark(!dark)}>
             {dark ? <Brightness7/> : <Brightness4/>}
           </IconButton>
+          </Tooltip>
+          <Tooltip title="Logout">
+          <IconButton onClick={handleAdminLogout}  color="inherit">
+              <ExitToApp />
+            </IconButton>
+            </Tooltip> 
         </Toolbar>
       </AppBar>
       <SideBar {...{open, setOpen}}/>
