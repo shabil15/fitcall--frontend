@@ -15,7 +15,7 @@ import SideBar from '../../components/common/Sidebar';
 import { useDispatch } from 'react-redux';
 import { adminLogout } from '../../slices/authSlice';
 import { useLogoutAdminMutation } from '../../slices/adminApiSlices';
-import {Link,useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {toast} from 'react-toastify';
 

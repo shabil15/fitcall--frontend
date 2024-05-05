@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Swal from "sweetalert2";
 import { trainerLogout } from "../../slices/authSlice";
 import { useTrainerLogoutMutation } from "../../slices/TrainerApiSlice";
@@ -11,7 +11,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const [TrainerLogout] = useTrainerLogoutMutation();
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleLogout = async () => {
     // Display a confirmation dialog
