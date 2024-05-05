@@ -148,7 +148,7 @@ function JoinFitcall() {
                         Welcome to FitCall 
                       </h1>
                       <p
-                        className="font-poppins text-lg text-center font-light"
+                        className="font-poppins text-lg text-center text-secondary font-bold "
                         style={{ marginTop: "0.5rem" }}
                       >
                         Trainer Sign In
@@ -305,9 +305,9 @@ function JoinFitcall() {
             <div className="mt-8 flex justify-center">
               <button
                 type="submit"
-                className="bg-primary hover:bg-black text-white h-10 w-2/3 rounded font-Sans text-sm"
+                className="bg-primary hover:bg-black  h-10 w-2/3 rounded font-Sans text-sm text-secondary font-bold text-2xl"
               >
-              "Join Our Team" 
+              Join Our Team
               </button>
             </div>
             <div className="justify-center flex">
