@@ -128,7 +128,7 @@ export default function Navbar() {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-white bg-primary  text-customFont rounded md:bg-transparent md:text-primary md:p-0 md:text-primary"
+                  className="block py-2 px-3 text-white bg-primary  text-customFont rounded md:bg-transparent md:p-0 md:hover:text-primary "
                   aria-current="page"
                 >
                   Home
