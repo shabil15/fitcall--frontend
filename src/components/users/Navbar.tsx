@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import {Link} from 'react-router-dom';
 import Swal from "sweetalert2";
 import { openLoginModal } from "../../slices/modalSlices/loginModal";
 import Login from "../../components/common/login";
@@ -131,7 +132,7 @@ export default function Navbar() {
                   className="block py-2 px-3 text-white bg-primary  text-customFont rounded md:bg-transparent md:p-0 md:hover:text-primary "
                   aria-current="page"
                 >
-                  Home
+                 <Link to={"/"}>Home</Link>
                 </a>
               </li>
               <li>
@@ -139,7 +140,7 @@ export default function Navbar() {
                   href="#"
                   className="block py-2 px-3 text-gray-900 rounded text-customFont hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:.hover:text-primary text-white .hover:bg-gray-700 .hover:text-white md:.hover:bg-transparent .border-gray-700"
                 >
-                  Trainers
+                  <Link to={"/trainers"}>Trainers</Link>
                 </a>
               </li>
               <li>

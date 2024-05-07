@@ -67,7 +67,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    
+    getTrainers: builder.mutation({
+      query: () => ({
+        url:`${USER_URL}/getTrainers`,
+        methode:"GET"
+      })
+    }),
+
   }),
 });
 
@@ -80,4 +86,5 @@ export const {
   useSendOtpToEmailMutation,
   useForgotPasswordMutation,
   useLogoutMutation,
+  useGetTrainersMutation,
 } = userApiSlice;

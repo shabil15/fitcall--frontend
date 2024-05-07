@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
+import { useGetTrainersMutation } from "../../slices/userApiSlice";
 
 function Trainers() {
+  const [getTrainers] = useGetTrainersMutation();
+  const [trainers, setTrainers] = useState([]); // Corrected state variable name
+
+  useEffect(() => {
+    async function fetchTrainers() { // Renamed the function to avoid name collision
+      try {
+        const res = await getTrainers("").unwrap();
+        setTrainers(res.data);
+      } catch (error) {
+        console.error("Error fetching trainers:", error);
+      }
+    }
+    fetchTrainers();
+  }, []);
+
   return (
     <div className="bg-secondary h-auto">
       <Navbar />
-      {/* //////////////////////////////////////////////////////////////// */}
       <div className="relative">
         <img
           src="../../../src/assets/header div.jpg"
@@ -24,26 +39,21 @@ function Trainers() {
           </h1>
         </div>
       </div>
-    {/* ///////////////////////////////////////////////////////////// */}
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-44 md:px-14 px-3">
-  {[...Array(16)].map((_, index) => (
-    <div key={index} className="max-w-52 shadow-lg rounded-lg hover:rounded-none overflow-hidden mt-4 mx-2 group">
-      <img
-        className="w-full h-60 object-cover"
-        src="../../../src/assets/pexels-ivan-samkov-4162491.jpg"
-        alt="Trainer"
-      />
-      <div className="bg-secondary text-center py-4 transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-4">
-        <h3 className="text-xl font-semibold text-white">John Doe</h3>
-        <p className="text-white">Weight Loss</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-44 md:px-14 px-3">
+        {trainers.map((trainer, index) => ( // Changed 'users' to 'trainers'
+          <div key={index} className="max-w-52 shadow-lg rounded-lg hover:rounded-none overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group">
+            <img
+              className="w-full h-60 object-cover"
+              src={trainer.profile_img} // Assuming trainer object has a profileImage property
+              alt="Trainer"
+            />
+            <div className="bg-secondary text-center py-4 transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-4">
+              <h3 className="text-xl font-semibold text-white">{trainer.name}</h3>
+              <p className="text-white">{trainer.specialisation}</p>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-
-
-
-
       <Footer />
     </div>
   );
