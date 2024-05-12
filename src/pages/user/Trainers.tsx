@@ -5,19 +5,27 @@ import { useGetTrainersMutation } from "../../slices/userApiSlice";
 
 function Trainers() {
   const [getTrainers] = useGetTrainersMutation();
-  const [trainers, setTrainers] = useState([]); // Corrected state variable name
+  const [trainers, setTrainers] = useState([]); 
+  const [currentPage,setCurrentPage]= useState(1);
+  const [totalPages,setTotalPages] = useState(1)
+  const itemsPerPage = 1;
 
   useEffect(() => {
     async function fetchTrainers() { // Renamed the function to avoid name collision
       try {
         const res = await getTrainers("").unwrap();
         setTrainers(res.data);
+        setTotalPages(Math.ceil(res.total/itemsPerPage));
       } catch (error) {
         console.error("Error fetching trainers:", error);
       }
     }
     fetchTrainers();
-  }, []);
+  }, [currentPage]);
+
+  const handlePageChange = (pageNumber:number) => {
+    setCurrentPage(pageNumber);
+  }
 
   return (
     <div className="bg-secondary h-auto">
@@ -41,7 +49,7 @@ function Trainers() {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-44 md:px-14 px-3">
         {trainers.map((trainer, index) => ( // Changed 'users' to 'trainers'
-          <div key={index} className="max-w-52 shadow-lg rounded-lg hover:rounded-none overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group">
+          <div key={index} className="max-w-52 shadow-lg rounded-lg  overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group">
             <img
               className="w-full h-60 object-cover"
               src={trainer.profile_img} // Assuming trainer object has a profileImage property
@@ -49,7 +57,8 @@ function Trainers() {
             />
             <div className="bg-secondary text-center py-4 transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-4">
               <h3 className="text-xl font-semibold text-white">{trainer.name}</h3>
-              <p className="text-white">{trainer.specialisation}</p>
+              <p className="text-white text-sm">{trainer.specialisation}</p>
+            <p className="text-xs text-white">{trainer.language}</p>
             </div>
           </div>
         ))}

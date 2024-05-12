@@ -11,10 +11,8 @@ function Home() {
       <Navbar/>
       <Hero />
       <LandingPage />
-      <div className='bg-primary w-full h-28 my-10'></div>
       <Footer/>
-      </div>
-    
+    </div>
   )
 }
 
