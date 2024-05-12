@@ -16,22 +16,14 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const [logOut] = useLogoutMutation();
+  
 
   const handleLoginButtonClick = () => {
     dispatch(openLoginModal());
   };
 
-  // const handleLogout = async () => {
-  //   try {
-  //     navigate('/')
-  //     dispatch(userLogout())
-  //     await logOut('').unwrap()
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  
   const handleLogout = async () => {
-    // Display a confirmation dialog
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You will be logged out.",
@@ -45,18 +37,13 @@ export default function Navbar() {
         title: "swal2-title",
         content: "swal2-content",
         confirmButton: "swal2-confirm",
-        // Apply the custom CSS class
       },
     });
 
-    // If user confirms, proceed with logout
     if (result.isConfirmed) {
       try {
-        // Navigate to home page
         navigate("/");
-        // Dispatch the logout action
         dispatch(userLogout());
-        // Call the logout mutation
         const res = await logOut("").unwrap();
         toast.success(res.message);
       } catch (error) {
@@ -148,7 +135,7 @@ export default function Navbar() {
                   href="#"
                   className="block py-2 px-3 text-gray-900 rounded text-customFont hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:.hover:text-primary text-white .hover:bg-gray-700 .hover:text-white md:.hover:bg-transparent .border-gray-700"
                 >
-                  About us
+                  <Link to={"/aboutus"}>About us</Link>
                 </a>
               </li>
               <li>
@@ -156,7 +143,7 @@ export default function Navbar() {
                   href="#"
                   className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:.hover:text-primary text-white .hover:bg-gray-700 .hover:text-white md:.hover:bg-transparent .border-gray-700"
                 >
-                  Contact
+                  <Link to={"/contactus"}>Contact</Link>
                 </a>
               </li>
             </ul>
