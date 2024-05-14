@@ -68,9 +68,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
 
     getTrainers: builder.mutation({
-      query: () => ({
+      query: ({ page, per_page, specialisation, language, search }) => ({
         url:`${USER_URL}/getTrainers`,
-        methode:"GET"
+        method:"GET",
+        params: {
+          page,
+          per_page,
+          specialisation,
+          language,
+          search,
+        }
       })
     }),
 
