@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
+import { useLocation } from "react-router-dom";
 
 function TrainerProfile() {
   const [activeTab, setActiveTab] = useState(1);
+  const location = useLocation();
+  const {data} = location.state;
+  
 
   const handleTabClick = (tabId:number) => {
     setActiveTab(tabId);
@@ -32,13 +36,13 @@ function TrainerProfile() {
       </div>
       <div className="md:flex md:text-center align-center md:px-52">
         <img
-          src="../../../src/assets/pexels-pixabay-209969.jpg"
+          src={data?.profile_img}
           alt="user Profile Image"
           className="h-60 w-48 object-cover rounded-lg shadow-xl mt-16 "
         />
         <div className="mt-16 mx-16">
           <h1 className=" text-primary shadow-sm text-start font-bold text-2xl pb-2">
-            JHON DAVID
+            {data?.name}
           </h1>
           <div className="flex items-start  space-x-1">
             <input
@@ -113,21 +117,10 @@ function TrainerProfile() {
           </div>
 
           <h3 className="text-white text-start pb-2 text-base">
-            Muscle Gain ,Weight Loss
+          {data?.specialisation}
           </h3>
           <p className="text-white text-start text-sm w-1/">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu
-            scelerisque lacus. Donec fermentum sagittis justo at gravida. Cras
-            quis ex vitae eros pellentesque lacinia. Aliquam laoreet dui
-            ultricies mi ornare vulputate a sit amet eros. Donec tempor tempus
-            nulla consectetur tempor. Etiam commodo ex id justo pharetra, et
-            pretium ipsum scelerisque. Pellentesque et nisl dolor. Vestibulum
-            convallis augue nec quam scelerisque porta. Phasellus vel felis
-            imperdiet, varius odio non, pellentesque tellus. In tristique leo
-            ante. Pellentesque risus nulla, laoreet vel tempor sed, cursus id
-            ante. Integer est est, vestibulum nec vestibulum commodo, porttitor
-            quis felis. Nulla mattis augue eget purus iaculis, quis feugiat mi
-            egestas
+          {data?.description}
           </p>
         </div>
       </div>
@@ -212,7 +205,7 @@ function TrainerProfile() {
       </div>
     </div>
 
-      <div className="px-60 py-16">
+      {/* <div className="px-60 py-16">
         <h2 className="text-primary font-bold">SPECIALISATION</h2>
         <ul className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2">
           <li className="flex items-center">
@@ -250,7 +243,7 @@ function TrainerProfile() {
             <span>Diet and Nutrition</span>
           </li>
         </ul>
-      </div>
+      </div> */}
       <Footer />
     </div>
   );

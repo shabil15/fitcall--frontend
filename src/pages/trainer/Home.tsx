@@ -1,10 +1,14 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Navbar from '../../components/trainers/Navbar'
 import Hero from '../../components/trainers/Hero'
 import Footer from '../../components/trainers/Footer'
 import LandingPage from '../../components/trainers/LandingPage'
 
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+  
   return (
     <div className='bg-secondary'>
       <Navbar/>

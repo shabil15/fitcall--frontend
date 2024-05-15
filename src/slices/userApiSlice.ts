@@ -81,6 +81,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+    getTrainerDetails:builder.mutation({
+      query:(id) =>({
+        url:`trainers/profile?id=${id}`,
+        method:'GET',
+      })
+    }),
+
   }),
 });
 
@@ -94,4 +101,6 @@ export const {
   useForgotPasswordMutation,
   useLogoutMutation,
   useGetTrainersMutation,
+  useGetTrainerDetailsMutation,
+
 } = userApiSlice;

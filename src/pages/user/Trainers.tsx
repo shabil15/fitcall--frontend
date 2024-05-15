@@ -3,6 +3,7 @@ import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 import { useGetTrainersMutation } from "../../slices/userApiSlice";
 import { IoSearchOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 function Trainers() {
   
@@ -21,6 +22,7 @@ function Trainers() {
     language: languageFilter,
     search: searchQuery
   });
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchTrainers() {
@@ -144,8 +146,9 @@ function Trainers() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-44 md:px-14 px-3">
-        {trainers.map((trainer, index) => ( 
-          <div key={index} className="max-w-52 shadow-lg  rounded-lg  overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group">
+        {trainers.map((trainer) => ( 
+           
+          <div onClick={()=>navigate("/trainerDetails",{ state: { data: trainer } })}  key={trainer._id} className="max-w-52 shadow-lg  rounded-lg  overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group">
             <img
               className="w-full h-60 object-cover"
               src={trainer.profile_img} 
@@ -156,7 +159,8 @@ function Trainers() {
               <p className="text-white text-sm">{trainer.specialisation}</p>
             <p className="text-xs text-white">{trainer.language}</p>
             </div>
-          </div>
+          </div> 
+         
         ))}
       </div>
       <div className="pagingation text-center text-primary">
