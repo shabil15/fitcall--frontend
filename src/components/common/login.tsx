@@ -56,6 +56,7 @@ function Login() {
     onSubmit: async (values) => {
       try {
         const res = await login(values).unwrap();
+        console.log("res",res);
         dispatch(setCredential({ ...res.data }));
         dispatch(closeLoginModal());
         toast.success(res.message);

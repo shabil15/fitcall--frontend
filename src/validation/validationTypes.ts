@@ -33,3 +33,9 @@ export interface ITrainerJoin extends FormValues{
   profile_img: string;
   description : string
 }
+
+
+export interface UpdateUser {
+    name:string;
+    mobile : string;
+  }

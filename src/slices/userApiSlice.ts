@@ -81,14 +81,33 @@ export const userApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/updateProfile`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
     getTrainerDetails:builder.mutation({
       query:(id) =>({
         url:`trainers/profile?id=${id}`,
         method:'GET',
       })
     }),
+    setUserImg: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/addProfile`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
 
   }),
+
+  
+
+  
 });
 
 export const {
@@ -102,5 +121,7 @@ export const {
   useLogoutMutation,
   useGetTrainersMutation,
   useGetTrainerDetailsMutation,
+  useUpdateProfileMutation,
+  useSetUserImgMutation,
 
 } = userApiSlice;

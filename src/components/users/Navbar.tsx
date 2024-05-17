@@ -1,7 +1,8 @@
+import { Fragment } from 'react';
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Menu, Transition } from '@headlessui/react';
 import { useDispatch, useSelector } from "react-redux";
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import Swal from "sweetalert2";
 import { openLoginModal } from "../../slices/modalSlices/loginModal";
 import Login from "../../components/common/login";
@@ -17,6 +18,9 @@ export default function Navbar() {
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const [logOut] = useLogoutMutation();
   
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ');
+  }
 
   const handleLoginButtonClick = () => {
     dispatch(openLoginModal());
@@ -68,12 +72,67 @@ export default function Navbar() {
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {userInfo ? (
-              <button
-                onClick={handleLogout}
-                className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary "
-              >
-                Log Out
-              </button>
+             <Menu as="div" className="relative ml-3">
+             <div>
+               <Menu.Button className="relative flex rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                 <span className="absolute -inset-1.5" />
+                 <span className="sr-only">Open user menu</span>
+                 {/* {userInfo.profile_img ? 
+                  <img
+                  className="h-8 w-8 rounded-full"
+                  src={userInfo.profile_img}
+                   alt=""
+                />:
+                <img
+                className="h-8 w-8 rounded-full"
+                src='/src/assets/img/images.jpg'
+                 alt=""
+              />
+              } */} {userInfo.name}
+               </Menu.Button>
+             </div>
+             <Transition
+               as={Fragment}
+               enter="transition ease-out duration-100"
+               enterFrom="transform opacity-0 scale-95" 
+               leave="transition ease-in duration-75"
+               leaveFrom="transform opacity-100 scale-100"
+               leaveTo="transform opacity-0 scale-95"
+             >
+               <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-secondary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                 <Menu.Item>
+                   {({ active }) => (
+                     <a
+                      onClick={()=>navigate("/profile")}
+                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                     >
+                       Your Profile
+                     </a>
+                   )}
+                 </Menu.Item>
+                 <Menu.Item>
+                   {({ active }) => (
+                     <a
+                       href="#"
+                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                     >
+                       Settings
+                     </a>
+                   )}
+                 </Menu.Item>
+                 <Menu.Item>
+                   {({ active }) => (
+                     <a onClick={handleLogout}
+                       href="#"
+                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                     >
+                       Sign out
+                     </a>
+                   )}
+                 </Menu.Item>
+               </Menu.Items>
+             </Transition>
+           </Menu> 
             ) : (
               <button
                 onClick={handleLoginButtonClick}
