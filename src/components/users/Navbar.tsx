@@ -77,7 +77,7 @@ export default function Navbar() {
                <Menu.Button className="relative flex rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                  <span className="absolute -inset-1.5" />
                  <span className="sr-only">Open user menu</span>
-                 {/* {userInfo.profile_img ? 
+                  {userInfo.profile_img ? 
                   <img
                   className="h-8 w-8 rounded-full"
                   src={userInfo.profile_img}
@@ -85,10 +85,10 @@ export default function Navbar() {
                 />:
                 <img
                 className="h-8 w-8 rounded-full"
-                src='/src/assets/img/images.jpg'
+                src='/src/assets/images.png'
                  alt=""
               />
-              } */} {userInfo.name}
+              } 
                </Menu.Button>
              </div>
              <Transition
