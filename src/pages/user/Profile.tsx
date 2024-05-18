@@ -29,13 +29,37 @@ function Profile() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSubmit,setSubmit] = useState(false);
   const [addProfile]= useSetUserImgMutation();
+  const [updateUser] = useUpdateProfileMutation();
+  const dispatch = useDispatch()
+ 
 
+
+  const initialValues: UpdateUser= {
+    name:userInfo?.name,
+    mobile: userInfo?.mobile,
+  }
 
   const handleFileClick = () => {
     if(fileInputRef.current) {
       fileInputRef.current.click();
     }
   }
+
+  const {values,handleChange,handleSubmit,errors,touched} = useFormik({
+    initialValues:initialValues,
+    validationSchema:validationForUserUpdate,
+    onSubmit: async (values) => {
+      try{
+        const _id = userInfo?._id;
+        const {name,mobile} =  values;
+        const res= await updateUser({_id,name,mobile}).unwrap();
+        dispatch(setCredential({...res.user}));
+        toast.success(res.message)
+      } catch (err){
+        toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
+      }
+    }
+  })
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -78,33 +102,8 @@ function Profile() {
     }
   }
 
-  const initialValues:UpdateUser= {
-    name :"",
-    mobile:"",
-  }
-  const dispatch = useDispatch()
-  const[updateUser] =useUpdateProfileMutation()
-
-
-  const {values,handleChange,handleSubmit,errors,touched} = useFormik({
-    initialValues:initialValues,
-    validationSchema:validationForUserUpdate,
-    onSubmit:async(values) => {
-      try {
-        const _id = userInfo?._id;
-        const {name,mobile} = values;
-        const res= await updateUser({_id,name,mobile}).unwrap();
-        dispatch(setCredential({...res.user}))
-        toast.success(res.message)
-       } catch (err) {
-        toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
-      
-      }
-    }
-  })
-
-
-
+ 
+  
 
 
 
@@ -193,10 +192,20 @@ function Profile() {
                   </button>
                 </div>
               ) : (
-                <div></div>
+                <div className=" justify-center mt-3 mb-3">
+                  <button
+                    onClick={handleFileClick}
+                    className="bg-primary text-secondary rounded-md shadow-md w-20 h-8 font-medium"
+                  >
+                    Edit
+                  </button>
+                </div>
               )}
             </div>
-          <div className="flex-grow w-full sm:w-[80%] p-4 ">
+            <div className="flex-grow w-full sm:w-[80%] p-4 ">
+          <form action="" onSubmit={handleSubmit}>
+          
+          
             <div className="mt-5 grid grid-cols-2 gap-5 max-md:grid-cols-1">
               <div className=" shadow-xl p-3 flex rounded-lg ">
                 <div className=" flex justify-center shadow-xl items-center w-12 h-12 rounded-lg">
@@ -248,7 +257,14 @@ function Profile() {
                 </div>
               </div>
             </div>
-          </div>
+            <div className="flex w-full">
+            <div className="flex justify-end w-1/2">
+                <button className="bg-tertiary rounded-md mt-4 shadow-md w-28 h-10 font-medium">Save</button>
+            </div>
+           </div>
+          
+          </form> 
+          </div> 
         </div>
       </div>
 
