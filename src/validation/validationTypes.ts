@@ -39,3 +39,9 @@ export interface UpdateUser {
     name:string;
     mobile : string;
   }
+
+
+  export interface UpdateTrainer {
+    name:string;
+    mobile : string;
+  }

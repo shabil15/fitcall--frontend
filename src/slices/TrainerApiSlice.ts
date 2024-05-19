@@ -26,6 +26,29 @@ export const trainerApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+
+    updateTrainerProfile: builder.mutation({
+      query: (data) => ({
+        url: `${TRAINER_URL}/updateTrainerProfile`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
+    setTrainerImg: builder.mutation({
+      query: (data) => ({
+        url: `${TRAINER_URL}/addProfile`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
+
+
+
+
+
+
   }),
 });
 
@@ -33,4 +56,7 @@ export const {
   useTrainerLoginMutation,
   useTrainerRegisterMutation,
   useTrainerLogoutMutation,
+  useUpdateTrainerProfileMutation,
+  useSetTrainerImgMutation,
+  
 } = trainerApiSlice;

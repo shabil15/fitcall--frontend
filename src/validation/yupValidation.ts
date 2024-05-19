@@ -92,3 +92,15 @@ mobile: Yup.string()
   .matches(/^(?!(\d)\1{9})[5-9]\d{9}$/, "Invalid mobile number")
   .required("Please enter mobile"),
 })
+
+export const validationForTrainerUpdate = Yup.object({
+  name: Yup.string()
+  .min(3)
+  .max(30)
+  .matches(/^[^\s]+(\s[^\s]+)*$/, "Name cannot have adjacent spaces")
+  .required("Please enter name"),
+mobile: Yup.string()
+  .matches(/^(?!(\d)\1{9})[5-9]\d{9}$/, "Invalid mobile number")
+  .required("Please enter mobile"),
+})
+
