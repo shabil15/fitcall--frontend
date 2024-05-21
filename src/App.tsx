@@ -10,7 +10,7 @@ import AdminRoutes from "./routes/adminRoutes";
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className="font-customFont">
         <ToastContainer autoClose={3000} />
         <Routes>
           <Route path="/*" element={<UserRoutes />} />

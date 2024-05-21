@@ -5,6 +5,7 @@ import TrainerProfile from '../pages/user/TrainerProfile';
 import AboutUs from '../pages/user/AboutUs';
 import ContactUs from '../pages/user/ContactUs';
 import Profile from '../pages/user/Profile';
+import Pricing from '../pages/user/Pricing';
 
 function UserRoutes() {
   return (
@@ -15,6 +16,7 @@ function UserRoutes() {
       <Route path='/aboutus' element={<AboutUs/>}/>
       <Route path='/contactus' element={<ContactUs/>}/>
       <Route path='/profile' element={<Profile/>}/>
+      <Route path='/pricing' element={<Pricing/>}/>
     </Routes>     
   )
 }

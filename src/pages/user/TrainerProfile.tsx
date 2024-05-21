@@ -34,6 +34,7 @@ function TrainerProfile() {
           </h1>
         </div>
       </div>
+    
       <div className="md:flex md:text-center align-center md:px-52">
         <img
           src={data?.profile_img}
