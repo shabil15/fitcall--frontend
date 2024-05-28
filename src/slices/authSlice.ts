@@ -6,6 +6,19 @@ export interface UserInfo {
   name: string;
   mobile?: number;
   password?: string;
+  profile_img?: string;
+  isBlocked?: boolean;
+  isSubscribed?: boolean;
+  subscriptionPlan?: string; 
+  subscriptionStart?: Date;
+  subscriptionEnd?: Date;
+  paymentId?: string; 
+  trainerId?: string;
+  amount?: number; 
+  age?:string; 
+  height?: string; 
+  weight?: string;
+  goal?: string;
 }
 
 export interface TrainerInfo extends UserInfo{

@@ -1,6 +1,9 @@
 import React from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 function Hero() {
+  const { trainerInfo } = useSelector((state: RootState) => state.auth);
   return (
     <div>
   
@@ -20,7 +23,7 @@ function Hero() {
     <div className="max-w-xl  ltr:sm:text-left rtl:sm:text-right "  data-aos="fade-right"
      data-aos-offset="400"
      data-aos-easing="ease-in-sine">
-      <h1 className="text-5xl font-extrabold text-primary sm:text-8xl ">
+      <h1 className="text-7xl font-black text-primary sm:text-8xl ">
       Impact
         <span className="text-customFont block text-white">More Lives</span>
       </h1>

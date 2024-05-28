@@ -3,14 +3,16 @@ import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 // import ProfileData from "../../components/users/Profile/ProfileData";
 import { MdModeEdit } from "react-icons/md";
+import { GoGoal } from "react-icons/go";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaMobileAlt } from "react-icons/fa";
+import { FaPerson,FaWeightScale } from "react-icons/fa6";
 import { MdOutlineMail} from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateProfileMutation } from "../../slices/userApiSlice";
 import { RootState } from "../../app/store";
-import { MyError,UpdateUser } from "../../validation/validationTypes";
-import { validationForUserUpdate } from "../../validation/yupValidation";
+import { MyError,UpdateUser,UpdateHealth } from "../../validation/validationTypes";
+import { validationForUserUpdate,validationForUserHealth } from "../../validation/yupValidation";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { setCredential } from "../../slices/authSlice";
@@ -18,6 +20,9 @@ import { useSetUserImgMutation } from "../../slices/userApiSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../app/firebase/config";
 import Spinner from "../../components/common/Spinner";
+// import HealthDetails from "../../components/users/Profile/HealthDetails";
+import { CiLineHeight } from "react-icons/ci";
+import {useUpdateHealthMutation} from "../../slices/userApiSlice";
 
 
 function Profile() {
@@ -30,36 +35,65 @@ function Profile() {
   const [isSubmit,setSubmit] = useState(false);
   const [addProfile]= useSetUserImgMutation();
   const [updateUser] = useUpdateProfileMutation();
+  const [updateHealth] = useUpdateHealthMutation();
   const dispatch = useDispatch()
  
 
-
-  const initialValues: UpdateUser= {
-    name:userInfo?.name,
+  const initialValues: UpdateUser = {
+    name: userInfo?.name,
     mobile: userInfo?.mobile,
-  }
+  };
+
+  const healthValues: UpdateHealth = {
+    age: userInfo?.age,
+    weight: userInfo?.weight,
+    height: userInfo?.height,
+    goal: userInfo?.goal,
+  };
 
   const handleFileClick = () => {
-    if(fileInputRef.current) {
+    if (fileInputRef.current) {
       fileInputRef.current.click();
     }
-  }
+  };
 
-  const {values,handleChange,handleSubmit,errors,touched} = useFormik({
-    initialValues:initialValues,
-    validationSchema:validationForUserUpdate,
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationForUserUpdate,
     onSubmit: async (values) => {
-      try{
+      try {
         const _id = userInfo?._id;
-        const {name,mobile} =  values;
-        const res= await updateUser({_id,name,mobile}).unwrap();
-        dispatch(setCredential({...res.user}));
-        toast.success(res.message)
-      } catch (err){
+        const { name, mobile } = values;
+        const res = await updateUser({ _id, name, mobile }).unwrap();
+        dispatch(setCredential({ ...res.user }));
+        toast.success(res.message);
+      } catch (err) {
         toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
       }
-    }
-  })
+    },
+  });
+
+  const {
+    values: healthValuesFormik,
+    handleChange: handleChangeHealth,
+    handleSubmit: handleSubmitHealth,
+    errors: healthErrors,
+    touched: healthTouched,
+  } = useFormik({
+    initialValues: healthValues,
+    validationSchema: validationForUserHealth,
+    onSubmit: async (values) => {
+      try {
+        const _id = userInfo?._id;
+        const { age, weight, height, goal } = values;
+        const res = await updateHealth({ _id, age, weight, height, goal }).unwrap();
+        dispatch(setCredential({ ...res.user }));
+        toast.success(res.message);
+      } catch (err) {
+        toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
+      }
+    },
+  });
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -246,7 +280,7 @@ function Profile() {
                   <input
                     name="mobile"
                     value={values.mobile}
-                    placeholder={userInfo?.mobile}
+                    placeholder={`${userInfo?.mobile}`}
                     onChange={handleChange}
                     type="text"
                     className="mt-1 w-full  bg-secondary  focus:border-black outline-none"
@@ -254,6 +288,17 @@ function Profile() {
                   {/* {errors.mobile && touched.mobile && (
                     <div className="text-red-500">{errors.mobile}</div>
                   )} */}
+                </div>
+              </div>
+              <div className=" shadow-xl p-3 flex rounded-lg">
+                <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
+                  <MdOutlineMail size={26} color="#3BE48B" />
+                </div>
+                <div className="ml-5">
+                  <p className="font-medium text-primary">Subscription Plan</p>
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                    {`${userInfo?.subscriptionPlan} Plan`}
+                  </p>
                 </div>
               </div>
             </div>
@@ -335,7 +380,87 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p>First tab content goes here.</p>
+             
+             <div className="flex-grow items-center w-full p-4 ">
+             <form onSubmit={handleSubmitHealth} className="mt-5">
+                <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
+                  <div className="shadow-xl p-3 flex rounded-lg">
+                    <div className="flex justify-center shadow-xl items-center w-12 h-12 rounded-lg">
+                      <FaPerson size={26} color="#3BE48B" />
+                    </div>
+                    <div className="ml-5">
+                      <p className="font-medium text-primary">Age</p>
+                      <input
+                        name="age"
+                        value={healthValuesFormik.age}
+                        placeholder={userInfo?.age?.toString()}
+                        type="number"
+                        onChange={handleChangeHealth}
+                        className="mt-1 w-full bg-secondary text-white outline-none"
+                      />
+                      {healthErrors.age && healthTouched.age && <p className="text-red-500">{healthErrors.age}</p>}
+                    </div>
+                  </div>
+                  <div className="shadow-xl p-3 flex rounded-lg">
+                    <div className="shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
+                      <FaWeightScale size={26} color="#3BE48B" />
+                    </div>
+                    <div className="ml-5">
+                      <p className="font-medium text-primary">Weight (kg)</p>
+                      <input
+                        name="weight"
+                        value={healthValuesFormik.weight}
+                        placeholder={userInfo?.weight?.toString()}
+                        type="text"
+                        onChange={handleChangeHealth}
+                        className="mt-1 w-full bg-secondary text-white outline-none"
+                      />
+                      {healthErrors.weight && healthTouched.weight && <p className="text-red-500">{healthErrors.weight}</p>}
+                    </div>
+                  </div>
+                  <div className="shadow-xl p-3 flex rounded-lg">
+                    <div className="flex justify-center items-center w-12 h-12 rounded-lg">
+                      <CiLineHeight size={26} color="#3BE48B" />
+                    </div>
+                    <div className="ml-5">
+                      <p className="font-medium text-primary">Height (cm)</p>
+                      <input
+                        name="height"
+                        value={healthValuesFormik.height}
+                        placeholder={userInfo?.height?.toString()}
+                        type="text"
+                        onChange={handleChangeHealth}
+                        className="mt-1 w-full bg-secondary text-white outline-none"
+                      />
+                      {healthErrors.height && healthTouched.height && <p className="text-red-500">{healthErrors.height}</p>}
+                    </div>
+                  </div>
+                  <div className="shadow-xl p-3 flex rounded-lg">
+                    <div className="flex justify-center items-center w-12 h-12 rounded-lg">
+                      <GoGoal size={26} color="#3BE48B" />
+                    </div>
+                    <div className="ml-5">
+                      <p className="font-medium text-primary">Fitness Goal</p>
+                      <input
+                        name="goal"
+                        value={healthValuesFormik.goal}
+                        placeholder={userInfo?.goal}
+                        type="text"
+                        onChange={handleChangeHealth}
+                        className="mt-1 w-full bg-secondary text-white outline-none"
+                      />
+                      {healthErrors.goal && healthTouched.goal && <p className="text-red-500">{healthErrors.goal}</p>}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 justify-center flex">
+                  <button className="bg-primary text-secondary rounded-md shadow-md w-20 h-8 font-medium">Save</button>
+                </div>
+              </form>
+          </div> 
+
+
+
             </div>
             <div
               id="panel-2"
@@ -344,7 +469,12 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p>Second tab content goes here.</p>
+              <div className=" ">
+                <h1 className="text-3xl text-center font-bold text-white ">Upload your latest medical report</h1>
+                  <div className="">
+                    
+                  </div>
+              </div>
             </div>
             <div
               id="panel-3"
@@ -353,7 +483,65 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p>Third tab content goes here.</p>
+              <div className="mt-5 grid grid-cols-2 gap-5 max-md:grid-cols-1">
+              <div className=" shadow-xl p-3 flex rounded-lg">
+                <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
+                  <MdOutlineMail size={26} color="#3BE48B" />
+                </div>
+                <div className="ml-5">
+                  <p className="font-medium text-primary">Morning</p>
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                    3 Eggs ,vegitables ,potato
+                  </p>
+                </div>
+              </div>
+              <div className=" shadow-xl p-3 flex rounded-lg">
+                <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
+                  <MdOutlineMail size={26} color="#3BE48B" />
+                </div>
+                <div className="ml-5">
+                  <p className="font-medium text-primary">Noon</p>
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                    3 Eggs ,vegitables ,potato
+                  </p>
+                </div>
+              </div>
+              <div className=" shadow-xl p-3 flex rounded-lg">
+                <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
+                  <MdOutlineMail size={26} color="#3BE48B" />
+                </div>
+                <div className="ml-5">
+                  <p className="font-medium text-primary">Evening</p>
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                    3 Eggs ,vegitables ,potato
+                  </p>
+                </div>
+              </div>
+              <div className=" shadow-xl p-3 flex rounded-lg">
+                <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
+                  <MdOutlineMail size={26} color="#3BE48B" />
+                </div>
+                <div className="ml-5">
+                  <p className="font-medium text-primary">Night</p>
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                    3 Eggs ,vegitables ,potato
+                  </p>
+                </div>
+              </div>
+              </div>
+              <div className="grid grid-cols-1 ">
+              <div className=" shadow-xl p-3 flex rounded-lg">
+                <div className="  shadow-xl flex justify-center items-center w-12  h-12 rounded-lg">
+                  <MdOutlineMail size={26} color="#3BE48B" />
+                </div>
+                <div className="ml-5">
+                  <p className="font-medium text-primary">Additional Instructions</p>
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                    Drink more water ,and stay hydrate . also walk for 5 minutes after eating these foods.
+                  </p>
+                </div>
+              </div>
+              </div>
             </div>
           </div>
         </div>

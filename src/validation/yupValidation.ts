@@ -93,6 +93,13 @@ mobile: Yup.string()
   .required("Please enter mobile"),
 })
 
+export const validationForUserHealth = Yup.object({
+  age:Yup.string(),
+  weight:Yup.string(),
+  height:Yup.string(),
+  goal:Yup.string(),
+})
+
 export const validationForTrainerUpdate = Yup.object({
   name: Yup.string()
   .min(3)

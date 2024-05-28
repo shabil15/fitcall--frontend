@@ -36,10 +36,17 @@ export interface ITrainerJoin extends FormValues{
 
 
 export interface UpdateUser {
+    height: string | number | readonly string[] | undefined;
     name:string;
     mobile : string;
   }
 
+export interface UpdateHealth {
+  age:string;
+  height:string;
+  weight:string;
+  goal:string;
+}
 
   export interface UpdateTrainer {
     name:string;

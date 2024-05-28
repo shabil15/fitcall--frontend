@@ -111,6 +111,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
       })
   }),
 
+  updateHealth: builder.mutation({
+    query: (data) => ({
+      url: `${USER_URL}/updateHealth`,
+      method: "PATCH",
+      body: data,
+    }),
+  }),
+
   }),
 
   
@@ -132,5 +140,6 @@ export const {
   useUpdateProfileMutation,
   useSetUserImgMutation,
   usePaymentMutation,
+  useUpdateHealthMutation
 
 } = userApiSlice;

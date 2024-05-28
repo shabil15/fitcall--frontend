@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from 'react';
 import { Link} from "react-router-dom";
 import Swal from "sweetalert2";
 import { trainerLogout } from "../../slices/authSlice";
@@ -6,12 +6,18 @@ import { useTrainerLogoutMutation } from "../../slices/TrainerApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { toast } from "react-toastify";
+import { Menu, Transition } from '@headlessui/react';
+import {useNavigate} from 'react-router-dom'
+
 
 function Navbar() {
   const dispatch = useDispatch();
   const [TrainerLogout] = useTrainerLogoutMutation();
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
-  // const navigate = useNavigate();
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ');
+  }
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     // Display a confirmation dialog
@@ -37,6 +43,7 @@ function Navbar() {
       try {
         dispatch(trainerLogout());
         const res = await TrainerLogout("").unwrap();
+        navigate('/trainer');
         toast.success(res.message);
       } catch (error) {
         console.error(error);
@@ -60,12 +67,67 @@ function Navbar() {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {/* <button type="button" className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary "><Link to="login">Get started</Link></button> */}
             {trainerInfo ? (
-              <button
-                onClick={handleLogout}
-                className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary "
-              >
-                Log Out
-              </button>
+             <Menu as="div" className="relative ml-3">
+             <div>
+               <Menu.Button className="relative flex rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                 <span className="absolute -inset-1.5" />
+                 <span className="sr-only">Open user menu</span>
+                  {trainerInfo.profile_img ? 
+                  <img
+                  className="h-8 w-8 rounded-full"
+                  src={trainerInfo.profile_img}
+                   alt=""
+                />:
+                <img
+                className="h-8 w-8 rounded-full"
+                src='/src/assets/images.png'
+                 alt=""
+              />
+              } 
+               </Menu.Button>
+             </div>
+             <Transition
+               as={Fragment}
+               enter="transition ease-out duration-100"
+               enterFrom="transform opacity-0 scale-95" 
+               leave="transition ease-in duration-75"
+               leaveFrom="transform opacity-100 scale-100"
+               leaveTo="transform opacity-0 scale-95"
+             >
+               <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-secondary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                 <Menu.Item>
+                   {({ active }) => (
+                     <a
+                      onClick={()=>navigate("/trainer/profile")}
+                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                     >
+                       Your Profile
+                     </a>
+                   )}
+                 </Menu.Item>
+                 <Menu.Item>
+                   {({ active }) => (
+                     <a
+                     onClick={()=>navigate("/myplan")}
+                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                     >
+                       My Plan
+                     </a>
+                   )}
+                 </Menu.Item>
+                 <Menu.Item>
+                   {({ active }) => (
+                     <a onClick={handleLogout}
+                       href="#"
+                       className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                     >
+                       Sign out
+                     </a>
+                   )}
+                 </Menu.Item>
+               </Menu.Items>
+             </Transition>
+           </Menu> 
             ) : (
               <button className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary ">
                 <Link to="login">Get started</Link>
@@ -107,7 +169,7 @@ function Navbar() {
                   className="block py-2 px-3 text-white bg-primary  text-customFont rounded md:bg-transparent md:text-primary md:p-0 md:text-primary"
                   aria-current="page"
                 >
-                  Home
+                 <Link to="trainer"> Home</Link>
                 </a>
               </li>
               <li>

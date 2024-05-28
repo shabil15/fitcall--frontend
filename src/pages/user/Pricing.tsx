@@ -7,7 +7,7 @@ import { RootState } from "../../app/store";
 import { Link } from "react-router-dom";
 const public_stripe_key = 'pk_test_51PIo52SH9t7Bwd2YBOEZkvSjrfLfJwzyPXAAWLPuIqs3TWpaT4ErRl4DB8ReSZzGKu8tAdjJ96rU5YdkyDMyqc3M00Ppk33Q2p'
 import { usePaymentMutation } from '../../slices/userApiSlice';
-function Pricing() {
+function  Pricing() {
 
 
      const {userInfo} =useSelector((state:RootState)=> state.auth);

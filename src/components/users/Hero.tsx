@@ -1,6 +1,9 @@
 import React from 'react'
+import {  useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 function Hero() {
+  const { userInfo } = useSelector((state: RootState) => state.auth);
   return (
     <div>
   
@@ -20,7 +23,7 @@ function Hero() {
     <div className="max-w-xl  ltr:sm:text-left rtl:sm:text-right "  data-aos="fade-right"
      data-aos-offset="400"
      data-aos-easing="ease-in-sine">
-      <h1 className="text-7xl font-extrabold text-primary sm:text-9xl ">
+      <h1 className="text-7xl font-black text-primary sm:text-9xl ">
         Be Your 
         <strong className="text-customFont text-white"> Best Self </strong>
       </h1>
@@ -28,7 +31,7 @@ function Hero() {
       <p className="mt-4 max-w-lg text-white text-2xl sm:text-xl/relaxed">
       with FitCall, Start now.
       </p>
-
+      {userInfo? <div className="mt-8 flex  flex-wrap gap-4 text-center"></div>:
       <div className="mt-8 flex  flex-wrap gap-4 text-center">
         <a
           href="#"
@@ -36,7 +39,8 @@ function Hero() {
         >
           Get Started
         </a>
-      </div>
+      </div>}
+      
     </div>
   </div>
 </section>
