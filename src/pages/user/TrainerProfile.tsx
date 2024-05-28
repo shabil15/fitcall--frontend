@@ -1,12 +1,27 @@
 import React, { useState} from "react";
+import { useSelector } from "react-redux";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 import { useLocation } from "react-router-dom";
+import { useSetTrainerMutation } from "../../slices/userApiSlice";
+import { RootState } from "../../app/store";
+import { toast } from "react-toastify";
 
 function TrainerProfile() {
   const [activeTab, setActiveTab] = useState(1);
   const location = useLocation();
   const {data} = location.state;
+  const [setTrainer] = useSetTrainerMutation();
+  const {userInfo} =useSelector((state:RootState)=> state.auth);
+  const userId =userInfo? userInfo?._id:null;
+  const trainerId = data?._id;
+
+  const handleClick = async ()=> {
+    const res = await setTrainer({userId, trainerId}).unwrap();
+    toast.success(res.message);
+  }
+
+
   
 
   const handleTabClick = (tabId:number) => {
@@ -123,6 +138,16 @@ function TrainerProfile() {
           <p className="text-white text-start text-sm w-1/">
           {data?.description}
           </p>
+        </div>
+        
+          <div className="flex justify-center items-center">
+            <button
+              className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg"
+              onClick={handleClick}
+            >
+              SET AS TRAINER
+            </button>
+  
         </div>
       </div>
 

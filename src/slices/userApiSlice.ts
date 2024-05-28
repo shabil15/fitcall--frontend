@@ -119,6 +119,17 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 
+
+  setTrainer: builder.mutation({
+    query:({ userId, trainerId }) => ({
+      url:`${USER_URL}/setTrainer`,
+      method:"PATCH",
+      body:{ userId, trainerId }
+    })
+  }),
+
+
+
   }),
 
   
@@ -140,6 +151,6 @@ export const {
   useUpdateProfileMutation,
   useSetUserImgMutation,
   usePaymentMutation,
-  useUpdateHealthMutation
-
+  useUpdateHealthMutation,
+  useSetTrainerMutation
 } = userApiSlice;
