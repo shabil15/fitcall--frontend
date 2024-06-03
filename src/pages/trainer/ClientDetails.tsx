@@ -1,152 +1,11 @@
-import React, {ChangeEvent,useState,useRef } from "react";
-import Navbar from "../../components/users/Navbar";
-import Footer from "../../components/users/Footer";
-// import ProfileData from "../../components/users/Profile/ProfileData";
-import { MdModeEdit } from "react-icons/md";
-import { GoGoal } from "react-icons/go";
-import { IoPersonSharp } from "react-icons/io5";
-import { FaMobileAlt } from "react-icons/fa";
-import { FaPerson,FaWeightScale } from "react-icons/fa6";
-import { MdOutlineMail} from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { useUpdateProfileMutation } from "../../slices/userApiSlice";
-import { RootState } from "../../app/store";
-import { MyError,UpdateUser,UpdateHealth } from "../../validation/validationTypes";
-import { validationForUserUpdate,validationForUserHealth } from "../../validation/yupValidation";
-import { toast } from "react-toastify";
-import { useFormik } from "formik";
-import { setCredential } from "../../slices/authSlice";
-import { useSetUserImgMutation } from "../../slices/userApiSlice";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../app/firebase/config";
-import Spinner from "../../components/common/Spinner";
-// import HealthDetails from "../../components/users/Profile/HealthDetails";
-import { CiLineHeight } from "react-icons/ci";
-import {useUpdateHealthMutation} from "../../slices/userApiSlice";
+import React,{useState} from 'react'
+import Navbar from '../../components/trainers/Navbar';
+import Footer from '../../components/trainers/Footer';
 
 
-function Profile() {
-  const [activeTab, setActiveTab] = useState(1);
-  const {userInfo} =useSelector((state:RootState)=> state.auth);
-  const [userImg,setUserImg] = useState<File | null>(null);
-
-  const [imagePreview,setImagePreview] = useState<string |null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isSubmit,setSubmit] = useState(false);
-  const [addProfile]= useSetUserImgMutation();
-  const [updateUser] = useUpdateProfileMutation();
-  const [updateHealth] = useUpdateHealthMutation();
-  const dispatch = useDispatch()
- 
-
-  const initialValues: UpdateUser = {
-    name: userInfo?.name,
-    mobile: userInfo?.mobile,
-  };
-
-  const healthValues: UpdateHealth = {
-    age:userInfo?.age,
-    weight: userInfo?.weight,
-    height: userInfo?.height,
-    goal: userInfo?.goal,
-  };
-
-  const handleFileClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
-    initialValues: initialValues,
-    validationSchema: validationForUserUpdate,
-    onSubmit: async (values) => {
-      try {
-        const _id = userInfo?._id;
-        const { name, mobile } = values;
-        const res = await updateUser({ _id, name, mobile }).unwrap();
-        dispatch(setCredential({ ...res.user }));
-        toast.success(res.message);
-      } catch (err) {
-        toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
-      }
-    },
-  });
-
-  const {
-    values: healthValuesFormik,
-    handleChange: handleChangeHealth,
-    handleSubmit: handleSubmitHealth,
-    errors: healthErrors,
-    touched: healthTouched,
-  } = useFormik({
-    initialValues: healthValues,
-    validationSchema: validationForUserHealth,
-    onSubmit: async (values) => {
-      try {
-        const _id = userInfo?._id;
-        const { age, weight, height, goal } = values;
-        const res = await updateHealth({ _id, age, weight, height, goal }).unwrap();
-        dispatch(setCredential({ ...res.user }));
-        toast.success(res.message);
-      } catch (err) {
-        toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
-      }
-    },
-  });
-
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if(file) {
-      setUserImg(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }else{
-      setImagePreview(null);
-    }
-  }
-
-  const handleImageChange = async () => {
-    setSubmit(true);
-    const fileName = `${Date.now()}.jpg`;
-    const storageRef = ref(storage,`/image/userProfile/${fileName}`);
-
-    if(userImg) {
-      const snapshot = await uploadBytes(storageRef,userImg);
-      const downloadURL = await getDownloadURL(snapshot.ref);
-      const profile_img = downloadURL;
-      console.log(profile_img);
-
-      const _id = userInfo?._id;
-      console.log(_id);
-      try{
-        const res = await addProfile({profile_img,_id}).unwrap();
-        console.log(res);
-        
-        setSubmit(false);
-        toast.success(res.message);
-        dispatch(setCredential({...res.user}))
-      } catch(err) {
-        toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
-        setSubmit(false);
-      }
-    }
-  }
-
- 
-  
-
-
-
-  const handleTabClick = (tabId: number) => {
-    setActiveTab(tabId);
-  };
-
+function ClientDetails() {
   return (
-    <div className="bg-secondary">
+    <div className='bg-secondary'>
       <Navbar />
       <div className="relative">
         <img
@@ -156,14 +15,13 @@ function Profile() {
         />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center mt-8">
           <h1 className="text-3xl font-extrabold text-white mt-5">
-            <span className="bg-secondary italic px-5 py-2 rounded-lg">MY</span>
+            <span className="bg-secondary italic px-5 py-2 rounded-lg">CLIENT</span>
           </h1>
           <h1 className="text-3xl font-extrabold italic text-secondary mt-3">
-            PROFILE
+            DETAILS
           </h1>
         </div>
       </div>
-
 
 
 
@@ -316,7 +174,7 @@ function Profile() {
 
 
 
-
+{/* 
 
       <div className="max-w-3xk mx-auto px-8  sm:px-0 mt-16">
         <div className="sm:w-3/4 sm:mx-auto">
@@ -545,11 +403,11 @@ function Profile() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <Footer />
     </div>
-  );
+  )
 }
 
-export default Profile;
+export default ClientDetails

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import  { useState} from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useSetTrainerMutation } from "../../slices/userApiSlice";
 import { RootState } from "../../app/store";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 function TrainerProfile() {
   const [activeTab, setActiveTab] = useState(1);
@@ -17,8 +18,30 @@ function TrainerProfile() {
   const trainerId = data?._id;
 
   const handleClick = async ()=> {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This will be your Trainer until your subscription ends",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3BE48B",
+      cancelButtonColor: "#3d3636",
+      confirmButtonText: "Yes, I am Sure",
+      customClass: {
+        popup: "swal-custom-background",
+        title: "swal2-title",
+        content: "swal2-content",
+        confirmButton: "swal2-confirm",
+      },
+    });
+
+    if (result.isConfirmed) {
+    try {
     const res = await setTrainer({userId, trainerId}).unwrap();
     toast.success(res.message);
+  } catch (error) {
+      // toast.error(res.message);
+  }
+}
   }
 
 
@@ -140,17 +163,23 @@ function TrainerProfile() {
           </p>
         </div>
         
-          <div className="flex justify-center items-center">
+          
+      </div>
+      <div className="flex justify-center items-center">
             <button
-              className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg"
+              className="bg-primary m-4  text-secondary py-2 px-2 rounded-lg shadow-lg"
               onClick={handleClick}
             >
               SET AS TRAINER
             </button>
+            <button
+              className="bg-primary text-secondary py-2 px-2 rounded-lg shadow-lg"
+             
+            >
+              SUBSCRIPTION HISTORY
+            </button>
   
         </div>
-      </div>
-
       <div className="max-w-3xk mx-auto px-8  sm:px-0 mt-16">
       <div className="sm:w-7/12 sm:mx-auto">
         <div

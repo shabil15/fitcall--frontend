@@ -1,10 +1,8 @@
-import React from 'react'
 import Navbar from '../../components/users/Navbar';
 import Footer from '../../components/users/Footer';
 import { loadStripe,Stripe  } from "@stripe/stripe-js";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { Link } from "react-router-dom";
 const public_stripe_key = 'pk_test_51PIo52SH9t7Bwd2YBOEZkvSjrfLfJwzyPXAAWLPuIqs3TWpaT4ErRl4DB8ReSZzGKu8tAdjJ96rU5YdkyDMyqc3M00Ppk33Q2p'
 import { usePaymentMutation } from '../../slices/userApiSlice';
 function  Pricing() {

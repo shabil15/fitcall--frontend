@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useRef } from "react";
+import  { ChangeEvent, useState, useRef } from "react";
 import Navbar from "../../components/trainers/Navbar";
 import Footer from "../../components/trainers/Footer";
 import { IoPersonSharp } from "react-icons/io5";

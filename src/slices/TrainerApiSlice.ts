@@ -43,11 +43,13 @@ export const trainerApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-
-
-
-
-
+    getClients: builder.mutation({
+      query: (trainerId) => ({
+        url: `${TRAINER_URL}/getClientS`,
+        method: 'POST',
+        body: { trainerId },
+      })
+    }),
 
   }),
 });
@@ -58,5 +60,6 @@ export const {
   useTrainerLogoutMutation,
   useUpdateTrainerProfileMutation,
   useSetTrainerImgMutation,
+  useGetClientsMutation,
   
 } = trainerApiSlice;

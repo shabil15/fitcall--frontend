@@ -21,9 +21,17 @@ export interface UserInfo {
   goal?: string;
 }
 
-export interface TrainerInfo extends UserInfo{
-  img:string,
-  joinDate:string
+export interface TrainerInfo {
+  _id?: string;
+    name: string;
+    mobile: string;
+    email: string;
+    password: string;
+    description:string;
+    language: string;
+    specialisation: string;
+    certificate: string;
+    profile_img?: string;
 }
 
 
