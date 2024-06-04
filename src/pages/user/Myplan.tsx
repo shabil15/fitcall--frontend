@@ -36,10 +36,11 @@ function Myplan() {
           </h1>
         </div>
       </div>
+      
       <section className="relative bg-secondary bg-[url('../../../src/assets/pexels-li-sun-2294361.jpg')] bg-cover bg-no-repeat">
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="absolute inset-0 sm:bg-transparent ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
-        {userInfo.isSubscribed ? (
+        {userInfo?.isSubscribed ? (
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div className="relative mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
               <h2 className="mb-4 text-4xl tracking-tight font-extrabold font-customFont text-white ">
@@ -255,6 +256,7 @@ function Myplan() {
         )}
       </section>
       :
+      
       <Footer />
     </div>
   );

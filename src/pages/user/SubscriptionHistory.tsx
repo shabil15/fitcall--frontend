@@ -1,10 +1,44 @@
-import React from 'react'
-import Navbar from '../../components/users/Navbar';
-import Footer from '../../components/users/Footer';
+import React, { useState, useEffect } from "react";
+import Navbar from "../../components/users/Navbar";
+import Footer from "../../components/users/Footer";
+import { RootState } from "../../app/store";
+import { useSelector } from "react-redux";
+import { useGetSubscriptionHistoryMutation } from "../../slices/userApiSlice";
+import { formatDate } from "../../utils/formateDate";
+import { FaCheckCircle } from "react-icons/fa";
 
 function SubscriptionHistory() {
+  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const [getSubscriptionHistory] = useGetSubscriptionHistoryMutation();
+  const userId = userInfo?._id;
+
+  useEffect(() => {
+    const fetchSubscriptionHistory = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getSubscriptionHistory(userId).unwrap();
+        console.log("API Response:", response);
+        setSubscriptions(response);
+        console.log("subs", subscriptions);
+      } catch (err) {
+        console.error("Error fetching subscription history:", err);
+        setError("Failed to fetch subscription history");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (userId) {
+      fetchSubscriptionHistory();
+    }
+  }, [userId, getSubscriptionHistory]);
+
   return (
-    <div className='bg-secondary'>
+    <div className="bg-secondary">
       <Navbar />
       <div className="relative">
         <img
@@ -24,11 +58,56 @@ function SubscriptionHistory() {
         </div>
       </div>
 
+      {isLoading && <p>Loading...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:px-44 md:px-14 px-3 ">
+        {subscriptions.map((sub, index) => (
+          <div key={index} className="bg-secondary my-4 rounded-lg shadow-2xl group mx-2">
+          {/* head */}
+          <div className="grid sm:flex justify-between p-4">
+            <div className="max-sm:flex max-sm:justify-between">
+              <p className="text-gray-500 font-Sans">Payment Id</p>
+              <p className="text-white font-medium font-Sans sm:mt-2">
+                {sub?.paymentId?.toUpperCase()}
+              </p>
+            </div>
+            <div className="flex gap-5 max-sm:mt-2">
+              <div>
+                <p className="text-gray-500 font-Sans">Subscription Status</p>
+                <p className="text-white font-Sans font-medium mt-2">
+                  {sub?.isActive?"Active":"Inactive"}
+                </p>
+              </div>
+            </div>
+          </div>
+          <hr />
+          {/* section */}
+          <div className="flex md:p-5">
+            <div className="ml-5">
+              <p className="text-primary font-Sans text-lg font-medium ">
+                {sub?.plan} Plan
+              </p>
+            </div>
+          </div>
+          <div className="sm:flex justify-between px-5 max-sm:mt-2 ">
+            <div className="text-gray-500 gap-3 font-Sans flex max-sm:text-sm">
+              {/* Booking At {formatDate(sub?.start)}{" "} */}
+              <span className="text-white font-medium font-Sans mb-2">
+                {formatDate(sub?.start)}-{formatDate(sub?.end)}
+              </span>{" "}
+            </div>
+            <div className="text-primary font-Sans font-medium max-sm:mt-2">
+            ₹{sub?.amount}/-
+            </div>
+          </div>
+        </div>
+        ))}
+      </div>
 
 
       <Footer />
     </div>
-  )
+  );
 }
 
 export default SubscriptionHistory;

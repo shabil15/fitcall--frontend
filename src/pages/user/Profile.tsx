@@ -23,6 +23,7 @@ import Spinner from "../../components/common/Spinner";
 // import HealthDetails from "../../components/users/Profile/HealthDetails";
 import { CiLineHeight } from "react-icons/ci";
 import {useUpdateHealthMutation} from "../../slices/userApiSlice";
+import { useNavigate } from "react-router-dom";
 
 
 function Profile() {
@@ -37,7 +38,7 @@ function Profile() {
   const [updateUser] = useUpdateProfileMutation();
   const [updateHealth] = useUpdateHealthMutation();
   const dispatch = useDispatch()
- 
+ const navigate = useNavigate();
 
   const initialValues: UpdateUser = {
     name: userInfo?.name,
@@ -305,16 +306,22 @@ function Profile() {
             <div className="flex w-full">
             <div className="flex justify-end w-1/2">
                 <button className="bg-tertiary rounded-md mt-4 shadow-md w-28 h-10 font-medium">Save</button>
+                
             </div>
            </div>
           
           </form> 
           </div> 
         </div>
+        
+      <button onClick={()=> navigate("/subscriptionHistory")}
+              className="bg-primary rounded-md mt-10 shadow-md w-52 h-10 font-medium">
+              SUBSCRIPTION HISTORY
+            </button>
       </div>
 
-
-
+     
+     
 
 
 

@@ -128,13 +128,17 @@ export const userApiSlice = apiSlice.injectEndpoints({
     })
   }),
 
+  getSubscriptionHistory: builder.mutation({
+    query: (userId) => ({
+      url: `${USER_URL}/subscriptionHistory/${userId}`,
+      method: 'GET',
+    }),
+  }),
+
+
 
 
   }),
-
-  
-
-  
 });
 
 export const {
@@ -152,5 +156,6 @@ export const {
   useSetUserImgMutation,
   usePaymentMutation,
   useUpdateHealthMutation,
-  useSetTrainerMutation
+  useSetTrainerMutation,
+  useGetSubscriptionHistoryMutation,
 } = userApiSlice;

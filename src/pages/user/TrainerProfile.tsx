@@ -172,12 +172,6 @@ function TrainerProfile() {
             >
               SET AS TRAINER
             </button>
-            <button
-              className="bg-primary text-secondary py-2 px-2 rounded-lg shadow-lg"
-             
-            >
-              SUBSCRIPTION HISTORY
-            </button>
   
         </div>
       <div className="max-w-3xk mx-auto px-8  sm:px-0 mt-16">
