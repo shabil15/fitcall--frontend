@@ -4,7 +4,7 @@ import { RootState } from '../../app/store';
 import { useSelector } from 'react-redux';
 import Navbar from '../../components/trainers/Navbar';
 import Footer from '../../components/trainers/Footer';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ClientsList: React.FC = () => {
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
@@ -13,16 +13,15 @@ const ClientsList: React.FC = () => {
   const [clients, setClients] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [getClients]  = useGetClientsMutation();
+  const [getClients] = useGetClientsMutation();
+  const navigate = useNavigate(); // Ensure this is at the top level
 
   useEffect(() => {
     const fetchClients = async () => {
       try {
         setIsLoading(true);
         const { data } = await getClients(trainerId);
-        setClients(data || []); 
-
-        
+        setClients(data || []);
       } catch (error) {
         console.error('Error fetching clients:', error);
       } finally {
@@ -38,7 +37,6 @@ const ClientsList: React.FC = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  const navigate = useNavigate()
 
   return (
     <div className="bg-secondary">
@@ -53,27 +51,31 @@ const ClientsList: React.FC = () => {
           <h1 className="text-3xl font-extrabold text-white mt-5">
             <span className="bg-secondary italic px-5 py-2 rounded-lg">MY</span>
           </h1>
-          <h1 className="text-3xl font-extrabold italic text-secondary mt-3"> 
+          <h1 className="text-3xl font-extrabold italic text-secondary mt-3">
             CLIENTS
           </h1>
         </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-44 md:px-14 px-3">
-      {clients.map((client) => ( 
-        <div  onClick={()=>navigate("/trainerDetails",{ state: { data: client } })}  key={client?._id} className="max-w-52 shadow-lg  rounded-lg  overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group">
+        {clients.map((client) => (
+          <div
+            onClick={() => navigate("clientsDetails", { state: { data: client } })}
+            key={client?._id}
+            className="max-w-52 shadow-lg rounded-lg overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group"
+          >
             <img
               className="w-full h-60 object-cover"
-              src={client?.profile_img} 
+              src={client?.profile_img}
               alt="Client"
             />
             <div className="bg-secondary text-center py-4 transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-4">
-              <h3 className="text-xl font-semibold text-white">{client.name}</h3>
+              <h3 className="text-xl font-semibold text-white">{client?.name}</h3>
               <p className="text-white text-sm">{client?.mobile}</p>
-            <p className="text-xs text-white">{client?.goal}</p>
+              <p className="text-xs text-white">{client?.goal}</p>
             </div>
           </div>
-    ))}
+        ))}
       </div>
 
       <Footer />

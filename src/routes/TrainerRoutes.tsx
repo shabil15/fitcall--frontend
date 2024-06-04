@@ -5,6 +5,7 @@ import TrainerLogin from '../pages/trainer/TrainerLogin';
 // import TrainerPrivateRoute from '../components/trainers/TrainerPrivateRoute';
 import Profile from '../pages/trainer/Profile';
 import Clients from '../pages/trainer/Clients';
+import ClientDetails from '../pages/trainer/ClientDetails';
 
 
 function TrainerRoutes() {
@@ -15,7 +16,7 @@ function TrainerRoutes() {
       <Route path="signup" element={<JoinFitcall/>} />
       <Route path= "/profile" element={<Profile/>}/>
       <Route path="/clients" element={<Clients/>}/>
-      <Route path="/clientsDetails" element={<Cl}/>
+      <Route path="/clients/clientsDetails" element={<ClientDetails/>}/>
     </Routes>     
   )
 }
