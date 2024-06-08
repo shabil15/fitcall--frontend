@@ -51,6 +51,16 @@ export const trainerApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+
+    addDescription:builder.mutation({
+      query:({trainerId,description}) => ({
+        url:`${TRAINER_URL}/addDescription/${trainerId}`,
+        method:'PATCH',
+        body:description,
+      })
+    }),
+    
+
   }),
 });
 
@@ -61,5 +71,5 @@ export const {
   useUpdateTrainerProfileMutation,
   useSetTrainerImgMutation,
   useGetClientsMutation,
-  
+  useAddDescriptionMutation,
 } = trainerApiSlice;

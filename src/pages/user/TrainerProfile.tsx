@@ -158,7 +158,7 @@ function TrainerProfile() {
           <h3 className="text-white text-start pb-2 text-base">
           {data?.specialisation}
           </h3>
-          <p className="text-white text-start text-sm w-1/">
+          <p className="text-white text-start text-sm w-1/" style={{ whiteSpace: 'pre-wrap' }}>
           {data?.description}
           </p>
         </div>

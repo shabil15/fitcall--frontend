@@ -15,7 +15,7 @@ import { setTrainerCredential } from "../../slices/authSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../app/firebase/config";
 import Spinner from "../../components/common/Spinner";
-
+import Description from "../../components/trainers/Profile/Description";
 function Profile() {
   const [activeTab, setActiveTab] = useState(1);
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
@@ -266,7 +266,7 @@ function Profile() {
               }`}
               onClick={() => handleTabClick(1)}
             >
-              <span className="">EXPERIENCE</span>
+              <span className="">DESCRIPTION</span>
             </button>
             <button
               role="tab"
@@ -296,7 +296,7 @@ function Profile() {
               }`}
               onClick={() => handleTabClick(3)}
             >
-              <span>DIET PLAN</span>
+              <span>EXPERIENCE</span>
             </button>
           </div>
           <div className="relative rounded-xl h-auto border border-opacity-5 border-gray-900 shadow-xl">
@@ -307,7 +307,8 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p>First tab content goes here.</p>
+              <p className='text-white text-center mb-3 text-2xl font-bold  '>Description</p>
+              <Description/>
             </div>
             <div
               id="panel-2"
@@ -332,7 +333,7 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p>Third tab content goes here.</p>
+              <p>Experience</p>
             </div>
           </div>
         </div>
