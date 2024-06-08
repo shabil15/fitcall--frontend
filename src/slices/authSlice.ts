@@ -1,24 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface Diet{
+  morning?: string;
+  noon?: string;
+  evening?: string;
+  night?: string;
+  additionalInstructions?: string;
+}
+
+export interface Subscription{
+  plan?: string;
+  start?: Date;
+  end?: Date;
+  paymentId?: string;
+  amount?: number;
+  isActive?:boolean;
+}
+
 export interface UserInfo {
   _id?: string;
   email: string;
   name: string;
-  mobile?: number;
+  mobile?: string | null;
   password?: string;
   profile_img?: string;
   isBlocked?: boolean;
   isSubscribed?: boolean;
-  subscriptionPlan?: string; 
-  subscriptionStart?: Date;
-  subscriptionEnd?: Date;
-  paymentId?: string; 
+  subscriptions?:Subscription[];
   trainerId?: string;
-  amount?: number; 
   age?:string; 
   height?: string; 
   weight?: string;
   goal?: string;
+  diet?: Diet;
+  testResult?:string;
 }
 
 export interface TrainerInfo {

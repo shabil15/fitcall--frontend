@@ -95,6 +95,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method:'GET',
       })
     }),
+
     setUserImg: builder.mutation({
       query: (data) => ({
         url: `${USER_URL}/addProfile`,
@@ -135,6 +136,21 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 
+  updateDiet:builder.mutation({
+    query:({userId,diet}) => ({
+      url:`${USER_URL}/update-diet/${userId}`,
+      method:'PUT',
+      body:diet,
+    })
+  }),
+
+  addTestResult: builder.mutation({
+    query: (data ) => ({
+      url: `${USER_URL}/addTestRes`,
+      method: 'PATCH',
+      body: data,
+    }),
+  }),
 
 
 
@@ -158,4 +174,6 @@ export const {
   useUpdateHealthMutation,
   useSetTrainerMutation,
   useGetSubscriptionHistoryMutation,
+  useUpdateDietMutation,
+  useAddTestResultMutation
 } = userApiSlice;

@@ -11,6 +11,7 @@ import { userLogout } from "../../slices/authSlice";
 import { useLogoutMutation } from "../../slices/userApiSlice";
 import "./alert.css";
 import { toast } from "react-toastify";
+import { ButtonsCard } from '../ui/ButtonCards';
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export default function Navbar() {
         content: "swal2-content",
         confirmButton: "swal2-confirm",
       },
-    });
+    })
 
     if (result.isConfirmed) {
       try {
@@ -134,12 +135,14 @@ export default function Navbar() {
              </Transition>
            </Menu> 
             ) : (
+              <ButtonsCard >
               <button
                 onClick={handleLoginButtonClick}
-                className="text-secondary bg-primary hover:bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center .bg-primary-600 .hover:bg-primary "
+                className="inline-flex h-12 animate-shimmer bg-primary items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"  
               >
                 Get started
               </button>
+              </ButtonsCard>
             )}
 
             <button

@@ -20,17 +20,17 @@ import { useSetUserImgMutation } from "../../slices/userApiSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../app/firebase/config";
 import Spinner from "../../components/common/Spinner";
-// import HealthDetails from "../../components/users/Profile/HealthDetails";
 import { CiLineHeight } from "react-icons/ci";
 import {useUpdateHealthMutation} from "../../slices/userApiSlice";
 import { useNavigate } from "react-router-dom";
+import TestResult from "../../components/users/Profile/TestResult";
+
 
 
 function Profile() {
   const [activeTab, setActiveTab] = useState(1);
   const {userInfo} =useSelector((state:RootState)=> state.auth);
   const [userImg,setUserImg] = useState<File | null>(null);
-
   const [imagePreview,setImagePreview] = useState<string |null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSubmit,setSubmit] = useState(false);
@@ -40,17 +40,18 @@ function Profile() {
   const dispatch = useDispatch()
  const navigate = useNavigate();
 
-  const initialValues: UpdateUser = {
-    name: userInfo?.name,
-    mobile: userInfo?.mobile,
-  };
+ const initialValues: UpdateUser = {
+  name: userInfo?.name ?? '',
+  mobile: userInfo?.mobile ?? '',
+};
 
-  const healthValues: UpdateHealth = {
-    age:userInfo?.age,
-    weight: userInfo?.weight,
-    height: userInfo?.height,
-    goal: userInfo?.goal,
-  };
+const healthValues: UpdateHealth = {
+  age: userInfo?.age ?? '',
+  weight: userInfo?.weight ?? '',
+  height: userInfo?.height ?? '',
+  goal: userInfo?.goal ?? '',
+};
+
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -298,7 +299,7 @@ function Profile() {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Subscription Plan</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
-                    {`${userInfo?.subscriptionPlan} Plan`}
+                  {userInfo?.subscriptions && userInfo.subscriptions.length > 0 ? `${userInfo.subscriptions[userInfo.subscriptions.length - 1].plan} Plan` : 'No Plan'}
                   </p>
                 </div>
               </div>
@@ -476,11 +477,9 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <div className=" ">
-                <h1 className="text-3xl text-center font-bold text-white ">Upload your latest medical report</h1>
-                  <div className="">
-                    
-                  </div>
+              <div className="flex justify-center align-center">
+                
+                  <TestResult/>
               </div>
             </div>
             <div
@@ -498,7 +497,7 @@ function Profile() {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Morning</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
-                    3 Eggs ,vegitables ,potato
+                    {userInfo?.diet?.morning}
                   </p>
                 </div>
               </div>
@@ -509,7 +508,8 @@ function Profile() {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Noon</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
-                    3 Eggs ,vegitables ,potato
+                  {userInfo?.diet?.noon}
+
                   </p>
                 </div>
               </div>
@@ -520,7 +520,7 @@ function Profile() {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Evening</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
-                    3 Eggs ,vegitables ,potato
+                  {userInfo?.diet?.evening}
                   </p>
                 </div>
               </div>
@@ -531,7 +531,7 @@ function Profile() {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Night</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
-                    3 Eggs ,vegitables ,potato
+                  {userInfo?.diet?.night}
                   </p>
                 </div>
               </div>
@@ -544,7 +544,7 @@ function Profile() {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Additional Instructions</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
-                    Drink more water ,and stay hydrate . also walk for 5 minutes after eating these foods.
+                  {userInfo?.diet?.additionalInstructions}
                   </p>
                 </div>
               </div>

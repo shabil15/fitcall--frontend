@@ -34,9 +34,9 @@ const ClientsList: React.FC = () => {
     }
   }, [trainerId, getClients]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div className="bg-secondary">

@@ -1,12 +1,17 @@
 import React from 'react'
+// import { LampContainer } from '../ui/lamp'
+import { TracingBeam } from '../ui/TracingBeam';
+
 
 function LandingPage() {
   return (
     <div className='bg-secondary text-customFont scroll-smooth'>
       <div className='' data-aos="fade-up">
+      {/* <LampContainer/> */}
 
       <h1 className=' text-white text-5xl pt-9  px-16 font-extrabold font-customFont  text-center'>Your Personal</h1>
       <h1 className='text-primary text-5xl pt-5 px-16 font-extrabold font-customFont text-center '>Fitness Companion</h1>
+
       <p className=' text-white sm:text-2xl  text-center py-8 md:px-16 '>At fitCall, we're more than a fitness platform. We're your dedicated partner, providing personalized support, expert guidance, and comprehensive resources to help you achieve your goals. Access tailored training plans, expert trainers, and community support. Start your journey with fitCall today.</p>
       </div>
 
@@ -45,6 +50,8 @@ function LandingPage() {
 {/* <div className="py-3 flex items-center text-sm text-white before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6"></div> */}
 
 <div className="text-center p-8" >
+<TracingBeam className="px-6">
+
     <h2 className="font-bold  text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl" data-aos="fade-up">
         Why to choose <span className='text-primary'>FitCall?</span>
     </h2>
@@ -88,13 +95,14 @@ function LandingPage() {
             </p>
         </div>
     </div>
+    </TracingBeam>
+
 </div>
 
 {/* rEVIEWS  */}
 
 {/* our trainers */}
     
-
     </div>
   )
 }

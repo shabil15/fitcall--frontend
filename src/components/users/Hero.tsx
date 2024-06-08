@@ -1,9 +1,16 @@
 import React from 'react'
-import {  useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { openLoginModal } from '../../slices/modalSlices/loginModal';
 
 function Hero() {
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state: RootState) => state.auth);
+
+  const handleLoginButtonClick = () => {
+    dispatch(openLoginModal());
+  };
+
   return (
     <div>
   
@@ -33,12 +40,12 @@ function Hero() {
       </p>
       {userInfo? <div className="mt-8 flex  flex-wrap gap-4 text-center"></div>:
       <div className="mt-8 flex  flex-wrap gap-4 text-center">
-        <a
-          href="#"
-          className="block rounded bg-primary px-12 py-3  font-medium text-black shadow focus:outline-none   "
+        <button
+        onClick={handleLoginButtonClick}
+          className="block rounded bg-primary px-12 py-3  font-medium text-secondary shadow focus:outline-none   "
         >
           Get Started
-        </a>
+        </button>
       </div>}
       
     </div>
