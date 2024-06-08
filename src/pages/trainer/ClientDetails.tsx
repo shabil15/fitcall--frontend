@@ -698,7 +698,14 @@ function ClientDetails() {
               role="tabpanel"
             >
               <div className=" ">
-                <h1 className="text-3xl text-center font-bold text-white ">Upload your latest medical report</h1>
+                <h1 className="text-3xl text-center font-bold text-white ">Latest Medical Report</h1>
+                <div className="mt-3 flex justify-center">
+          <img
+            className="w-auto h-auto  object-cover cursor-pointer"
+            src={data?.testResult}
+            alt="Test Result"
+          />
+        </div>
                 <div className="">
                   
                 </div>
