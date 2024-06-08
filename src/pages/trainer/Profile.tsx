@@ -16,6 +16,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../app/firebase/config";
 import Spinner from "../../components/common/Spinner";
 import Description from "../../components/trainers/Profile/Description";
+import Experience from "../../components/trainers/Profile/Experience";
+
 function Profile() {
   const [activeTab, setActiveTab] = useState(1);
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
@@ -333,7 +335,8 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p>Experience</p>
+              <p className='text-white text-center mb-3 text-2xl font-bold  '>Experience</p>
+              <Experience/>
             </div>
           </div>
         </div>

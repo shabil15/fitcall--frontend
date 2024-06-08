@@ -230,7 +230,7 @@ function TrainerProfile() {
             }`}
             role="tabpanel"
           >
-            <p>First tab content goes here.</p>
+            <p style={{ whiteSpace: 'pre-wrap' }}>{data?.experience}</p>
           </div>
           <div
             id="panel-2"
@@ -239,7 +239,15 @@ function TrainerProfile() {
             }`}
             role="tabpanel"
           >
-            <p>Second tab content goes here.</p>
+            <p className='text-white text-center mb-3 text-2xl font-bold  '>Latest Medical Report</p>
+            <div className="mt-3 flex justify-center">
+          <img
+            className="w-auto h-auto  object-cover cursor-pointer"
+            src={data?.certificate}
+            alt="Test Result"
+            // onClick={handleFileClick}
+          />
+        </div>
           </div>
           <div
             id="panel-3"

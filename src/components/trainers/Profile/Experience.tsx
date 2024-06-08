@@ -5,17 +5,17 @@ import { useAddExperienceMutation } from '../../../slices/TrainerApiSlice';
 import { toast } from 'react-toastify';
 import { setTrainerCredential } from '../../../slices/authSlice';
 
-function Description() {
+function Experience() {
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
-  const [description, setDescription] = useState(trainerInfo?.description || '');
-  const [addDescription] = useAddDescriptionMutation();
+  const [experience, setExperience] = useState(trainerInfo?.experience || '');
+  const [addExperience] = useAddExperienceMutation();
   const dispatch = useDispatch();
   const [error, setError] = useState('');
   const textareaRef = useRef(null);
 
   useEffect(() => {
-    console.log('Initial description:', trainerInfo?.description);
-    setDescription(trainerInfo?.description || '');
+    console.log('Initial experience:', trainerInfo?.experience);
+    setExperience(trainerInfo?.experience || '');
   }, [trainerInfo]);
 
   useEffect(() => {
@@ -23,10 +23,10 @@ function Description() {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [description]);
+  }, [experience]);
 
-  const validateDescription = (desc) => {
-    const wordCount = desc.trim().split(/\s+/).length;
+  const validateDescription = (expe) => {
+    const wordCount = expe.trim().split(/\s+/).length;
     if (wordCount < 100 || wordCount > 200) {
       return false;
     }
@@ -35,27 +35,27 @@ function Description() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateDescription(description)) {
-      setError('Description must be between 100 and 150 words.');
+    if (!validateDescription(experience)) {
+      setError('Experience must be between 100 and 150 words.');
       return;
     }
     setError('');
     try {
-      const res = await addDescription({
+      const res = await addExperience({
         trainerId: trainerInfo?._id,
-        description: { description },
+        experience: { experience },
       }).unwrap();
 
       toast.success(res.message);
-      dispatch(setTrainerCredential({ ...trainerInfo, description })); // Update the Redux state
+      dispatch(setTrainerCredential({ ...trainerInfo, experience })); 
     } catch (err) {
-      console.error('Failed to update the description:', err);
-      toast.error('Failed to update the description');
+      console.error('Failed to update the experience:', err);
+      toast.error('Failed to update the experience');
     }
   };
 
   const handleTextareaChange = (e) => {
-    setDescription(e.target.value);
+    setExperience(e.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
@@ -68,7 +68,7 @@ function Description() {
         <div className="flex justify-center">
           <textarea
             ref={textareaRef}
-            value={description}
+            value={experience}
             onChange={handleTextareaChange}
             rows={5} // Minimum row count
             className="bg-secondary shadow-xl focus:outline-none text-white p-5 resize-none overflow-hidden w-full"
@@ -85,4 +85,4 @@ function Description() {
   );
 }
 
-export default Description;
+export default Experience;

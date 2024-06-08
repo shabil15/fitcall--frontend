@@ -59,7 +59,14 @@ export const trainerApiSlice = apiSlice.injectEndpoints({
         body:description,
       })
     }),
-    
+
+    addExperience:builder.mutation({
+      query:({trainerId,experience}) => ({
+        url:`${TRAINER_URL}/addExperience/${trainerId}`,
+        method:'PATCH',
+        body:experience,
+      })
+    }),
 
   }),
 });
@@ -72,4 +79,5 @@ export const {
   useSetTrainerImgMutation,
   useGetClientsMutation,
   useAddDescriptionMutation,
+  useAddExperienceMutation,
 } = trainerApiSlice;
