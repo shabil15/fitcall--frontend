@@ -34,7 +34,7 @@ function Profile() {
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click();
+      fileInputRef.current.click();   
     }
   };
 
