@@ -413,7 +413,8 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/trainers/Navbar';
 import Footer from '../../components/trainers/Footer';
-import { MdModeEdit } from "react-icons/md";
+import { MdModeEdit,MdFoodBank } from "react-icons/md";
+import { CiMoneyCheck1 } from "react-icons/ci";
 import { GoGoal } from "react-icons/go";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaMobileAlt } from "react-icons/fa";
@@ -545,7 +546,7 @@ function ClientDetails() {
                 </div>
                 <div className=" shadow-xl p-3 flex rounded-lg">
                   <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                    <MdOutlineMail size={26} color="#3BE48B" />
+                    <CiMoneyCheck1 size={26} color="#3BE48B" />
                   </div>
                   <div className="ml-5">
                     <p className="font-medium text-primary">Subscription Plan</p>
@@ -722,12 +723,11 @@ function ClientDetails() {
                 <div className="mt-5 grid grid-cols-2 gap-5 max-md:grid-cols-1">
                 <div className="shadow-xl p-3 flex rounded-lg">
                   <div className="shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                    <MdOutlineMail size={26} color="#3BE48B" />
+                    <MdFoodBank size={26} color="#3BE48B" />
                   </div>
                   <div className="ml-5 flex-grow">
                     <p className="font-medium text-primary">Morning</p>
-                    <input
-                      type="text"
+                    <textarea
                       className="mt-1 w-full text-gray-400 bg-secondary outline-none"
                       value={morning}
                       onChange={(e) => setMorning(e.target.value)}
@@ -736,12 +736,11 @@ function ClientDetails() {
                 </div>
                 <div className="shadow-xl p-3 flex rounded-lg">
                   <div className="shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                    <MdOutlineMail size={26} color="#3BE48B" />
+                    <MdFoodBank size={26} color="#3BE48B" />
                   </div>
                   <div className="ml-5 flex-grow">
                     <p className="font-medium text-primary">Noon</p>
-                    <input
-                      type="text"
+                    <textarea
                       className="mt-1 w-full text-gray-400 bg-secondary outline-none"
                       value={noon}
                       onChange={(e) => setNoon(e.target.value)}
@@ -750,12 +749,11 @@ function ClientDetails() {
                 </div>
                 <div className="shadow-xl p-3 flex rounded-lg">
                   <div className="shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                    <MdOutlineMail size={26} color="#3BE48B" />
+                    <MdFoodBank size={26} color="#3BE48B" />
                   </div>
                   <div className="ml-5 flex-grow">
                     <p className="font-medium text-primary">Evening</p>
-                    <input
-                      type="text"
+                    <textarea
                       className="mt-1 w-full text-gray-400 bg-secondary outline-none"
                       value={evening}
                       onChange={(e) => setEvening(e.target.value)}
@@ -764,12 +762,11 @@ function ClientDetails() {
                 </div>
                 <div className="shadow-xl p-3 flex rounded-lg">
                   <div className="shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                    <MdOutlineMail size={26} color="#3BE48B" />
+                    <MdFoodBank size={26} color="#3BE48B" />
                   </div>
                   <div className="ml-5 flex-grow">
                     <p className="font-medium text-primary">Night</p>
-                    <input
-                      type="text"
+                    <textarea
                       className="mt-1 w-full text-gray-400 bg-secondary outline-none"
                       value={night}
                       onChange={(e) => setNight(e.target.value)}
@@ -780,11 +777,11 @@ function ClientDetails() {
               <div className="grid grid-cols-1 ">
                 <div className="shadow-xl p-3 flex rounded-lg">
                   <div className="shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                    <MdOutlineMail size={26} color="#3BE48B" />
+                    <MdFoodBank size={26} color="#3BE48B" />
                   </div>
                   <div className="ml-5 flex-grow">
                     <p className="font-medium text-primary">Additional Instructions</p>
-                    <textarea
+                    <textarea 
                       className="mt-1 w-full text-gray-400 bg-secondary outline-none"
                       value={additionalInstructions}
                       onChange={(e) => setAdditionalInstructions(e.target.value)}

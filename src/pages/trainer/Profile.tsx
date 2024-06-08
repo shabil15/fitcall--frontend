@@ -266,7 +266,7 @@ function Profile() {
               }`}
               onClick={() => handleTabClick(1)}
             >
-              <span className="">HEALTH DETAILS</span>
+              <span className="">EXPERIENCE</span>
             </button>
             <button
               role="tab"
@@ -281,7 +281,7 @@ function Profile() {
               }`}
               onClick={() => handleTabClick(2)}
             >
-              <span>PROGRESS</span>
+              <span>CERTIFICATE</span>
             </button>
             <button
               role="tab"
@@ -316,7 +316,14 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p>Second tab content goes here.</p>
+              <div className="mt-3 flex justify-center">
+          <img
+            className="w-auto h-auto  object-cover cursor-pointer"
+            src={trainerInfo?.certificate}
+            alt="Test Result"
+            // onClick={handleFileClick}
+          />
+        </div>
             </div>
             <div
               id="panel-3"

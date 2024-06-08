@@ -2,7 +2,8 @@ import React, {ChangeEvent,useState,useRef } from "react";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 // import ProfileData from "../../components/users/Profile/ProfileData";
-import { MdModeEdit } from "react-icons/md";
+import { MdModeEdit,MdFoodBank } from "react-icons/md";
+import { CiMoneyCheck1 } from "react-icons/ci";
 import { GoGoal } from "react-icons/go";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaMobileAlt } from "react-icons/fa";
@@ -294,7 +295,7 @@ const healthValues: UpdateHealth = {
               </div>
               <div className=" shadow-xl p-3 flex rounded-lg">
                 <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                  <MdOutlineMail size={26} color="#3BE48B" />
+                  <CiMoneyCheck1 size={26} color="#3BE48B" />
                 </div>
                 <div className="ml-5">
                   <p className="font-medium text-primary">Subscription Plan</p>
@@ -492,45 +493,45 @@ const healthValues: UpdateHealth = {
               <div className="mt-5 grid grid-cols-2 gap-5 max-md:grid-cols-1">
               <div className=" shadow-xl p-3 flex rounded-lg">
                 <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                  <MdOutlineMail size={26} color="#3BE48B" />
+                  <MdFoodBank size={26} color="#3BE48B" />
                 </div>
                 <div className="ml-5">
                   <p className="font-medium text-primary">Morning</p>
-                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
                     {userInfo?.diet?.morning}
                   </p>
                 </div>
               </div>
               <div className=" shadow-xl p-3 flex rounded-lg">
                 <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                  <MdOutlineMail size={26} color="#3BE48B" />
+                  <MdFoodBank size={26} color="#3BE48B" />
                 </div>
                 <div className="ml-5">
                   <p className="font-medium text-primary">Noon</p>
-                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
                   {userInfo?.diet?.noon}
 
                   </p>
                 </div>
               </div>
               <div className=" shadow-xl p-3 flex rounded-lg">
-                <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                  <MdOutlineMail size={26} color="#3BE48B" />
+                <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg" >
+                  <MdFoodBank size={26} color="#3BE48B" />
                 </div>
                 <div className="ml-5">
                   <p className="font-medium text-primary">Evening</p>
-                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
                   {userInfo?.diet?.evening}
                   </p>
                 </div>
               </div>
               <div className=" shadow-xl p-3 flex rounded-lg">
                 <div className="  shadow-xl flex justify-center items-center w-12 h-12 rounded-lg">
-                  <MdOutlineMail size={26} color="#3BE48B" />
+                  <MdFoodBank size={26} color="#3BE48B" />
                 </div>
                 <div className="ml-5">
                   <p className="font-medium text-primary">Night</p>
-                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
                   {userInfo?.diet?.night}
                   </p>
                 </div>
@@ -539,12 +540,12 @@ const healthValues: UpdateHealth = {
               <div className="grid grid-cols-1 ">
               <div className=" shadow-xl p-3 flex rounded-lg">
                 <div className="  shadow-xl flex justify-center items-center w-12  h-12 rounded-lg">
-                  <MdOutlineMail size={26} color="#3BE48B" />
+                  <MdFoodBank size={26} color="#3BE48B" />
                 </div>
                 <div className="ml-5">
                   <p className="font-medium text-primary">Additional Instructions</p>
-                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none">
-                  {userInfo?.diet?.additionalInstructions}
+                  <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
+                  {`${userInfo?.diet?.additionalInstructions}`}
                   </p>
                 </div>
               </div>
