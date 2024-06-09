@@ -153,6 +153,12 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 
+  cancelSubscription: builder.mutation({
+    query: ( userId ) => ({
+      url: `${USER_URL}/${userId}/refund`,
+      method: 'POST',
+    }),
+  }),
 
 
   }),
@@ -176,5 +182,6 @@ export const {
   useSetTrainerMutation,
   useGetSubscriptionHistoryMutation,
   useUpdateDietMutation,
-  useAddTestResultMutation
+  useAddTestResultMutation,
+  useCancelSubscriptionMutation
 } = userApiSlice;

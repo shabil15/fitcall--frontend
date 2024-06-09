@@ -1,21 +1,48 @@
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 // import React,{useState} from 'react'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../utils/formateDate";
+import { useCancelSubscriptionMutation } from "../../slices/userApiSlice";
+import { toast } from "react-toastify";
+import { MyError } from "../../validation/validationTypes";
+import { setCredential } from "../../slices/authSlice";
 
 function Myplan() {
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
-  const startDate = userInfo?.subscriptions?.length 
-  ? formatDate(userInfo.subscriptions[userInfo.subscriptions.length - 1].start )
-  : null;
-  const expiryDate = userInfo?.subscriptions?.length 
-  ? formatDate(userInfo.subscriptions[userInfo.subscriptions.length - 1].end )
-  : null;
+  const startDate = userInfo?.subscriptions?.length
+    ? formatDate(
+        userInfo.subscriptions[userInfo.subscriptions.length - 1].start
+      )
+    : null;
+    const startDates = userInfo?.subscriptions?.length
+    ? new Date(userInfo?.subscriptions[userInfo.subscriptions.length - 1].start)
+    : null;
+  const expiryDate = userInfo?.subscriptions?.length
+    ? formatDate(userInfo.subscriptions[userInfo.subscriptions.length - 1].end)
+    : null;
+  const [cancelSubscription] = useCancelSubscriptionMutation();
+  const userId = userInfo?._id;
+  const dispatch = useDispatch();
+  const currentDate = new Date();
+  const diff = startDate ? (currentDate.getTime() - startDates.getTime()) / (1000 * 3600 * 24) : null;
 
+  const handleCancelSubscription = async () => {
+    try {
+      const res = await cancelSubscription(userId).unwrap();
+      dispatch(setCredential({ ...res.user }));
+      console.log("res: ", res);
+      toast.success(res.message);
+    } catch (error) {
+      console.error("Error cancelling subscription:", error);
+      toast.error(
+        (error as MyError)?.data?.message || (error as MyError)?.error
+      );
+    }
+  };
   return (
     <div className="bg-secondary">
       <Navbar />
@@ -36,7 +63,6 @@ function Myplan() {
           </h1>
         </div>
       </div>
-      
       <section className="relative bg-secondary bg-[url('../../../src/assets/pexels-li-sun-2294361.jpg')] bg-cover bg-no-repeat">
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="absolute inset-0 sm:bg-transparent ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
@@ -55,7 +81,8 @@ function Myplan() {
               </p>
             </div>
 
-            {userInfo.subscriptions[userInfo.subscriptions.length - 1].plan === "Monthly" ? (
+            {userInfo.subscriptions[userInfo.subscriptions.length - 1].plan ===
+            "Monthly" ? (
               <div className="space-y-8 lg:grid lg:grid-cols-1 sm:gap-6 xl:gap-10 lg:space-y-0">
                 <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-white backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-100 rounded-lg shadow dark:border-white-600 xl:p-8">
                   <h3 className="mb-4 text-2xl font-semibold">MONTHLY PLAN</h3>
@@ -145,10 +172,26 @@ function Myplan() {
                       <span>Premium support (chat and email)</span>
                     </li>
                   </ul>
-                  {/* <button onClick={()=>handlePurchase(3999)} className=" bg-primary text-secondary hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5  text-center ">Get started</button> */}
+                  {diff !== null && diff < 3 ? (
+                    <div>
+                    <p>
+                      You can cancel your subscription within the first 3 days
+                      after the start date.
+                    </p>
+                  
+                  <button
+                    onClick={handleCancelSubscription}
+                    className="mt-4 bg-primary text-secondary hover:bg-green-700 hover:text-white font-bold transition-colors py-2 px-4 rounded-lg"
+                  >
+                    Cancel Subscription
+                  </button>
+                  </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
-            ): (
+            ) : (
               <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-white backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-100 rounded-lg  shadow xl:p-8">
                 <h3 className="mb-4 text-2xl font-semibold">ANNUAL PLAN</h3>
                 <p className="font-light text-white sm:text-lg ">
@@ -238,6 +281,10 @@ function Myplan() {
                   </li>
                 </ul>
                 {/* <button onClick={()=>handlePurchase(39999)} className="bg-primary text-secondary hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Get started</button> */}
+                <p>
+                  You can cancel your subscription within the first 3 days after
+                  the start date.
+                </p>
               </div>
             )}
           </div>
@@ -256,7 +303,6 @@ function Myplan() {
         )}
       </section>
       :
-      
       <Footer />
     </div>
   );
