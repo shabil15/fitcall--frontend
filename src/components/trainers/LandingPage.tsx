@@ -1,4 +1,5 @@
 import React from 'react'
+import { TracingBeam } from '../ui/TracingBeam';
 
 function LandingPage() {
   return (
@@ -45,6 +46,8 @@ function LandingPage() {
 {/* <div className="py-3 flex items-center text-sm text-white before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6"></div> */}
 
 <div className="text-center p-8" >
+<TracingBeam className="px-6">
+
     <h2 className="font-bold  text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl" data-aos="fade-up">
         Why to choose <span className='text-primary'>FitCall?</span>
     </h2>
@@ -88,6 +91,7 @@ function LandingPage() {
             </p>
         </div>
     </div>
+    </TracingBeam>
 </div>
 
 {/* rEVIEWS  */}
