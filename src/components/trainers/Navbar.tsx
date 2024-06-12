@@ -108,10 +108,10 @@ function Navbar() {
                  <Menu.Item>
                    {({ active }) => (
                      <a
-                     onClick={()=>navigate("/myplan")}
+                     onClick={()=>navigate("/trainer/sessions")}
                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
                      >
-                       My Plan
+                       My Sessions
                      </a>
                    )}
                  </Menu.Item>

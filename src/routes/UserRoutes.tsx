@@ -9,6 +9,7 @@ import Pricing from '../pages/user/Pricing';
 import Myplan from '../pages/user/Myplan';
 import UserPrivateRoute from './privateRoutes/UserPrivateRoute';
 import SubscriptionHistory from '../pages/user/SubscriptionHistory';
+import Chat from '../pages/user/chat/Chat';
 
 function UserRoutes() {
   return (
@@ -24,6 +25,8 @@ function UserRoutes() {
           <Route path ='myplan' element={<Myplan/>}/>
           <Route path='subscriptionHistory' element={<SubscriptionHistory/>}/>
       </Route>
+      <Route path='chat' element={<Chat/>}/>
+
 
     </Routes>     
   )
