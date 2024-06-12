@@ -335,7 +335,7 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p className='text-white text-center mb-3 text-2xl font-bold  '>Experience</p>
+              <p className='text-white text-center mb-3 text-2xl font-bold '>Experience</p>
               <Experience/>
             </div>
           </div>

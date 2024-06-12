@@ -68,6 +68,21 @@ export const trainerApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+    addSession: builder.mutation({
+      query: (body) => ({
+        url: `${TRAINER_URL}/addSession`,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    getSessions:builder.mutation({
+      query:(trainerId) =>({
+        url:`${TRAINER_URL}/${trainerId}/sessions`,
+        method:'GET',
+      }),
+    })
+
   }),
 });
 
@@ -80,4 +95,6 @@ export const {
   useGetClientsMutation,
   useAddDescriptionMutation,
   useAddExperienceMutation,
+  useAddSessionMutation,
+  useGetSessionsMutation
 } = trainerApiSlice;

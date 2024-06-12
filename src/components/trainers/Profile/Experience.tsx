@@ -27,7 +27,7 @@ function Experience() {
 
   const validateDescription = (expe) => {
     const wordCount = expe.trim().split(/\s+/).length;
-    if (wordCount < 100 || wordCount > 200) {
+    if (wordCount < 40 || wordCount > 200) {
       return false;
     }
     return true;
@@ -36,7 +36,7 @@ function Experience() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateDescription(experience)) {
-      setError('Experience must be between 100 and 150 words.');
+      setError('Experience must be between 40 and 200 words.');
       return;
     }
     setError('');
@@ -76,9 +76,9 @@ function Experience() {
         </div>
         {error && <p className="text-red-500 text-center">{error}</p>}
         <div className='flex justify-center'>
-        <button type="submit" className="bg-primary rounded-md text-white px-4 py-2 mt-2">
-          Save
-        </button>
+          <button type="submit" className="bg-primary rounded-md text-white px-4 py-2 mt-2">
+            Save
+          </button>
         </div>
       </form>
     </div>

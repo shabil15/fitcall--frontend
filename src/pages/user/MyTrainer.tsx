@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 import { useLocation } from "react-router-dom";
-import { useSetTrainerMutation } from "../../slices/userApiSlice";
 import { RootState } from "../../app/store";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -12,37 +11,9 @@ function TrainerProfile() {
   const [activeTab, setActiveTab] = useState(1);
   const location = useLocation();
   const { data } = location.state;
-  const [setTrainer] = useSetTrainerMutation();
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const userId = userInfo ? userInfo?._id : null;
-  const trainerId = data?._id;
-
-  const handleClick = async () => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "This will be your Trainer until your subscription ends",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3BE48B",
-      cancelButtonColor: "#3d3636",
-      confirmButtonText: "Yes, I am Sure",
-      customClass: {
-        popup: "swal-custom-background",
-        title: "swal2-title",
-        content: "swal2-content",
-        confirmButton: "swal2-confirm",
-      },
-    });
-
-    if (result.isConfirmed) {
-      try {
-        const res = await setTrainer({ userId, trainerId }).unwrap();
-        toast.success(res.message);
-      } catch (error) {
-        // toast.error(res.message);
-      }
-    }
-  };
+  const trainerId = userInfo?.trainerId;
 
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);

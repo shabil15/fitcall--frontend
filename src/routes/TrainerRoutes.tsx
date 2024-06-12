@@ -6,6 +6,7 @@ import TrainerLogin from '../pages/trainer/TrainerLogin';
 import Profile from '../pages/trainer/Profile';
 import Clients from '../pages/trainer/Clients';
 import ClientDetails from '../pages/trainer/ClientDetails';
+import MySessions from '../pages/trainer/MySessions';
 
 
 function TrainerRoutes() {
@@ -17,6 +18,7 @@ function TrainerRoutes() {
       <Route path= "/profile" element={<Profile/>}/>
       <Route path="/clients" element={<Clients/>}/>
       <Route path="/clients/clientsDetails" element={<ClientDetails/>}/>
+      <Route path="/sessions" element={<MySessions/>}/>
     </Routes>     
   )
 }

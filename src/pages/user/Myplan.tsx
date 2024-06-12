@@ -1,6 +1,6 @@
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
-// import React,{useState} from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useCancelSubscriptionMutation } from "../../slices/userApiSlice";
 import { toast } from "react-toastify";
 import { MyError } from "../../validation/validationTypes";
 import { setCredential } from "../../slices/authSlice";
+import {useGetUserMutation} from "../../slices/userApiSlice";
 
 function Myplan() {
   const { userInfo } = useSelector((state: RootState) => state.auth);
@@ -25,10 +26,25 @@ function Myplan() {
     ? formatDate(userInfo.subscriptions[userInfo.subscriptions.length - 1].end)
     : null;
   const [cancelSubscription] = useCancelSubscriptionMutation();
+  const [getUser] = useGetUserMutation();
   const userId = userInfo?._id;
   const dispatch = useDispatch();
   const currentDate = new Date();
   const diff = startDate ? (currentDate.getTime() - startDates.getTime()) / (1000 * 3600 * 24) : null;
+  const email = userInfo?.email;
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getUser(email).unwrap();
+        dispatch(setCredential({ ...res.user }));
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+    
+    fetchUser();
+  }, [getUser, email, dispatch]);
 
   const handleCancelSubscription = async () => {
     try {
@@ -289,13 +305,13 @@ function Myplan() {
             )}
           </div>
         ) : (
-          <div className="relative py-16 items-center text-center">
+          <div className="relative h-svh flex justify-center  items-center text-center">
             <h1 className="text-4xl tracking-tight font-extrabold font-customFont text-white ">
               You have no Subscription plan
             </h1>
             <button
               onClick={() => navigate("/pricing")}
-              className="bg-primary font-bold text-secondary rounded-lg p-4 mt-4"
+              className="bg-primary font-bold text-secondary rounded-lg p-4 mx-4"
             >
               TAKE A PLAN{" "}
             </button>

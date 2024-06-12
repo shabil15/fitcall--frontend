@@ -160,6 +160,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 
+  getUser:builder.mutation({
+    query:(email) =>({
+      url:`${USER_URL}/getUser?email=${email}`,
+      method:'GET',
+    })
+  }),
+
 
   }),
 });
@@ -183,5 +190,6 @@ export const {
   useGetSubscriptionHistoryMutation,
   useUpdateDietMutation,
   useAddTestResultMutation,
-  useCancelSubscriptionMutation
+  useCancelSubscriptionMutation,
+  useGetUserMutation,
 } = userApiSlice;
