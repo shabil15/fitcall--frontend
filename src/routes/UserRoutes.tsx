@@ -10,7 +10,8 @@ import Myplan from '../pages/user/Myplan';
 import UserPrivateRoute from './privateRoutes/UserPrivateRoute';
 import SubscriptionHistory from '../pages/user/SubscriptionHistory';
 import Chat from '../pages/user/chat/Chat';
-
+import MyTrainer from '../pages/user/MyTrainer';
+import UserChat from '../pages/user/UserChat';
 function UserRoutes() {
   return (
     <Routes>
@@ -24,8 +25,10 @@ function UserRoutes() {
           <Route path='profile' element={<Profile/>}/>
           <Route path ='myplan' element={<Myplan/>}/>
           <Route path='subscriptionHistory' element={<SubscriptionHistory/>}/>
+          <Route path='mytrainer' element={<MyTrainer/>}/>
+          <Route path='chat' element={<UserChat/>}/>
       </Route>
-      <Route path='chat' element={<Chat/>}/>
+      {/* <Route path='chat' element={<Chat/>}/> */}
 
 
     </Routes>     

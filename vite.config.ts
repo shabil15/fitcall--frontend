@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const {BASE_URL} = process.env;
+const {VITE_BASE_URL} = process.env;
 
 export default defineConfig({
   plugins: [react()], 
@@ -13,7 +13,7 @@ export default defineConfig({
     
     proxy: {
       '/api':{
-        target:BASE_URL,
+        target:VITE_BASE_URL,
         changeOrigin:true,
       }
     }

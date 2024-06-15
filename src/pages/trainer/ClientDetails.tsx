@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 import Navbar from '../../components/trainers/Navbar';
 import Footer from '../../components/trainers/Footer';
 import { MdModeEdit,MdFoodBank } from "react-icons/md";
@@ -13,11 +15,14 @@ import { useLocation } from 'react-router-dom';
 import {useUpdateDietMutation} from '../../slices/userApiSlice';
 import Spinner from "../../components/common/Spinner";
 import { toast } from "react-toastify";
-
+import {useCreateConversationMutation} from '../../slices/chatApiSlice';
+import { IoChatboxSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 function ClientDetails() {
   const [activeTab, setActiveTab] = useState(1);
   const location = useLocation();
+  const { trainerInfo } = useSelector((state: RootState) => state.auth);
   const { data } = location.state;
 
   const [morning, setMorning] = useState(data?.diet?.morning || '');
@@ -26,9 +31,27 @@ function ClientDetails() {
   const [night, setNight] = useState(data?.diet?.night || '');
   const [additionalInstructions, setAdditionalInstructions] = useState(data?.diet?.additionalInstructions || '');
   const [updateDiet, { isLoading, error }] = useUpdateDietMutation();
+  const navigate = useNavigate();
+  const [conversation] = useCreateConversationMutation();
+
+  const userId = data?._id;
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
+  };
+
+  const handleChat = async (receiverId: string) => {
+    try {
+      const res = await conversation({
+        senderId: trainerInfo?._id,
+        receiverId,
+      }).unwrap();
+      navigate("/trainer/chat", {
+        state: { conversationData: res.newConversation.data },
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const  handleSubmit = async(e) =>  {
@@ -88,6 +111,12 @@ function ClientDetails() {
                 style={{ display: "none" }}
               />
             </div>
+            <button
+                      onClick={() => handleChat(userId)}
+                      className="bg-gray-300 p-3 my-1 rounded-full shadow-md flex justify-center font-medium text-primary gap-2 items-center font-Sans "
+                    >
+                      <IoChatboxSharp />
+                    </button>
           </div>
           <div className="flex-grow w-full sm:w-[80%] p-4 ">
             <form action="">
@@ -290,11 +319,16 @@ function ClientDetails() {
               <div className=" ">
                 <h1 className="text-3xl text-center font-bold text-white ">Latest Medical Report</h1>
                 <div className="mt-3 flex justify-center">
+          {data?.testResult && data.testResult!== ""?(       
           <img
             className="w-auto h-auto  object-cover cursor-pointer"
             src={data?.testResult}
             alt="Test Result"
-          />
+          />):
+          (
+            <h1 className='text-2xl text-gray-500 font-bold mt-5  text-center'>No Medical Report <br /> Available </h1>
+          )
+          }
         </div>
                 <div className="">
                   
@@ -344,7 +378,7 @@ function ClientDetails() {
                     <p className="font-medium text-primary">Evening</p>
                     <textarea
                       className="mt-1 w-full text-gray-400 bg-secondary outline-none"
-                      value={evening}
+                      value={evening?evening:"do not eat"}
                       onChange={(e) => setEvening(e.target.value)}
                     />
                   </div>

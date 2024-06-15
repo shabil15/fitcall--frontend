@@ -91,7 +91,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
     getTrainerDetails:builder.mutation({
       query:(id) =>({
-        url:`trainers/profile?id=${id}`,
+        url:`${USER_URL}/trainers/profile?id=${id}`,
         method:'GET',
       })
     }),

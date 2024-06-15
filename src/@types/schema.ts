@@ -24,3 +24,23 @@
     createdAt?: Date;
   }
   
+  
+  export interface IMessage {
+    _id:string;
+    conversationId : string;
+    senderId : string;
+    text: string;
+    status?: boolean;
+    createdAt: string;
+}
+
+
+export interface IConversation {
+  _id: string;
+  members: string[];
+  user:string,
+  userEmail:string,
+  user_profile:string,
+  worker:string,
+  worker_profile:string
+}

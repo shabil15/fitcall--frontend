@@ -63,11 +63,11 @@ const TestResult = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="my-auto">
-            <h1 className='text-center text-white text-2xl font-extrabold'>LATEST MEDICAL TEST REPORT </h1>
+            <h1 className='text-center text-white text-2xl font-extrabold'>UPLOADLATEST MEDICAL TEST REPORT </h1>
         <div className="mt-3 flex justify-center">
           <img
-            className="w-auto h-auto  object-cover cursor-pointer"
-            src={imagePreview || userInfo?.testResult || "/src/assets/images.png"}
+            className="w-auto h-auto max-w-md  object-cover cursor-pointer"
+            src={imagePreview || userInfo?.testResult || "/src/assets/illustration-downloading-icon.png"}
             alt="Test Result"
             onClick={handleFileClick}
           />

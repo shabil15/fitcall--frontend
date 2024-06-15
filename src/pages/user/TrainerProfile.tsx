@@ -162,7 +162,8 @@ function TrainerProfile() {
           </p>
         </div>
       </div>
-      {data?.isSubscribed && data?.trainerId != null ? (
+      {userInfo?.isSubscribed && !userInfo?.trainerId? (
+
         <div className="flex justify-center items-center">
           <button
             className="bg-primary m-4 text-secondary py-2 px-2 rounded-lg shadow-lg"
@@ -171,7 +172,7 @@ function TrainerProfile() {
             SET AS TRAINER
           </button>
         </div>
-      ) : (
+) : (
         ""
       )}
       <div className="max-w-3xk mx-auto px-8  sm:px-0 mt-16">
@@ -246,7 +247,7 @@ function TrainerProfile() {
               role="tabpanel"
             >
               <p className="text-white text-center mb-3 text-2xl font-bold  ">
-                Latest Medical Report
+                Certificate
               </p>
               <div className="mt-3 flex justify-center">
                 <img

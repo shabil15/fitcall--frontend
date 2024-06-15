@@ -7,6 +7,7 @@ import Profile from '../pages/trainer/Profile';
 import Clients from '../pages/trainer/Clients';
 import ClientDetails from '../pages/trainer/ClientDetails';
 import MySessions from '../pages/trainer/MySessions';
+import TrainerChat from '../pages/trainer/TrainerChat';
 
 
 function TrainerRoutes() {
@@ -19,6 +20,7 @@ function TrainerRoutes() {
       <Route path="/clients" element={<Clients/>}/>
       <Route path="/clients/clientsDetails" element={<ClientDetails/>}/>
       <Route path="/sessions" element={<MySessions/>}/>
+      <Route path="/chat" element={<TrainerChat/>}/>
     </Routes>     
   )
 }

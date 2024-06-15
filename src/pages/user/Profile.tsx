@@ -1,4 +1,4 @@
-import React, {ChangeEvent,useState,useRef } from "react";
+import React, {ChangeEvent,useState,useRef,useEffect } from "react";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 // import ProfileData from "../../components/users/Profile/ProfileData";
@@ -25,7 +25,7 @@ import { CiLineHeight } from "react-icons/ci";
 import {useUpdateHealthMutation} from "../../slices/userApiSlice";
 import { useNavigate } from "react-router-dom";
 import TestResult from "../../components/users/Profile/TestResult";
-
+import {useGetUserMutation} from "../../slices/userApiSlice";
 
 
 function Profile() {
@@ -38,8 +38,11 @@ function Profile() {
   const [addProfile]= useSetUserImgMutation();
   const [updateUser] = useUpdateProfileMutation();
   const [updateHealth] = useUpdateHealthMutation();
+  const [getUser] = useGetUserMutation();
   const dispatch = useDispatch()
  const navigate = useNavigate();
+
+ const email = userInfo?.email;
 
  const initialValues: UpdateUser = {
   name: userInfo?.name ?? '',
@@ -140,7 +143,18 @@ const healthValues: UpdateHealth = {
   }
 
  
-  
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getUser(email).unwrap();
+        dispatch(setCredential({ ...res.user }));
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+    
+    fetchUser();
+  }, [getUser, email, dispatch]);
 
 
 
@@ -315,11 +329,17 @@ const healthValues: UpdateHealth = {
           </form> 
           </div> 
         </div>
-        
+        <div className="flex justify-center">
       <button onClick={()=> navigate("/subscriptionHistory")}
-              className="bg-primary rounded-md mt-10 shadow-md w-52 h-10 font-medium">
+              className="bg-primary rounded-md mt-10 shadow-md mx-2 w-52 h-10 font-bold">
               SUBSCRIPTION HISTORY
             </button>
+
+            <button onClick={()=> navigate("/mytrainer")}
+              className="bg-primary rounded-md mt-10 shadow-md w-52 h-10 font-bold">
+              MY TRAINER
+            </button>
+      </div>
       </div>
 
      
@@ -498,7 +518,7 @@ const healthValues: UpdateHealth = {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Morning</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
-                    {userInfo?.diet?.morning}
+                    {userInfo?.diet?.morning?userInfo?.diet?.morning:"Drop a hint to your trainer for an update"}
                   </p>
                 </div>
               </div>
@@ -509,7 +529,7 @@ const healthValues: UpdateHealth = {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Noon</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
-                  {userInfo?.diet?.noon}
+                  {userInfo?.diet?.noon?userInfo?.diet?.noon:"Drop a hint to your trainer for an update"}
 
                   </p>
                 </div>
@@ -521,7 +541,7 @@ const healthValues: UpdateHealth = {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Evening</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
-                  {userInfo?.diet?.evening}
+                  {userInfo?.diet?.evening ?userInfo?.diet?.evening :"Your evening meal is on vacation. Hydrate and chill!"}
                   </p>
                 </div>
               </div>
@@ -532,7 +552,7 @@ const healthValues: UpdateHealth = {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Night</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
-                  {userInfo?.diet?.night}
+                  {userInfo?.diet?.night?userInfo?.diet?.night:"Drop a hint to your trainer for an update"}
                   </p>
                 </div>
               </div>
@@ -545,7 +565,7 @@ const healthValues: UpdateHealth = {
                 <div className="ml-5">
                   <p className="font-medium text-primary">Additional Instructions</p>
                   <p className="mt-1 w-full text-gray-400 bg-secondary  outline-none" style={{ whiteSpace: 'pre-wrap' }}>
-                  {`${userInfo?.diet?.additionalInstructions}`}
+                  {userInfo?.diet?.additionalInstructions?userInfo?.diet?.additionalInstructions:"There is no additional Instructions!"}
                   </p>
                 </div>
               </div>
