@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 import { useLocation } from "react-router-dom";
 import { useSetTrainerMutation } from "../../slices/userApiSlice";
+import {useGetAverageRatingMutation} from '../../slices/ratingApiSlice';
 import { RootState } from "../../app/store";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import RatingStars from '../../components/users/rating/RatingStars';
 
 function TrainerProfile() {
   const [activeTab, setActiveTab] = useState(1);
+  const [getAverageRating] = useGetAverageRatingMutation();
+  const [rating, setRating] = useState<number | 5>(5);
   const location = useLocation();
   const { data } = location.state;
   const [setTrainer] = useSetTrainerMutation();
@@ -44,6 +48,23 @@ function TrainerProfile() {
     }
   };
 
+
+  useEffect(() => {
+    const fetchAverageRating = async () => {
+      try {
+        const  {averageRating}  = await getAverageRating(trainerId).unwrap();
+        setRating(averageRating);
+        console.log(averageRating)
+      } catch (error) {
+        console.error('Failed to fetch average rating:', error);
+      }
+    };
+
+    fetchAverageRating();
+  }, [trainerId, getAverageRating]);
+
+  
+
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);
   };
@@ -75,87 +96,18 @@ function TrainerProfile() {
           alt="user Profile Image"
           className="h-60 w-48 object-cover rounded-lg shadow-xl mt-16 "
         />
+
         <div className="mt-16 mx-16">
           <h1 className=" text-primary shadow-sm text-start font-bold text-2xl pb-2">
             {data?.name}
           </h1>
-          <div className="flex items-start  space-x-1">
-            <input
-              type="radio"
-              id="star5"
-              name="rating"
-              value="5"
-              className="sr-only"
-            />
-            <label
-              htmlFor="star5"
-              className="text-yellow-400 text-2xl cursor-pointer"
-            >
-              &#9733;
-            </label>
-
-            <input
-              type="radio"
-              id="star4"
-              name="rating"
-              value="4"
-              className="sr-only"
-            />
-            <label
-              htmlFor="star4"
-              className="text-yellow-400 text-2xl cursor-pointer"
-            >
-              &#9733;
-            </label>
-
-            <input
-              type="radio"
-              id="star3"
-              name="rating"
-              value="3"
-              className="sr-only"
-            />
-            <label
-              htmlFor="star3"
-              className="text-yellow-400 text-2xl cursor-pointer"
-            >
-              &#9733;
-            </label>
-
-            <input
-              type="radio"
-              id="star2"
-              name="rating"
-              value="2"
-              className="sr-only"
-            />
-            <label
-              htmlFor="star2"
-              className="text-yellow-400 text-2xl cursor-pointer"
-            >
-              &#9733;
-            </label>
-
-            <input
-              type="radio"
-              id="star1"
-              name="rating"
-              value="1"
-              className="sr-only"
-            />
-            <label
-              htmlFor="star1"
-              className="text-yellow-400 text-2xl cursor-pointer"
-            >
-              &#9733;
-            </label>
-          </div>
 
           <h3 className="text-white text-start pb-2 text-base">
             {data?.specialisation}
           </h3>
+          <RatingStars rating={rating}  />
           <p
-            className="text-white text-start text-sm w-1/"
+            className="text-white text-start mt-4 text-sm w-1/"
             style={{ whiteSpace: "pre-wrap" }}
           >
             {data?.description}
