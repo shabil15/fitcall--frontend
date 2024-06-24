@@ -1,229 +1,4 @@
-// import { Fragment } from 'react';
-// import React from "react";
-// import { Menu, Transition } from '@headlessui/react';
-// import { useDispatch, useSelector } from "react-redux";
-// import {Link,useNavigate} from 'react-router-dom';
-// import Swal from "sweetalert2";
-// import { openLoginModal } from "../../slices/modalSlices/loginModal";
-// import Login from "../../components/common/login";
-// import { RootState } from "../../app/store";
-// import { userLogout } from "../../slices/authSlice";
-// import { useLogoutMutation } from "../../slices/userApiSlice";
-// import "./alert.css";
-// import { toast } from "react-toastify";
-// import { ButtonsCard } from '../ui/ButtonCards';
 
-// export default function Navbar() {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const { userInfo } = useSelector((state: RootState) => state.auth);
-//   const [logOut] = useLogoutMutation();
-  
-//   function classNames(...classes: string[]) {
-//     return classes.filter(Boolean).join(' ');
-//   }
-
-//   const handleLoginButtonClick = () => {
-//     dispatch(openLoginModal());
-//   };
-
-  
-//   const handleLogout = async () => {
-//     const result = await Swal.fire({
-//       title: "Are you sure?",
-//       text: "You will be logged out.",
-//       icon: "warning",
-//       showCancelButton: true,
-//       confirmButtonColor: "#3BE48B",
-//       cancelButtonColor: "#3d3636",
-//       confirmButtonText: "Yes, log me out!",
-//       customClass: {
-//         popup: "swal-custom-background",
-//         title: "swal2-title",
-//         content: "swal2-content",
-//         confirmButton: "swal2-confirm",
-//       },
-//     })
-
-//     if (result.isConfirmed) {
-//       try {
-//         navigate("/");
-//         dispatch(userLogout());
-//         const res = await logOut("").unwrap();
-//         toast.success(res.message);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     }
-//   };
-
-//   return (
-//     <div className="absolute">
-//       <nav className=" fixed w-full z-20 top-0 start-0 ">
-//         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-//           <a href="" className="flex items-center mb-3">
-//             <img
-//               src="../../../src/assets/FITcALL lOGO.png"
-//               className="h-8"
-//               alt="FitCall Logo"
-//             />
-//             <span className="self-center text-customFont text-2xl font-extrabold whitespace-nowrap text-white">
-//               FitCall
-//             </span>
-//           </a>
-//           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-//             {userInfo ? (
-//              <Menu as="div" className="relative ml-3">
-//              <div>
-//                <Menu.Button className="relative flex rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-//                  <span className="absolute -inset-1.5" />
-//                  <span className="sr-only">Open user menu</span>
-//                   {userInfo.profile_img ? 
-//                   <img
-//                   className="h-8 w-8 rounded-full"
-//                   src={userInfo.profile_img}
-//                    alt=""
-//                 />:
-//                 <img
-//                 className="h-8 w-8 rounded-full"
-//                 src='/src/assets/images.png'
-//                  alt=""
-//               />
-//               } 
-//                </Menu.Button>
-//              </div>
-//              <Transition
-//                as={Fragment}
-//                enter="transition ease-out duration-100"
-//                enterFrom="transform opacity-0 scale-95" 
-//                leave="transition ease-in duration-75"
-//                leaveFrom="transform opacity-100 scale-100"
-//                leaveTo="transform opacity-0 scale-95"
-//              >
-//                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-secondary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-//                  <Menu.Item>
-//                    {({ active }) => (
-//                      <a
-//                       onClick={()=>navigate("/profile")}
-//                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
-//                      >
-//                        Your Profile
-//                      </a>
-//                    )}
-//                  </Menu.Item>
-//                  <Menu.Item>
-//                    {({ active }) => (
-//                      <a
-//                      onClick={()=>navigate("/myplan")}
-//                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
-//                      >
-//                        My Plan
-//                      </a>
-//                    )}
-//                  </Menu.Item>
-//                  <Menu.Item>
-//                    {({ active }) => (
-//                      <a onClick={handleLogout}
-//                        href="#"
-//                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
-//                      >
-//                        Sign out
-//                      </a>
-//                    )}
-//                  </Menu.Item>
-//                </Menu.Items>
-//              </Transition>
-//            </Menu> 
-//             ) : (
-//               <ButtonsCard >
-//               <button
-//                 onClick={handleLoginButtonClick}
-//                 className="inline-flex h-12 animate-shimmer bg-primary items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"  
-//               >
-//                 Get started
-//               </button>
-//               </ButtonsCard>
-//             )}
-
-//             <button
-//               data-collapse-toggle="navbar-sticky"
-//               type="button"
-//               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400 .hover:bg-gray-700 .focus:ring-gray-600"
-//               aria-controls="navbar-sticky"
-//               aria-expanded="false"
-//             >
-//               <span className="sr-only">Open main menu</span>
-//               <svg
-//                 className="w-5 h-5"
-//                 aria-hidden="true"
-//                 xmlns="http://www.w3.org/2000/svg"
-//                 fill="none"
-//                 viewBox="0 0 17 14"
-//               >
-//                 <path
-//                   stroke="currentColor"
-//                   strokeLinecap="round"
-//                   strokeLinejoin="round"
-//                   strokeWidth="2"
-//                   d="M1 1h15M1 7h15M1 13h15"
-//                 />
-//               </svg>
-//             </button>
-//           </div>
-//           <div
-//             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-//             id="navbar-sticky"
-//           >
-//             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  md:.bg-gray-900 ">
-//               <li>
-//                 <a
-//                   href="#"
-//                   className="block py-2 px-3 text-white bg-primary  text-customFont rounded md:bg-transparent md:p-0 md:hover:text-primary "
-//                   aria-current="page"
-//                 >
-//                  <Link to={"/"}>Home</Link>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a
-//                   href="#"
-//                   className="block py-2 px-3 text-gray-900 rounded text-customFont hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:.hover:text-primary text-white .hover:bg-gray-700 .hover:text-white md:.hover:bg-transparent .border-gray-700"
-//                 >
-//                   <Link to={"/trainers"}>Trainers</Link>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a
-//                   href="#"
-//                   className="block py-2 px-3 text-gray-900 rounded text-customFont hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:.hover:text-primary text-white .hover:bg-gray-700 .hover:text-white md:.hover:bg-transparent .border-gray-700"
-//                 >
-//                   <Link to={"/pricing"}>Pricing</Link>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a
-//                   href="#"
-//                   className="block py-2 px-3 text-gray-900 rounded text-customFont hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:.hover:text-primary text-white .hover:bg-gray-700 .hover:text-white md:.hover:bg-transparent .border-gray-700"
-//                 >
-//                   <Link to={"/aboutus"}>About us</Link>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a
-//                   href="#"
-//                   className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:.hover:text-primary text-white .hover:bg-gray-700 .hover:text-white md:.hover:bg-transparent .border-gray-700"
-//                 >
-//                   <Link to={"/contactus"}>Contact</Link>
-//                 </a>
-//               </li>
-//             </ul>
-//           </div>
-//         </div>
-//       </nav>
-//       <Login />
-//     </div>
-//   );
-// }
 import { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { useDispatch, useSelector } from "react-redux";
@@ -236,6 +11,9 @@ import { userLogout } from "../../slices/authSlice";
 import { useLogoutMutation } from "../../slices/userApiSlice";
 import { toast } from "react-toastify";
 import { ButtonsCard } from '../ui/ButtonCards';
+import { FaRegBell } from "react-icons/fa";
+import Notifications from './Notifications';
+
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -245,6 +23,7 @@ export default function Navbar() {
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [showNotifications, setShowNotifications] = useState(false); 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -353,69 +132,81 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
+        
+        
+
         <div className="flex items-center space-x-3">
+        {userInfo?(
+          <div className="relative">
+          <FaRegBell className='cursor-pointer mr-3' onClick={() => setShowNotifications(!showNotifications)} />
+          {showNotifications && <Notifications userId={userInfo._id} />}
+        </div>
+        ):""}
           {userInfo ? (
-            <Menu as="div" className="relative">
-              <div>
-                <Menu.Button className="relative flex items-center justify-center w-8 h-8 rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                  {userInfo.profile_img ? (
-                    <img
-                      className="w-full h-full rounded-full"
-                      src={userInfo.profile_img}
-                      alt="User Profile"
-                    />
-                  ) : (
-                    <img
-                      className="w-full h-full rounded-full"
-                      src="/src/assets/images.png"
-                      alt="Default Profile"
-                    />
-                  )}
-                </Menu.Button>
-              </div>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-secondary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        onClick={() => navigate("/profile")}
-                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
-                      >
-                        Your Profile
-                      </a>
+          <div className="">
+            
+              <Menu as="div" className="relative">
+                <div>
+                  <Menu.Button className="relative flex items-center justify-center w-8 h-8 rounded-full bg-primary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    {userInfo.profile_img ? (
+                      <img
+                        className="w-full h-full rounded-full"
+                        src={userInfo.profile_img}
+                        alt="User Profile"
+                      />
+                    ) : (
+                      <img
+                        className="w-full h-full rounded-full"
+                        src="/src/assets/images.png"
+                        alt="Default Profile"
+                      />
                     )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        onClick={() => navigate("/myplan")}
-                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
-                      >
-                        My Plan
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        onClick={handleLogout}
-                        href="#"
-                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
-                      >
-                        Sign out
-                      </a>
-                    )}
-                  </Menu.Item>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-secondary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          onClick={() => navigate("/profile")}
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                        >
+                          Your Profile
+                        </a>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          onClick={() => navigate("/myplan")}
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                        >
+                          My Plan
+                        </a>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          onClick={handleLogout}
+                          href="#"
+                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-white hover:bg-primary hover:text-secondary')}
+                        >
+                          Sign out
+                        </a>
+                      )}
+                    </Menu.Item>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+          </div>
           ) : (
             <ButtonsCard >
 <button

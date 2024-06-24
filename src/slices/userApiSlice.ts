@@ -167,6 +167,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
     })
   }),
 
+  getUserNotifications: builder.mutation({
+    query: (userId) => ({
+      url:`${USER_URL}/${userId}/notifications`,
+      method:'GET',
+    })
+  }),
+
 
   }),
 });
@@ -192,4 +199,5 @@ export const {
   useAddTestResultMutation,
   useCancelSubscriptionMutation,
   useGetUserMutation,
+  useGetUserNotificationsMutation,
 } = userApiSlice;
