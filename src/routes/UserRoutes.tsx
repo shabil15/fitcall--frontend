@@ -12,12 +12,15 @@ import SubscriptionHistory from '../pages/user/SubscriptionHistory';
 import Chat from '../pages/user/chat/Chat';
 import MyTrainer from '../pages/user/MyTrainer';
 import UserChat from '../pages/user/UserChat';
+import Session from '../pages/user/Session';
+import VideoChat from '../pages/common/VideoChat';
 function UserRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="trainers" element={<Trainers/>}/>
       <Route path="trainerDetails" element={<TrainerProfile/>}/>
+      <Route path="/videochat/:roomId" element={<VideoChat />} />
       <Route path='aboutus' element={<AboutUs/>}/>
       <Route path='contactus' element={<ContactUs/>}/>
       <Route path='*' element={<UserPrivateRoute/>}>
@@ -27,6 +30,7 @@ function UserRoutes() {
           <Route path='subscriptionHistory' element={<SubscriptionHistory/>}/>
           <Route path='mytrainer' element={<MyTrainer/>}/>
           <Route path='chat' element={<UserChat/>}/>
+          <Route path='session' element={<Session/>}/>
       </Route>
       {/* <Route path='chat' element={<Chat/>}/> */}
 
