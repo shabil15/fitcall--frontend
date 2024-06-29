@@ -34,6 +34,7 @@ export interface UserInfo {
   goal?: string;
   diet?: Diet;
   testResult?:string;
+  sessionTime?:string;
 }
 
 export interface TrainerInfo {
