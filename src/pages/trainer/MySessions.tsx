@@ -75,7 +75,7 @@ const MySessions = () => {
       try {
         const { data } = await getSessions(trainerId);
         setSessions(data || []);
-
+        console.log(sessions)
         const bookedTimes = data.map(session => session.startTime);
         setAvailableTimes(prevTimes =>
           prevTimes.filter(time => !bookedTimes.includes(time))
@@ -200,10 +200,10 @@ const MySessions = () => {
             <hr />
             <div className="mt-5 text-white text-center">
               <span className='text-white font-extrabold'>Client Name</span><br />
-              <span className='text-primary font-extrabold'>{session.clientName}</span>
+              <span className='text-primary font-extrabold'>{session.clientName }</span>
             </div>
             <div className="bg-primary shadow-2xl h-10 cursor-pointer text-center w-32 mt-4 m-auto rounded-xl"
-                 onClick={() => startVideoCall(session._id)}>
+                 onClick={() => startVideoCall(session.sessionId)}>
               <h1 className ='text-black text-lg font-bold'>Join</h1>
             </div>
           </div>
