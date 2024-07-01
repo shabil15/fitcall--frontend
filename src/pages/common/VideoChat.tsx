@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
+import { FaPhoneSlash, FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash } from 'react-icons/fa';
+import Draggable from 'react-draggable';
 
 const VideoChat = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
@@ -8,7 +10,13 @@ const VideoChat = () => {
   const peerConnection = useRef<RTCPeerConnection | null>(null);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
-  const location = useLocation();
+  const [callStarted, setCallStarted] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isVideoDisabled, setIsVideoDisabled] = useState(false);
+  const [showStartButton, setShowStartButton] = useState(true);
+  const [showPartnerDisconnected, setShowPartnerDisconnected] = useState(false);
+  const [roomFull, setRoomFull] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const initSocket = () => {
@@ -17,12 +25,25 @@ const VideoChat = () => {
 
       socket.on("connect", () => {
         console.log("Connected to Socket.IO");
-        socket.emit("join-session", sessionId, location.pathname === "/videochat/user" ? "userId" : "trainerId");
+        socket.emit("join-session", sessionId);
+      });
+
+      socket.on("room-full", () => {
+        setRoomFull(true);
+        console.log("Room is full");
       });
 
       socket.on("user-connected", (userId: string) => {
-        console.log(`User ${userId} connected`);
-        startWebRTC();
+        console.log(`User ${userId} connected to the room`);
+        if (callStarted) {
+          startWebRTC();
+        }
+      });
+
+      socket.on("partner-disconnected", () => {
+        console.log("Partner disconnected");
+        setShowPartnerDisconnected(true);
+        cleanupWebRTC();
       });
 
       socket.on("offer", (offer: RTCSessionDescriptionInit) => {
@@ -51,7 +72,7 @@ const VideoChat = () => {
       }
       cleanupWebRTC();
     };
-  }, [sessionId, location.pathname]);
+  }, [sessionId]);
 
   const startWebRTC = async () => {
     try {
@@ -69,6 +90,8 @@ const VideoChat = () => {
       const offer = await peerConnection.current.createOffer();
       await peerConnection.current.setLocalDescription(offer);
       socketRef.current.emit("offer", sessionId, peerConnection.current.localDescription);
+      setCallStarted(true);
+      setShowStartButton(false);
     } catch (error) {
       console.error("Error starting WebRTC:", error);
     }
@@ -115,45 +138,97 @@ const VideoChat = () => {
     setRemoteStream(event.streams[0]);
   };
 
+  const toggleMute = () => {
+    if (localStream) {
+      localStream.getAudioTracks()[0].enabled = !localStream.getAudioTracks()[0].enabled;
+      setIsMuted(!localStream.getAudioTracks()[0].enabled);
+    }
+  };
+
+  const toggleVideo = () => {
+    if (localStream) {
+      localStream.getVideoTracks()[0].enabled = !localStream.getVideoTracks()[0].enabled;
+      setIsVideoDisabled(!localStream.getVideoTracks()[0].enabled);
+    }
+  };
+
+  const hangUp = () => {
+    cleanupWebRTC();
+    if (socketRef.current) {
+      socketRef.current.disconnect();
+    }
+    navigate("/");
+  };
+
   const cleanupWebRTC = () => {
     if (peerConnection.current) {
       peerConnection.current.close();
+      peerConnection.current = null;
+    }
+    if (localStream) {
+      localStream.getTracks().forEach(track => track.stop());
     }
     setLocalStream(null);
     setRemoteStream(null);
+    setCallStarted(false);
+    setShowStartButton(true);
+    setShowPartnerDisconnected(false);
   };
 
   return (
-    <div className="bg-secondary min-h-screen flex flex-col justify-center items-center">
-      <div className="relative">
-        <img src="../../../src/assets/header div.jpg" alt="" className="pt-20 h-56 w-full object-cover" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center mt-8">
-          <h1 className="text-3xl font-extrabold text-white mt-5">
-            <span className="bg-secondary px-5 py-2 rounded-lg">VIDEO</span>
-          </h1>
-          <h1 className="text-3xl font-black text-secondary mt-3">CHAT</h1>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 lg:px-44 md:px-14 px-3 mt-5 w-full max-w-screen-lg">
-        <div className="bg-secondary w-full h-80 shadow-2xl rounded-lg flex text-white justify-between">
-          <div className="m-auto">
-            <h1 className="text-white font-bold text-2xl mb-2">Your Video</h1>
-            {localStream && <video className="w-full h-full rounded-lg" autoPlay playsInline ref={(video) => { if (video) video.srcObject = localStream; }} />}
+    <div className="bg-secondary min-h-screen flex flex-col justify-center items-center relative">
+      {roomFull ? (
+        <div className="text-white text-xl">This room is full. Please try another room.</div>
+      ) : (
+        <>
+          {showStartButton && (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center mt-8 z-50">
+              <div className="bg-primary shadow-2xl h-10 cursor-pointer w-40 m-auto rounded-xl flex items-center justify-center" onClick={startWebRTC}>
+                <h1 className="text-black text-lg font-bold text-center justify-center">Start Session</h1>
+                <FaVideo className="mx-2 text-secondary" />
+              </div>
+            </div>
+          )}
+          <div className="w-full h-full flex items-center justify-center">
+            {callStarted ? (
+              remoteStream ? (
+                <div className="bg-white rounded-xl shadow-2xl overflow-hidden h-[620px] w-[1100px] transform scaleX(-1)">
+                  <video className="w-full h-full object-cover rounded-xl" autoPlay playsInline ref={(video) => { if (video) video.srcObject = remoteStream; }} />
+                </div>
+              ) : (
+                <div className="w-auto h-auto flex items-center justify-center text-white text-xl">Waiting for other person to join...</div>
+              )
+            ) : (
+              <div className="w-full h-full flex items-center justify-center mb-16 text-white text-xl">Start the Call to Join</div>
+            )}
           </div>
-
-          <div className="bg-primary shadow-2xl h-10 cursor-pointer w-40 m-auto rounded-xl flex items-center justify-center" onClick={startWebRTC}>
-            <h1 className="text-black text-lg font-bold text-center">Start Call</h1>
-          </div>
-        </div>
-
-        <div className="bg-secondary w-full h-80 shadow-2xl rounded-lg flex text-white justify-between mt-5">
-          <div className="m-auto">
-            <h1 className="text-white font-bold text-2xl mb-2">Remote Video</h1>
-            {remoteStream && <video className="w-full h-full rounded-lg" autoPlay playsInline ref={(video) => { if (video) video.srcObject = remoteStream; }} />}
-          </div>
-        </div>
-      </div>
+          {localStream && (
+            <Draggable bounds="parent" onStart={() => setIsVideoDisabled(true)} onStop={() => setIsVideoDisabled(false)}>
+              <div className="absolute bottom-0 right-0 m-4 rounded-lg bg-gray-800 cursor-move">
+                <video className="w-48 h-36 rounded-lg" autoPlay playsInline ref={(video) => { if (video) video.srcObject = localStream; }} />
+              </div>
+            </Draggable>
+          )}
+          {callStarted && (
+            <div className="absolute shadow-lg p-5 rounded-lg bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-4 z-50">
+              <button onClick={hangUp} className="bg-red-600 p-2 rounded-full">
+                <FaPhoneSlash className="text-white" />
+              </button>
+              <button onClick={toggleMute} className={`p-2 rounded-full bg-yellow-400`}>
+                {isMuted ? <FaMicrophoneSlash className="text-white" /> : <FaMicrophone className="text-white" />}
+              </button>
+              <button onClick={toggleVideo} className={`p-2 rounded-full bg-blue-500`}>
+                {isVideoDisabled ? <FaVideoSlash className="text-white" /> : <FaVideo className="text-white" />}
+              </button>
+            </div>
+          )}
+          {showPartnerDisconnected && (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white py-2 px-4 rounded-lg">
+              Other person has disconnected.
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };
