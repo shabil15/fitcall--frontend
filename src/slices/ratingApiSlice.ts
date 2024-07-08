@@ -12,9 +12,18 @@ export const ratingApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
+        addRating: builder.mutation({
+            query: (ratingData) => ({
+              url: `${RATING_URL}/addRating`,
+              method: 'POST',
+              body: ratingData,
+            }),
+          }),
+
     })
 })
 
 export const {
     useGetAverageRatingMutation,
+    useAddRatingMutation,
 } =ratingApiSlice;

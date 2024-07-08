@@ -9,7 +9,7 @@ import Pricing from '../pages/user/Pricing';
 import Myplan from '../pages/user/Myplan';
 import UserPrivateRoute from './privateRoutes/UserPrivateRoute';
 import SubscriptionHistory from '../pages/user/SubscriptionHistory';
-import Chat from '../pages/user/chat/Chat';
+import Error404 from '../pages/common/Error404';
 import MyTrainer from '../pages/user/MyTrainer';
 import UserChat from '../pages/user/UserChat';
 import Session from '../pages/user/Session';
@@ -23,7 +23,7 @@ function UserRoutes() {
       <Route path="/videochat/:roomId" element={<VideoChat />} />
       <Route path='aboutus' element={<AboutUs/>}/>
       <Route path='contactus' element={<ContactUs/>}/>
-      <Route path='*' element={<UserPrivateRoute/>}>
+      <Route path='' element={<UserPrivateRoute/>}>
           <Route path='pricing' element={<Pricing/>}/>
           <Route path='profile' element={<Profile/>}/>
           <Route path ='myplan' element={<Myplan/>}/>
@@ -33,8 +33,9 @@ function UserRoutes() {
           <Route path='session' element={<Session/>}/>
       </Route>
       {/* <Route path='chat' element={<Chat/>}/> */}
+      <Route path='*' element={<Error404/>}/>
 
-
+    
     </Routes>     
   )
 }

@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import {useCreateConversationMutation} from '../../slices/chatApiSlice';
 import { IoChatboxSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-
+import AddRating from "../../components/users/rating/AddRating";
 function MyTrainer() {
   const [activeTab, setActiveTab] = useState(1);
   const { userInfo } = useSelector((state: RootState) => state.auth);
@@ -265,7 +265,9 @@ function MyTrainer() {
                   }`}
                   role="tabpanel"
                 >
-                  <p>Third tab content goes here.</p>
+                  <div className="flex justify-center items-center h-full w-full">
+                  <AddRating/>
+                  </div>
                 </div>
               </div>
             </div>

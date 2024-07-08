@@ -1,4 +1,4 @@
-import  { ChangeEvent, useState, useRef } from "react";
+import { ChangeEvent, useState, useRef } from "react";
 import Navbar from "../../components/trainers/Navbar";
 import Footer from "../../components/trainers/Footer";
 import { IoPersonSharp } from "react-icons/io5";
@@ -104,7 +104,7 @@ function Profile() {
         <img
           src="../../../src/assets/header div.jpg"
           alt=""
-          className="pt-20 h-56 w-full"
+          className="pt-20 h-56 w-full object-cover"
         />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center mt-8">
           <h1 className="text-3xl font-extrabold text-white mt-5">
@@ -117,8 +117,8 @@ function Profile() {
       </div>
 
       <div className="h-full max-[400px]:p-2 w-full flex items-center flex-col justify-center">
-        <div className="w-full p-4 md:px-12  md:py-4 lg:py-16 flex max-md:flex-col sm:w-[80%] items-start shadow-xl text-white rounded-3xl">
-          <div className="flex flex-col items-center">
+        <div className="w-full p-4 md:px-12 md:py-4 lg:py-16 flex flex-col md:flex-row items-start shadow-xl text-white rounded-3xl">
+          <div className="flex flex-col items-center mb-4 md:mb-0 md:mr-4">
             <div className="my-auto">
               <div className="mt-3 flex justify-center">
                 <img
@@ -160,9 +160,9 @@ function Profile() {
               </div>
             )}
           </div>
-          <div className="flex-grow w-full sm:w-[80%] p-4">
+          <div className="flex-grow w-full">
             <form onSubmit={handleSubmit}>
-              <div className="mt-5 grid grid-cols-2 gap-5 max-md:grid-cols-1">
+              <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="shadow-xl p-3 flex rounded-lg">
                   <div className="flex justify-center shadow-xl items-center w-12 h-12 rounded-lg">
                     <IoPersonSharp size={26} color="#3BE48B" />
@@ -235,40 +235,38 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="flex w-full">
-                <div className="flex justify-end w-1/2">
-                  <button className="bg-tertiary rounded-md mt-4 shadow-md w-28 h-10 font-medium">
-                    Save
-                  </button>
-                </div>
+              <div className="flex justify-end mt-4">
+                <button className="bg-tertiary rounded-md shadow-md w-28 h-10 font-medium">
+                  Save
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
 
-      <div className="max-w-3xk mx-auto px-8 sm:px-0 mt-16">
-        <div className="sm:w-3/4 sm:mx-auto">
+      <div className="max-w-3xl mx-auto px-4 sm:px-8 mt-16">
+        <div className="w-full sm:w-3/4 mx-auto">
           <div
             role="tablist"
             aria-label="tabs"
-            className="relative w-max mx-auto h-12 grid grid-cols-3 items-center px-[3xl] rounded-full overflow-hidden shadow-xl shadow-900/20 transition"
+            className="relative w-full sm:w-max mx-auto h-12 grid grid-cols-3 items-center px-4 sm:px-6 rounded-full overflow-hidden shadow-xl shadow-900/20 transition"
           >
-            <div className="absolute top-0 left-0 bg-white shadow-md"></div>
+            <div className="absolute top-0 left-0 w-full sm:w-auto bg-white shadow-md"></div>
             <button
               role="tab"
               aria-selected={activeTab === 1 ? "true" : "false"}
               aria-controls="panel-1"
               id="tab-1"
               tabIndex={0}
-              className={`relative block h-10 px-6 tab rounded-full ${
+              className={`relative block h-10 px-4 sm:px-6 tab rounded-full ${
                 activeTab === 1
                   ? "bg-primary text-secondary font-bold"
                   : "text-gray-500"
               }`}
               onClick={() => handleTabClick(1)}
             >
-              <span className="">DESCRIPTION</span>
+              <span>DESCRIPTION</span>
             </button>
             <button
               role="tab"
@@ -276,7 +274,7 @@ function Profile() {
               aria-controls="panel-2"
               id="tab-2"
               tabIndex={1}
-              className={`relative block h-10 px-6 tab rounded-full ${
+              className={`relative block h-10 px-4 sm:px-6 tab rounded-full ${
                 activeTab === 2
                   ? "bg-primary text-secondary font-bold"
                   : "text-gray-500"
@@ -291,7 +289,7 @@ function Profile() {
               aria-controls="panel-3"
               id="tab-3"
               tabIndex={2}
-              className={`relative block h-10 px-6 tab rounded-full ${
+              className={`relative block h-10 px-4 sm:px-6 tab rounded-full ${
                 activeTab === 3
                   ? "bg-primary text-secondary font-bold"
                   : "text-gray-500"
@@ -309,8 +307,10 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p className='text-white text-center mb-3 text-2xl font-bold  '>Description</p>
-              <Description/>
+              <p className="text-white text-center mb-3 text-2xl font-bold">
+                Description
+              </p>
+              <Description />
             </div>
             <div
               id="panel-2"
@@ -320,13 +320,12 @@ function Profile() {
               role="tabpanel"
             >
               <div className="mt-3 flex justify-center">
-          <img
-            className="w-auto h-auto  object-cover cursor-pointer"
-            src={trainerInfo?.certificate}
-            alt="Test Result"
-            // onClick={handleFileClick}
-          />
-        </div>
+                <img
+                  className="w-full h-auto object-cover cursor-pointer"
+                  src={trainerInfo?.certificate}
+                  alt="Certificate"
+                />
+              </div>
             </div>
             <div
               id="panel-3"
@@ -335,13 +334,14 @@ function Profile() {
               }`}
               role="tabpanel"
             >
-              <p className='text-white text-center mb-3 text-2xl font-bold '>Experience</p>
-              <Experience/>
+              <p className="text-white text-center mb-3 text-2xl font-bold">
+                Experience
+              </p>
+              <Experience />
             </div>
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

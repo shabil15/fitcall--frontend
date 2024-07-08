@@ -7,6 +7,7 @@ import Login from "../../components/common/login";
 import { RootState } from "../../app/store";
 import { userLogout } from "../../slices/authSlice";
 import { useLogoutMutation } from "../../slices/userApiSlice";
+import { openLoginModal } from "../../slices/modalSlices/loginModal";
 import { toast } from "react-toastify";
 import { ButtonsCard } from '../ui/ButtonCards';
 import { FaRegBell } from "react-icons/fa";
@@ -251,6 +252,16 @@ export default function Navbar() {
                           className={`block px-4 py-2 text-sm text-white  hover:bg-gray-700 hover:text-secondary'}`}
                         >
                           My Plan
+                        </Link>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          to={"/session"}
+                          className={`block px-4 py-2 text-sm text-white  hover:bg-gray-700 hover:text-secondary'}`}
+                        >
+                          My Session
                         </Link>
                       )}
                     </Menu.Item>

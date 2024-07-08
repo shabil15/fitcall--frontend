@@ -9,7 +9,7 @@ import { RootState } from "../../app/store";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import RatingStars from '../../components/users/rating/RatingStars';
-
+import Review from '../../components/users/rating/Review';
 function TrainerProfile() {
   const [activeTab, setActiveTab] = useState(1);
   const [getAverageRating] = useGetAverageRatingMutation();
@@ -217,7 +217,7 @@ function TrainerProfile() {
               }`}
               role="tabpanel"
             >
-              <p>Third tab content goes here.</p>
+              <Review/>
             </div>
           </div>
         </div>
