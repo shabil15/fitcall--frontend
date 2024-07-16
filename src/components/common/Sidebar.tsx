@@ -13,6 +13,7 @@ import Person3Icon from '@mui/icons-material/Person3';
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import UserMangement from '../../pages/admin/userManage/User';
+import Subscriptions from '../../pages/admin/Subscriptions/Subscriptions';
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Open } from "../../@types/Props";
 import Admin_Dashboard from '../../pages/admin/Dashboard/Dashboard';
@@ -100,10 +101,10 @@ function SideBar({ open, setOpen }: Open) {
         // component:<Trainers {...{setSelectedLink,link:'trainers'}}/>
       },
       {
-        title: "Transactions",
+        title: "Subscriptions",
         icon: <ReceiptIcon />,
-        link: "transactions",
-        // component: <Transaction {...{setSelectedLink,link:'transactions'}}/>,
+        link: "subscriptions",
+        component: <Subscriptions{...{setSelectedLink,link:'subscriptions'}}/>
       },
       {
         title: "Join Requests",

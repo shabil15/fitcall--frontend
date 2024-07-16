@@ -45,6 +45,7 @@ export interface TrainerInfo {
     password: string;
     description:string;
     language: string;
+    experience:string;
     specialisation: string;
     certificate: string;
     profile_img?: string;

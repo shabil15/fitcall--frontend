@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, FormEvent, ChangeEvent } from 'react';
 import { RootState } from '../../../app/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAddExperienceMutation } from '../../../slices/TrainerApiSlice';
 import { toast } from 'react-toastify';
 import { setTrainerCredential } from '../../../slices/authSlice';
 
-function Experience() {
+const Experience: React.FC = () => {
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
-  const [experience, setExperience] = useState(trainerInfo?.experience || '');
+  const [experience, setExperience] = useState<string>(trainerInfo?.experience || '');
   const [addExperience] = useAddExperienceMutation();
   const dispatch = useDispatch();
-  const [error, setError] = useState('');
-  const textareaRef = useRef(null);
+  const [error, setError] = useState<string>('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     console.log('Initial experience:', trainerInfo?.experience);
@@ -25,15 +25,12 @@ function Experience() {
     }
   }, [experience]);
 
-  const validateDescription = (expe) => {
+  const validateDescription = (expe: string): boolean => {
     const wordCount = expe.trim().split(/\s+/).length;
-    if (wordCount < 40 || wordCount > 200) {
-      return false;
-    }
-    return true;
+    return wordCount >= 40 && wordCount <= 200;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validateDescription(experience)) {
       setError('Experience must be between 40 and 200 words.');
@@ -47,14 +44,14 @@ function Experience() {
       }).unwrap();
 
       toast.success(res.message);
-      dispatch(setTrainerCredential({ ...trainerInfo, experience })); 
+      dispatch(setTrainerCredential({ ...trainerInfo, experience }));
     } catch (err) {
       console.error('Failed to update the experience:', err);
       toast.error('Failed to update the experience');
     }
   };
 
-  const handleTextareaChange = (e) => {
+  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setExperience(e.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -75,7 +72,7 @@ function Experience() {
           />
         </div>
         {error && <p className="text-red-500 text-center">{error}</p>}
-        <div className='flex justify-center'>
+        <div className="flex justify-center">
           <button type="submit" className="bg-primary rounded-md text-white px-4 py-2 mt-2">
             Save
           </button>
@@ -83,6 +80,6 @@ function Experience() {
       </form>
     </div>
   );
-}
+};
 
 export default Experience;

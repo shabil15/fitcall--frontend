@@ -1,13 +1,13 @@
-
-
-import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import  { useEffect, useRef, useState } from "react";
+import {useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+// import "../common/commonStyle.css";
 import {
   useGetMessageMutation,
   useSendMessageMutation,
+  // useViewMessagesMutation,
 } from "../../slices/chatApiSlice";
-import { IMessage, IConversation } from '../../@types/schema';
+import { IConversation, IMessage } from "../../@types/schema";
 import { useSocket } from "../../App";
 import { IoIosSend } from "react-icons/io";
 import { useLocation } from "react-router-dom";
@@ -19,6 +19,7 @@ function UserChat() {
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const [sendMessage] = useSendMessageMutation();
   const [getMessage] = useGetMessageMutation();
+  // const [viewMessages] = useViewMessagesMutation();
   const [chatText, setChatText] = useState("");
   const [message, setMessage] = useState<IMessage[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -33,13 +34,13 @@ function UserChat() {
   useEffect(() => {
     socket?.emit("addUser", userInfo?._id);
     socket?.on("getMessage", (data: any) => {
-      console.log(data);
+      console.log("Received message data:", data);
       // Append the new message to the existing array
       setMessage((prev) => [
         ...prev,
         {
-          _id: "", // You may need to assign an ID here
-          conversationId: "",
+          _id: data._id || "", 
+          conversationId: data._id || "",
           senderId: data.senderId,
           text: data.text,
           createdAt: new Date().toString(), // Convert to string
@@ -49,7 +50,7 @@ function UserChat() {
     return () => {
       socket?.off("getMessage");
     };
-  }, [socket, userInfo?._id]);
+  }, [socket]);
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -59,28 +60,25 @@ function UserChat() {
         }).unwrap();
         if (res) {
           setMessage(res.message.data);
-          console.log(message);
-        //   const idsToUpdate = res.message.data
-            // .filter(
-            //   (msg: IMessage) =>
-            //     msg.status === false && msg.senderId !== userInfo?._id
-            // )
-            // .map((msg: IMessage) => msg._id);
+          const idsToUpdate = res.message.data
+            .filter(
+              (msg: IMessage) =>
+                msg.status === false && msg.senderId !== userInfo?._id
+            )
+            .map((msg: IMessage) => msg._id);
 
-        //   if (idsToUpdate.length > 0) {
-        //     // Send the array of IDs to the backend to update their status
-        //     // await viewMessages({ _id: idsToUpdate }).unwrap();
-        //     // for updating navbar chat notification
-        //   }
+          if (idsToUpdate.length > 0) {
+            // Send the array of IDs to the backend to update their status
+            // await viewMessages({ _id: idsToUpdate }).unwrap();
+            // for updating navbar chat notification
+          }
         }
       } catch (error) {
         console.error(error);
       }
     };
-    if (conversationData._id) {
-      fetchChat();
-    }
-  }, [conversationData._id, getMessage, userInfo?._id, message]);
+    fetchChat();
+  }, [conversationData._id]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -141,19 +139,19 @@ function UserChat() {
                 alt=""
               />
             </div>
-            <div className="font-Sans text-2xl font-bold">{conversationData.trainer}</div>
+            <div className="font-Sans text-2xl">{conversationData.trainer}</div>
           </div>
           <hr />
         </div>
         <div>
           <div className="flex flex-col p-2 min-h-[370px]">
-            {message.map((mes) => mes && (
+            {message.map((mes) => (
               <div
                 ref={scrollRef}
                 key={mes._id}
                 className="grid grid-cols-12 gap-y-2"
               >
-                {mes.senderId !== userInfo?._id ? (
+                {mes.senderId != userInfo?._id ? (
                   <div className="col-start-1 col-end-8 p-3 rounded-lg">
                     <div className="flex flex-row items-center">
                       <div className="relative text-sm bg-gray-500 py-2 px-4 shadow rounded-lg ml-3">
@@ -223,7 +221,7 @@ function UserChat() {
               {chatText && (
                 <button
                   onClick={sendChat}
-                  className="rounded-xl flex  p-2 bg-primary"
+                  className="rounded-full flex  p-2 bg-blue-600"
                 >
                   <IoIosSend color="white" size={25} />
                 </button>
@@ -237,4 +235,3 @@ function UserChat() {
 }
 
 export default UserChat;
-

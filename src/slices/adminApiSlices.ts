@@ -56,6 +56,13 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+    getSubscriptions:builder.mutation({
+      query:()=>({
+        url:`${ADMIN_URL}/subscriptions`,
+        methode:'GET'
+      })
+    }),
+
     logoutAdmin : builder.mutation({
       query: () =>({
         url:`${ADMIN_URL}/logout`,
@@ -76,4 +83,5 @@ export const {
   useBlockTrainerMutation,
   useGetDashCardsMutation,
   useLogoutAdminMutation,
+  useGetSubscriptionsMutation
 }= adminApiSlice;

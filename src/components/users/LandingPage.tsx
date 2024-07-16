@@ -1,5 +1,3 @@
-import React from 'react'
-// import { LampContainer } from '../ui/lamp'
 import { TracingBeam } from '../ui/TracingBeam';
 
 
@@ -56,7 +54,7 @@ function LandingPage() {
         Why to choose <span className='text-primary'>FitCall?</span>
     </h2>
 
-    <div className="flex flex-wrap items-center mt-20 text-left text-white text-center" data-aos="fade-up">
+    <div className="flex flex-wrap items-center mt-20 text-left text-white " data-aos="fade-up">
         <div className="w-full md:w-3/5 lg:w-1/2 px-4">
             <img src="../../../src/assets/pexels-pixabay-209969.jpg" alt="gem" className="inline-block rounded shadow-lg rounded-lg shadow-lg  shadow-black"/>
         </div>
@@ -70,7 +68,7 @@ function LandingPage() {
         </div>
     </div>
 
-    <div className="flex flex-wrap items-center mt-20 text-left text-white text-center" data-aos="fade-up">
+    <div className="flex flex-wrap items-center mt-20 text-left text-white " data-aos="fade-up">
         <div className="w-full md:w-3/5 lg:w-1/2 px-4">
             <img src="../../../src/assets/pexels-ivan-samkov-4162491.jpg" alt="project members" className="inline-block object-cover rounded-lg shadow-lg  shadow-black"/>
         </div>

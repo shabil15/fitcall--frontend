@@ -1,4 +1,3 @@
-import React from 'react'
 import { TracingBeam } from '../ui/TracingBeam';
 
 function LandingPage() {

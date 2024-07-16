@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Trainers() {
   return (
     <div>trainers</div>
@@ -7,4 +5,4 @@ function Trainers() {
   )
 }
 
-export default trainers
+export default Trainers

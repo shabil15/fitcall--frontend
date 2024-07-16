@@ -1,13 +1,12 @@
-
-import React, { useEffect, useState } from 'react';
-import { useGetUserNotificationsMutation } from '../../slices/userApiSlice';
-import {timeAgo} from '../../utils/timeAgo';
+import React, { useEffect, useState } from "react";
+import { useGetUserNotificationsMutation } from "../../slices/userApiSlice";
+import { timeAgo } from "../../utils/timeAgo";
 
 interface Notification {
   _id: string;
   title: string;
   message: string;
-  createdAt: string; 
+  createdAt: string;
 }
 
 interface NotificationsProps {
@@ -15,8 +14,10 @@ interface NotificationsProps {
 }
 
 const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
-  const [getUserNotifications, { isLoading, data, error }] = useGetUserNotificationsMutation();
-  const [notificationsData, setNotificationsData] = useState<Notification[]>([]);
+  const [getUserNotifications] = useGetUserNotificationsMutation();
+  const [notificationsData, setNotificationsData] = useState<Notification[]>(
+    []
+  );
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -33,9 +34,8 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
     fetchNotifications();
   }, [getUserNotifications, userId]);
 
-
   return (
-    <div className='absolute right-0 shadow-lg bg-white py-4 z-[1000] min-w-full rounded-lg w-[410px] max-h-[50vh] overflow-auto mt-2 custom-scrollbar'>
+    <div className="absolute right-0 shadow-lg bg-white py-4 z-[1000] min-w-full rounded-lg w-[410px] max-h-[50vh] overflow-auto mt-2 custom-scrollbar">
       <style>
         {`
           .custom-scrollbar {
@@ -58,10 +58,17 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
           <p className="text-center text-gray-500">No notifications</p>
         ) : (
           notificationsData.map((notification) => (
-            <li key={notification._id} className='p-4 flex items-center hover:bg-gray-50 cursor-pointer'>
+            <li
+              key={notification._id}
+              className="p-4 flex items-center hover:bg-gray-50 cursor-pointer"
+            >
               <div className="ml-6">
-                <h3 className="text-sm text-[#333] font-semibold">{notification.title}</h3>
-                <p className="text-xs text-gray-500 mt-2">{notification.message}</p>
+                <h3 className="text-sm text-[#333] font-semibold">
+                  {notification.title}
+                </h3>
+                <p className="text-xs text-gray-500 mt-2">
+                  {notification.message}
+                </p>
                 <p className="text-xs text-blue-600 leading-3 mt-2">
                   {timeAgo(notification.createdAt)}
                 </p>
@@ -70,7 +77,9 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
           ))
         )}
       </ul>
-      <p className="text-xs px-4 mt-6 mb-4 inline-block text-blue-600 cursor-pointer">View all Notifications</p>
+      <p className="text-xs px-4 mt-6 mb-4 inline-block text-blue-600 cursor-pointer">
+        View all Notifications
+      </p>
     </div>
   );
 };

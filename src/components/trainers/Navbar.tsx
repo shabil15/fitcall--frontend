@@ -20,7 +20,6 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    // Display a confirmation dialog
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You will be logged out.",
@@ -32,7 +31,6 @@ function Navbar() {
       customClass: {
         popup: "swal-custom-background",
         title: "swal2-title",
-        content: "swal2-content",
         confirmButton: "swal2-confirm",
        
       },

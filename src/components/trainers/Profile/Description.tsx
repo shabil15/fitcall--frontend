@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, FormEvent, ChangeEvent } from 'react';
 import { RootState } from '../../../app/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAddDescriptionMutation } from '../../../slices/TrainerApiSlice';
 import { toast } from 'react-toastify';
 import { setTrainerCredential } from '../../../slices/authSlice';
 
-function Description() {
+const Description: React.FC = () => {
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
   const [description, setDescription] = useState(trainerInfo?.description || '');
   const [addDescription] = useAddDescriptionMutation();
   const dispatch = useDispatch();
   const [error, setError] = useState('');
-  const textareaRef = useRef(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     console.log('Initial description:', trainerInfo?.description);
@@ -25,15 +25,12 @@ function Description() {
     }
   }, [description]);
 
-  const validateDescription = (desc) => {
+  const validateDescription = (desc: string): boolean => {
     const wordCount = desc.trim().split(/\s+/).length;
-    if (wordCount < 100 || wordCount > 200) {
-      return false;
-    }
-    return true;
+    return wordCount >= 100 && wordCount <= 200;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validateDescription(description)) {
       setError('Description must be between 100 and 150 words.');
@@ -54,7 +51,7 @@ function Description() {
     }
   };
 
-  const handleTextareaChange = (e) => {
+  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -76,13 +73,13 @@ function Description() {
         </div>
         {error && <p className="text-red-500 text-center">{error}</p>}
         <div className='flex justify-center'>
-        <button type="submit" className="bg-primary rounded-md text-white px-4 py-2 mt-2">
-          Save
-        </button>
+          <button type="submit" className="bg-primary rounded-md text-white px-4 py-2 mt-2">
+            Save
+          </button>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default Description;

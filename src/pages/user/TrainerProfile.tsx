@@ -114,7 +114,7 @@ function TrainerProfile() {
           </p>
         </div>
       </div>
-      {userInfo?.isSubscribed && !userInfo?.trainerId? (
+      {userInfo?.isSubscribed===true && !userInfo?.trainerId || userInfo?.trainerId =="" ? (
 
         <div className="flex justify-center items-center">
           <button

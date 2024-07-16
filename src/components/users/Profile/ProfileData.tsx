@@ -1,14 +1,9 @@
-import { useState } from "react";
-import { MdIosShare, MdModeEdit } from "react-icons/md";
+
+import {  MdModeEdit } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5"
 import { FaMobileAlt } from "react-icons/fa";
-import { MdOutlineMail,MdOutlineDriveFileRenameOutline  } from "react-icons/md";
-import { BsTelephoneInbound } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../app/store";
-import { MyError } from "../../../validation/validationTypes";
-import { toast } from "react-toastify";
-import { useFormik } from "formik";
+import { MdOutlineMail } from "react-icons/md";
+
 
 
 const ProfileData: React.FC = () => {

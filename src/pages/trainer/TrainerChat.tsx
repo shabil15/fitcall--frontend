@@ -1,33 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-// import "../common/commonStyle.css";
 import {
   useGetMessageMutation,
   useSendMessageMutation,
-//   useViewMessagesMutation,
+  // useViewMessagesMutation,
 } from "../../slices/chatApiSlice";
-import { useLocation } from "react-router-dom";
+import { IConversation, IMessage } from "../../@types/schema";
 import { useSocket } from "../../App";
 import { IoIosSend } from "react-icons/io";
+import { useLocation } from "react-router-dom";
 import { VscTriangleDown } from "react-icons/vsc";
 import EmojiPicker from "emoji-picker-react";
 import { BsEmojiGrin } from "react-icons/bs";
 
-function TrainerChat() {
+function WorkerChat() {
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
   const [sendMessage] = useSendMessageMutation();
   const [getMessage] = useGetMessageMutation();
-//   const [viewMessages] = useViewMessagesMutation();
+  // const [viewMessages] = useViewMessagesMutation();
   const [chatText, setChatText] = useState("");
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState<IMessage[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const socket = useSocket();
-  const location = useLocation();
-  const conversationData = location.state?.conversationData;
   // for emoji picker
   const [emoji, setEmoji] = useState<boolean>(false);
-  
+  const location = useLocation();
+  const conversationData: IConversation = location.state?.conversationData;
 
   useEffect(() => {
     socket?.emit("addUser", trainerInfo?._id);
@@ -52,20 +51,20 @@ function TrainerChat() {
     const fetchChat = async () => {
       try {
         const res = await getMessage({
-          conversationId: conversationData._id,
+          conversationId:conversationData._id,
         }).unwrap();
         if (res) {
           setMessage(res.message.data);
           const idsToUpdate = res.message.data
           .filter(
-            (msg) =>
+            (msg: IMessage) =>
               msg.status === false && msg.senderId !== trainerInfo?._id
           )
-          .map((msg) => msg._id);
+          .map((msg: IMessage) => msg._id);
 
         if (idsToUpdate.length > 0) {
           // Send the array of IDs to the backend to update their status
-        //   await viewMessages({ _id: idsToUpdate }).unwrap();
+          // await viewMessages({ _id: idsToUpdate }).unwrap();
         }
         }
       } catch (error) {
@@ -225,4 +224,4 @@ function TrainerChat() {
   );
 }
 
-export default TrainerChat;
+export default WorkerChat;
