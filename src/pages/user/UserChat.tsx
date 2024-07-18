@@ -78,7 +78,7 @@ function UserChat() {
       }
     };
     fetchChat();
-  }, [conversationData._id]);
+  }, [conversationData._id,getMessage,userInfo?._id]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });

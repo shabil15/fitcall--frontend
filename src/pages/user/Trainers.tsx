@@ -42,7 +42,7 @@ function Trainers() {
     }
   
     fetchTrainers();
-  }, [currentPage, specialisationFilter, languageFilter, searchQuery]);
+  }, [currentPage, specialisationFilter, languageFilter, searchQuery,getTrainers]);
 
   const handlePageChange = (pageNumber:number) => {
     setCurrentPage(pageNumber);

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { validationTrainerJoin } from "../../validation/yupValidation";
 import { ITrainerJoin, MyError } from "../../validation/validationTypes";
@@ -8,16 +7,14 @@ import { storage } from "../../app/firebase/config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 // import Spinner from "../common/Spinner";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
+
 
 function JoinFitcall() {
-  const [language, setLanguage] = useState<string[]>();
+  // const [language, setLanguage] = useState<string[]>();
   // const [getLanguage] = useGetServiceMutation();
   const [register] = useTrainerRegisterMutation();
-  const [isSumbit, setSubmit] = useState(false);
+  // const [isSumbit, setSubmit] = useState(false);
   const navigate = useNavigate();
-  const { trainerInfo } = useSelector((state: RootState) => state.auth);
 
   const initialValues: ITrainerJoin = {
     name: "",
@@ -38,7 +35,7 @@ function JoinFitcall() {
       validationSchema: validationTrainerJoin,
       onSubmit: async (values) => {
         console.log('button submit clicked')
-        setSubmit(true);
+        // setSubmit(true);
         const profile:any = values.profile_img;
         let certificate:any = values.certificate;
 
@@ -89,13 +86,13 @@ function JoinFitcall() {
             profile_img,
           }).unwrap();
           navigate("/trainer");
-          setSubmit(false);
+          // setSubmit(false);
           toast.success(res.message);
         } catch (err) {
           toast.error(
             (err as MyError)?.data?.message || (err as MyError)?.error
           );
-          setSubmit(false);
+          // setSubmit(false);
         }
       },
     });
@@ -305,7 +302,7 @@ function JoinFitcall() {
             <div className="mt-8 flex justify-center">
               <button
                 type="submit"
-                className="bg-primary hover:bg-black  h-10 w-2/3 rounded font-Sans text-sm text-secondary font-bold text-2xl"
+                className="bg-primary hover:bg-black  h-10 w-2/3 rounded font-Sans text-sm text-secondary font-bold "
               >
               Join Our Team
               </button>
