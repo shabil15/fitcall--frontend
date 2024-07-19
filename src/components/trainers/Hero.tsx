@@ -5,7 +5,7 @@ function Hero() {
   
 
 <section
-  className="relative bg-[url(../../../src/assets/pexels-leon-ardho-1552242.jpg)] bg-cover bg-center bg-no-repeat"
+  className="relative bg-[url(../../../public/assets/pexels-leon-ardho-1552242.jpg)] bg-cover bg-center bg-no-repeat"
 >
 <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 

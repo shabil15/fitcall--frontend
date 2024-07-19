@@ -49,7 +49,7 @@ const SubscriptionHistory = () => {
       <Navbar />
       <div className="relative">
         <img
-          src="../../../src/assets/header div.jpg"
+          src="../../../public/assets/header div.jpg"
           alt="Header"
           className="pt-20 h-56 w-full object-cover"
         />
@@ -130,7 +130,7 @@ const SubscriptionHistory = () => {
         </div>
       ) : (
         <div className="flex justify-center items-center mt-10">
-          <img src="../../../src/assets/9264822.png" alt="No Subscriptions" className="w-full max-w-md" />
+          <img src="../../../public/assets/9264822.png" alt="No Subscriptions" className="w-full max-w-md" />
           <h1 className="text-white text-2xl">No History Available for You</h1>
         </div>
       )}

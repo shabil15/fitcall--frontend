@@ -102,7 +102,7 @@ function Profile() {
       <Navbar />
       <div className="relative">
         <img
-          src="../../../src/assets/header div.jpg"
+          src="../../../public/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full object-cover"
         />
@@ -126,7 +126,7 @@ function Profile() {
                   src={
                     imagePreview ||
                     trainerInfo?.profile_img ||
-                    "/src/assets/images.png"
+                    "/public/assets/images.png"
                   }
                   alt=""
                   onClick={handleFileClick}

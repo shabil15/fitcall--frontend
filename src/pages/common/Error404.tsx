@@ -16,7 +16,7 @@ function Error404() {
     <Navbar />
     <div className="relative">
         <img
-          src="../../../src/assets/header div.jpg"
+          src="../../../public/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full"
         />

@@ -32,7 +32,7 @@ const Login: React.FC = () => {
         <div className="flex h-screen ">
           {/* Left Pane */}
           <img
-            src="../../../src/assets/Group 880.png"
+            src="../../../public/assets/Group 880.png"
             className="absolute  w-40 m-8 lg:block hidden"
             alt=""
           />
@@ -115,7 +115,7 @@ const Login: React.FC = () => {
             </div>
           </div>
           {/* Right Pane */}
-          <div className="hidden signup-banner lg:flex bg-[url('../../../src/assets/pexels-li-sun-2294361.jpg')] items-center justify-center flex-1 object-center bg-white text-black">
+          <div className="hidden signup-banner lg:flex bg-[url('../../../public/assets/pexels-li-sun-2294361.jpg')] items-center justify-center flex-1 object-center bg-white text-black">
             <div className="text-center"></div>
           </div>
         </div>

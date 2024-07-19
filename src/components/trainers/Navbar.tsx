@@ -54,7 +54,7 @@ function Navbar() {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="" className="flex items-center mb-3">
             <img
-              src="../../../src/assets/FITcALL lOGO.png"
+              src="../../../public/assets/FITcALL lOGO.png"
               className="h-8"
               alt="Flowbite Logo"
             />
@@ -78,7 +78,7 @@ function Navbar() {
                 />:
                 <img
                 className="h-8 w-8 rounded-full"
-                src='/src/assets/images.png'
+                src='/public/assets/images.png'
                  alt=""
               />
               } 

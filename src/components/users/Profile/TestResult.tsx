@@ -67,7 +67,7 @@ const TestResult = () => {
         <div className="mt-3 flex justify-center">
           <img
             className="w-auto h-auto max-w-md  object-cover cursor-pointer"
-            src={imagePreview || userInfo?.testResult || "/src/assets/illustration-downloading-icon.png"}
+            src={imagePreview || userInfo?.testResult || "/public/assets/illustration-downloading-icon.png"}
             alt="Test Result"
             onClick={handleFileClick}
           />

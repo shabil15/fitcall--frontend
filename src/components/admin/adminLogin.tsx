@@ -37,7 +37,7 @@ function AdminLogin() {
   return (
     <main className="mx-auto flex min-h-screen w-full items-center justify-center text-xl font-customFont bg-white text-black">
       <form action="" onSubmit={handleSubmit} className="w-[30rem] flex flex-col space-y-10">
-        <img src="../../../src/assets/Group 880.png" className="mx-auto w-44 " alt="" />
+        <img src="../../../public/assets/Group 880.png" className="mx-auto w-44 " alt="" />
         <div className="text-center text-4xl font-extrabold">Admin Log In</div>
         <div className="relative">
           <input

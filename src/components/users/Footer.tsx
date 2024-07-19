@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="bg-secondary">
       <img
-        src="../../../src/assets/header div.jpg"
+        src="../../../public/assets/header div.jpg"
         alt=""
         className="pt-20 h-48 w-full"
       />

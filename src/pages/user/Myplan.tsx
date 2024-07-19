@@ -129,7 +129,7 @@ function Myplan() {
       <Navbar />
       <div className="relative">
         <img
-          src="../../../src/assets/header div.jpg"
+          src="../../../public/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full"
         />
@@ -144,7 +144,7 @@ function Myplan() {
           </h1>
         </div>
       </div>
-      <section className="relative bg-secondary bg-[url('../../../src/assets/pexels-li-sun-2294361.jpg')] bg-cover bg-no-repeat">
+      <section className="relative bg-secondary bg-[url('../../../public/assets/pexels-li-sun-2294361.jpg')] bg-cover bg-no-repeat">
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         <div className="absolute inset-0 sm:bg-transparent ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
         {userInfo?.isSubscribed ? (
@@ -406,7 +406,7 @@ function Myplan() {
           //   </button>
           // </div>
           <div className="flex justify-center relative items-center mt-10">
-    <img src="../../../src/assets/9264822.png" alt="No Subscriptions" className="w-full max-w-md" />
+    <img src="../../../public/assets/9264822.png" alt="No Subscriptions" className="w-full max-w-md" />
     < h1 className="text-white text-2xl ">You have no Subscription plan</h1>
     <button
             onClick={() => navigate("/pricing")}
