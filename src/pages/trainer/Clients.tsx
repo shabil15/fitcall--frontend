@@ -5,27 +5,28 @@ import { useSelector } from 'react-redux';
 import Navbar from '../../components/trainers/Navbar';
 import Footer from '../../components/trainers/Footer';
 import { useNavigate } from 'react-router-dom';
+import { IUser } from '../../@types/schema';
 
 const ClientsList: React.FC = () => {
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
   const trainerId = trainerInfo?._id;
 
-  const [clients, setClients] = useState([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [clients, setClients] = useState<IUser[]>([]);
   const [getClients] = useGetClientsMutation();
   const navigate = useNavigate(); // Ensure this is at the top level
 
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        setIsLoading(true);
-        const { data } = await getClients(trainerId);
-        setClients(data || []);
+        const response = await getClients(trainerId);
+        
+        if ('data' in response) {
+          setClients(response.data || []);
+        } else {
+          console.error('Error fetching clients:', response.error);
+        }
       } catch (error) {
         console.error('Error fetching clients:', error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -33,10 +34,6 @@ const ClientsList: React.FC = () => {
       fetchClients();
     }
   }, [trainerId, getClients]);
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <div className="bg-secondary">

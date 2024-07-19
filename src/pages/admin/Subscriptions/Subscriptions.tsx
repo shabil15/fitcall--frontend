@@ -9,7 +9,7 @@ import {
   GridSortModel,
   useGridApiRef,
 } from "@mui/x-data-grid";
-import moment from "moment";
+import moment, { MomentInput } from "moment";
 import { grey } from "@mui/material/colors";
 import * as XLSX from "xlsx";
 import { useGetSubscriptionsMutation } from "../../../slices/adminApiSlices";
@@ -54,7 +54,6 @@ const Subscriptions : React.FC<Selected> = ({ setSelectedLink, link }) => {
   }, [getSubscriptions]);
   
 
-  const formatId = (id: string) => id.slice(-8).toUpperCase();
 
   const columns: GridColDef[] = useMemo(
     () => [
@@ -66,13 +65,19 @@ const Subscriptions : React.FC<Selected> = ({ setSelectedLink, link }) => {
         field: "start",
         headerName: "Start Date",
         width: 170,
-        renderCell: (params: GridCellParams) => moment(params.value).format("DD-MM-YYYY"),
+        renderCell: (params: GridCellParams) => {
+          const value = params.value as MomentInput; 
+          return moment(value).format("DD-MM-YYYY");
+        },
       },
       {
         field: "end",
         headerName: "End Date",
         width: 170,
-        renderCell: (params: GridCellParams) => moment(params.value).format("DD-MM-YYYY"),
+        renderCell: (params: GridCellParams) => {
+          const value = params.value as MomentInput; 
+          return moment(value).format("DD-MM-YYYY");
+        },
       },
       { field: "amount", headerName: "Amount", width: 120 },
       { field: "goal", headerName: "User Goal", width: 170 },

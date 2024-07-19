@@ -4,9 +4,10 @@ import CardDataStats from '../../../components/admin/CardDataStats';
 import ChartOne from '../../../components/admin/ChartOne';
 import ChartTwo from '../../../components/admin/ChartTwo';
 import { useGetDashCardsMutation } from "../../../slices/adminApiSlices";
+import {DashCard} from '../../../@types/schema';
 function Dashboard({setSelectedLink, link}:Selected) {
   const [getDashCard] = useGetDashCardsMutation();
-  const [dashcard,setDashCard] = useState("")
+  const [dashcard,setDashCard] = useState<DashCard| null>(null)
 
   useEffect(() => {
     const fetchDashCard = async () => {
@@ -30,7 +31,7 @@ function Dashboard({setSelectedLink, link}:Selected) {
 return (
   <div>
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Total Revenue" total={dashcard?.totalRevenue}>
+        <CardDataStats title="Total Revenue" total={`${dashcard?.totalRevenue}`}>
           <svg
             className="fill-primary "
             width="22"
@@ -49,7 +50,7 @@ return (
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Profit" total={Math.floor(dashcard?.totalProfit)} >
+        <CardDataStats title="Total Profit" total={`${dashcard?.totalProfit}`} >
           <svg
             className="fill-primary "
             width="20"
@@ -72,7 +73,7 @@ return (
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Users" total={dashcard?.totalUsers}>
+        <CardDataStats title="Total Users" total={`${dashcard?.totalUsers}`}>
         <svg
             className="fill-primary "
             width="22"
@@ -95,7 +96,7 @@ return (
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Trainers" total={dashcard?.totalTrainers}>
+        <CardDataStats title="Total Trainers" total={`${dashcard?.totalTrainers}`}>
           <svg
             className="fill-primary "
             width="22"

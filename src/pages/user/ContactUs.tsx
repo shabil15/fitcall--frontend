@@ -36,7 +36,7 @@ function ContactUs() {
                                 className="w-full bg-secondary shadow-xl rounded py-3 px-6 text-sm " />
                             <input type='email' placeholder='Phone No.'
                                 className="w-full bg-secondary shadow-xl  rounded py-3 px-6 text-sm " />
-                            <textarea placeholder='Message' rows="6"
+                            <textarea placeholder='Message' rows={6}
                                 className="w-full bg-secondary  shadow-xl rounded px-6 text-sm pt-3 "></textarea>
                             <button type='button'
                                 className="text-secondary bg-primary  transition  font-semibold rounded text-sm px-6 py-3">

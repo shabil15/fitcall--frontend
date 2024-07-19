@@ -33,7 +33,6 @@ function TrainerProfile() {
       customClass: {
         popup: "swal-custom-background",
         title: "swal2-title",
-        content: "swal2-content",
         confirmButton: "swal2-confirm",
       },
     });

@@ -63,7 +63,7 @@ const healthValues: UpdateHealth = {
     }
   };
 
-  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+  const { values, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: validationForUserUpdate,
     onSubmit: async (values) => {

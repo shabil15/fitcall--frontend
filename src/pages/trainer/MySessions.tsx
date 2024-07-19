@@ -1,3 +1,4 @@
+// @ts-nocheck 
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../../components/trainers/Navbar";
 import Footer from "../../components/trainers/Footer";

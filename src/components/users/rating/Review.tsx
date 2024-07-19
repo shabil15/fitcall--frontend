@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Review = () => {
-  const [reviews, setReviews] = useState([
+  const [reviews] = useState([
     {
       name: "Leroy Jenkins",
       date: "2 days ago",
@@ -27,7 +27,7 @@ const Review = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec est sit amet magna rutrum pharetra. Cras lacinia fringilla mauris, vitae ullamcorper nisl aliquet nec.",
     },
   ]);
-
+  
   return (
     <div className="space-y-4">
       {reviews.map((review, index) => (

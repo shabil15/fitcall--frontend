@@ -33,6 +33,7 @@ export interface UserInfo {
   weight?: string;
   goal?: string;
   diet?: Diet;
+  sessionId?:string;
   testResult?:string;
   sessionTime?:string;
 }

@@ -1,27 +1,23 @@
+
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 import { useGetTrainersMutation } from "../../slices/userApiSlice";
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import {ITrainer} from '../../@types/schema';
 
 function Trainers() {
   
   const [showSearchInput, setShowSearchInput] = useState(false);
-  const [trainers, setTrainers] = useState([]); 
+  const [trainers, setTrainers] = useState<ITrainer[]>([]); 
   const [currentPage,setCurrentPage]= useState<number>(1);
   const [totalPages,setTotalPages] = useState<number>(1)
   const itemsPerPage:number = 4;
   const [specialisationFilter, setSpecialisationFilter] = useState<string>("");
   const [languageFilter, setLanguageFilter] = useState<string>("");
   const [searchQuery,setSearchQuery] = useState<string>("");
-  const [getTrainers] = useGetTrainersMutation({
-    page:currentPage,
-    per_page: itemsPerPage,
-    specialisation: specialisationFilter,
-    language: languageFilter,
-    search: searchQuery
-  });
+  const [getTrainers] = useGetTrainersMutation();
   const navigate = useNavigate()
 
   useEffect(() => {

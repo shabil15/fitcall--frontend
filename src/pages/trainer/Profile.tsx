@@ -30,8 +30,8 @@ function Profile() {
   const dispatch = useDispatch();
 
   const initialValues: UpdateTrainer = {
-    name: trainerInfo?.name,
-    mobile: trainerInfo?.mobile,
+    name: trainerInfo?.name ?? "",
+    mobile: trainerInfo?.mobile?? "",
   };
 
   const handleFileClick = () => {

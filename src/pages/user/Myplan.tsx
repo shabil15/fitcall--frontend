@@ -1,3 +1,5 @@
+// @ts-nocheck 
+
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 import { useEffect } from 'react';

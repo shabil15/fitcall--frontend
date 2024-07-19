@@ -3,6 +3,7 @@
     name: string;
     email: string;
     mobile : string;
+    goal?:string;
     profile_img: string;
     isBlocked: boolean;
     createdAt: string;
@@ -41,8 +42,8 @@ export interface IConversation {
   user:string,
   userEmail:string,
   user_profile:string,
-  worker:string,
-  worker_profile:string
+  trainer:string,
+  trainer_profile: string;
 }
 
 
@@ -54,4 +55,22 @@ export interface TrainerDetails {
   description: string;
   experience: string;
   certificate: string;
+}
+
+export interface DashCard {
+  totalRevenue: number;
+  totalProfit: number;
+  totalUsers: number;
+  totalTrainers: number;
+}
+
+export interface Client {
+  _id: string;
+  name: string;
+}
+
+export interface Session {
+  sessionId: string;
+  startTime: string;
+  clientName: string;
 }
