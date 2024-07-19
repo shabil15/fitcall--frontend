@@ -1,4 +1,3 @@
-import React from 'react'
 import Navbar from '../../components/users/Navbar';
 import Footer from '../../components/users/Footer';
 import Lottie from 'react-lottie';
@@ -37,7 +36,7 @@ function Error404() {
         <p className="mb-4">Don’t worry, it happens to the best of us. Here are a few things you can try:</p>
         <ul className="list-disc list-inside mb-4 text-left">
             <li className="mb-2">Double-check the URL – Typos are like squats: annoying but necessary!</li>
-            <li className="mb-2">Return to the homepage – Click <a href="/" class="text-blue-500 underline">here</a> to get back on track.</li>
+            <li className="mb-2">Return to the homepage – Click <a href="/" className="text-blue-500 underline">here</a> to get back on track.</li>
         </ul>
         <p>Still lost? Maybe a quick jog will clear your head! 🏃‍♂️💨</p>
     </div>

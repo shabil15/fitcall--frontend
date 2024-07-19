@@ -12,6 +12,8 @@ import { Selected } from "../../../@types/Props";
 import { useGetJoinRequestsMutation } from "../../../slices/adminApiSlices";
 import { ITrainer } from "../../../@types/schema";
 import TrainerActions from "./TrainerActions";
+import {toast} from 'react-toastify';
+import { MyError } from "../../../validation/validationTypes";
 
 const Trainers: React.FC<Selected> = ({ setSelectedLink, link }) => {
   const [rowId, setRowId] = useState<string | null>(null);
@@ -28,8 +30,9 @@ const Trainers: React.FC<Selected> = ({ setSelectedLink, link }) => {
           (trainer: Record<string, any>) => trainer.status === "accepted"
         );
         setTrainers(pendingTrainers);
-      } catch (error) {
-        console.error("Error fetching trainers:", error);
+      } catch (err) {
+        console.error("Error fetching trainers:", err);
+        toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
       }
     }
 

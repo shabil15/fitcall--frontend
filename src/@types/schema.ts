@@ -44,3 +44,14 @@ export interface IConversation {
   worker:string,
   worker_profile:string
 }
+
+
+export interface TrainerDetails {
+  _id: string;
+  name: string;
+  profile_img: string;
+  specialisation: string;
+  description: string;
+  experience: string;
+  certificate: string;
+}

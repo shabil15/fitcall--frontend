@@ -1,8 +1,8 @@
-import React, {ChangeEvent,useState,useRef,useEffect } from "react";
+import {ChangeEvent,useState,useRef,useEffect } from "react";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
 // import ProfileData from "../../components/users/Profile/ProfileData";
-import { MdModeEdit,MdFoodBank } from "react-icons/md";
+import { MdFoodBank } from "react-icons/md";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { GoGoal } from "react-icons/go";
 import { IoPersonSharp } from "react-icons/io5";

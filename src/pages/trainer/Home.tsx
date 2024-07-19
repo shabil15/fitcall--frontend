@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import {useEffect} from 'react'
 import Navbar from '../../components/trainers/Navbar'
 import Hero from '../../components/trainers/Hero'
 import Footer from '../../components/trainers/Footer'

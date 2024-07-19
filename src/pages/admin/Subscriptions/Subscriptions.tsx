@@ -17,8 +17,9 @@ import dayjs, { Dayjs } from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Selected } from "../../../@types/Props";
 
-const Subscriptions = () => {
+const Subscriptions : React.FC<Selected> = ({ setSelectedLink, link }) => {
   const [rowId, setRowId] = useState<string | null>(null);
   const [getSubscriptions] = useGetSubscriptionsMutation();
   const [subscriptions, setSubscriptions] = useState<any[]>([]);
@@ -30,8 +31,9 @@ const Subscriptions = () => {
   useEffect(() => {
     async function fetchSubscriptions() {
       try {
-        const res = await getSubscriptions().unwrap();
-        console.log('Fetched Subscriptions:', res); // Log the response to inspect structure
+        setSelectedLink(link);
+        const res = await getSubscriptions(link).unwrap();
+        console.log('Fetched Subscriptions:', res); 
         const flattenedSubscriptions = res.map((sub: any) => ({
           _id: sub._id,
           name: sub.name,

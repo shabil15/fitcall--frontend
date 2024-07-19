@@ -1,4 +1,3 @@
-import React from 'react'
 import Navbar from '../../components/users/Navbar'
 import Footer from '../../components/users/Footer';
 function ContactUs() {

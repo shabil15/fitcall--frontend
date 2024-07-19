@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/users/Navbar";
 import Footer from "../../components/users/Footer";
-import { useGetTrainerDetailsMutation, useSetTrainerMutation } from "../../slices/userApiSlice";
+import { useGetTrainerDetailsMutation } from "../../slices/userApiSlice";
 import { RootState } from "../../app/store";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import {useCreateConversationMutation} from '../../slices/chatApiSlice';
 import { IoChatboxSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import AddRating from "../../components/users/rating/AddRating";
+import {TrainerDetails} from '../../@types/schema';
 function MyTrainer() {
   const [activeTab, setActiveTab] = useState(1);
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const [getTrainerDetails] = useGetTrainerDetailsMutation();
-  const [trainerDetails, setTrainerDetails] = useState(null);
+  const [trainerDetails, setTrainerDetails] = useState<TrainerDetails | null>(null);
   const navigate = useNavigate();
   const [conversation] = useCreateConversationMutation();
   
