@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
       <nav className="max-w-screen-xl flex items-center justify-between mx-auto p-4 text-white">
         <a href="/" className="flex items-center">
           <img
-            src="../../../public/assets/FITcALL lOGO.png"
+            src="/assets/FITcALL lOGO.png"
             className="h-8"
             alt="FitCall Logo"
           />
@@ -216,7 +216,7 @@ const Navbar: React.FC = () => {
                     ) : (
                       <img
                         className="w-full h-full rounded-full"
-                        src="/public/assets/images.png"
+                        src="/assets/images.png"
                         alt="Default Profile"
                       />
                     )}

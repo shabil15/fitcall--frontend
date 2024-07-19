@@ -38,7 +38,7 @@ function  Pricing() {
       <Navbar />
       <div className="relative">
         <img
-          src="../../../public/assets/header div.jpg"
+          src="/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full"
         />
@@ -57,7 +57,7 @@ function  Pricing() {
       <div className="h-full max-[400px]:p-2 w-full flex items-center flex-col justify-center ">
         
       </div>
-      <section className="relative bg-secondary bg-[url('../../../public/assets/pexels-li-sun-2294361.jpg')] bg-cover bg-no-repeat">
+      <section className="relative bg-secondary bg-[url('/assets/pexels-li-sun-2294361.jpg')] bg-cover bg-no-repeat">
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
 <div

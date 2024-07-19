@@ -12,7 +12,7 @@ function Hero() {
 
   return (
     <div>
-      <section className="relative bg-[url(../../../public/assets/pexels-leon-ardho-1552242.jpg)] bg-cover bg-center bg-no-repeat">
+      <section className="relative bg-[url(/assets/pexels-leon-ardho-1552242.jpg)] bg-cover bg-center bg-no-repeat">
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
         <div className="absolute inset-0 sm:bg-transparent ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>

@@ -167,7 +167,7 @@ const healthValues: UpdateHealth = {
       <Navbar />
       <div className="relative">
         <img
-          src="../../../public/assets/header div.jpg"
+          src="/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full"
         />
@@ -193,7 +193,7 @@ const healthValues: UpdateHealth = {
               <img className="object-cover h-full w-full" src={
                       imagePreview ||
                       userInfo?.profile_img ||
-                      "/public/assets/images.png"
+                      "/assets/images.png"
                     }
                     alt=""
                     onClick={handleFileClick} />
@@ -217,7 +217,7 @@ const healthValues: UpdateHealth = {
                     src={
                       imagePreview ||
                       userInfo?.profile_img ||
-                      "/public/assets/images.png"
+                      "/assets/images.png"
                     }
                     alt=""
                     onClick={handleFileClick}

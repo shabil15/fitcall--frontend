@@ -14,30 +14,30 @@ function LandingPage() {
       <div className="grid grid-cols-5 px-24 sm:grid-cols-4 md:grid-cols-3 py-16 lg:grid-cols-5 gap-4 sm:gap-8 md:gap-4 lg:gap-0 " data-aos="fade-up">
       {/* Image 1 */}
       <div className="flex flex-col items-center ">
-        <img src="../../../public/assets/weighing.png" alt="Image 1" className="w-half" />
+        <img src="/assets/weighing.png" alt="Image 1" className="w-half" />
         <span className=" mt-2 text-center text-white hidden md:inline-block">Weight Loss</span>
       </div>
 
       {/* Image 2 */}
       <div className="flex flex-col items-center">
-        <img src="../../../public/assets/Muscle.png" alt="Image 2" className="w-half" />
+        <img src="/assets/Muscle.png" alt="Image 2" className="w-half" />
         <span className="mt-2 text-center text-white hidden md:inline-block">Muscle Gain</span>
       </div>
 
       {/* Image 3 */}
       <div className="flex flex-col items-center">
-        <img src="../../../public/assets/Pulse.png" alt="Image 3" className="w-half" />
+        <img src="/assets/Pulse.png" alt="Image 3" className="w-half" />
         <span className="mt-2 text-center text-white hidden md:inline-block">Cardio Fitness</span>
       </div>
 
       {/* Image 4 */}
       <div className="flex flex-col items-center">
-        <img src="../../../public/assets/Body.png" alt="Image 4" className="w-half" />
+        <img src="/assets/Body.png" alt="Image 4" className="w-half" />
         <span className="mt-2 text-center text-white hidden md:inline-block ">Mind-body wellness</span>
       </div>
       {/* Image 5 */}
       <div className="flex flex-col items-center ">
-        <img src="../../../public/assets/Healthy Eating.png" alt="Image 5" className="w-half" />
+        <img src="/assets/Healthy Eating.png" alt="Image 5" className="w-half" />
         <span className="mt-2 text-center text-white hidden md:inline-block ">Nutrition and Diet</span>
       </div>
     </div>
@@ -53,7 +53,7 @@ function LandingPage() {
 
     <div className="flex flex-wrap items-center mt-20 text-left text-white text-center" data-aos="fade-up">
         <div className="w-full md:w-3/5 lg:w-1/2 px-4">
-            <img src="../../../public/assets/pexels-pixabay-209969.jpg" alt="gem" className="inline-block rounded shadow-lg rounded-lg shadow-lg  shadow-black"/>
+            <img src="/assets/pexels-pixabay-209969.jpg" alt="gem" className="inline-block rounded shadow-lg rounded-lg shadow-lg  shadow-black"/>
         </div>
         <div className="w-full md:w-2/5 lg:w-1/2 px-6 text-center md:text-left lg:pl-12">
             <h3 className="font-bold mt-8 text-3xl md:mt-0 md:text-4xl sm:text-2xl">
@@ -67,7 +67,7 @@ function LandingPage() {
 
     <div className="flex flex-wrap items-center mt-20 text-left text-white text-center" data-aos="fade-up">
         <div className="w-full md:w-3/5 lg:w-1/2 px-4">
-            <img src="../../../public/assets/pexels-ivan-samkov-4162491.jpg" alt="project members" className="inline-block object-cover rounded-lg shadow-lg  shadow-black"/>
+            <img src="/assets/pexels-ivan-samkov-4162491.jpg" alt="project members" className="inline-block object-cover rounded-lg shadow-lg  shadow-black"/>
         </div>
         <div className="w-full md:w-2/5 lg:w-1/2 px-4 md:order-first text-center md:text-left lg:pr-12">
             <h3 className="font-bold mt-8 text-3xl md:mt-0 md:text-4xl ">
@@ -80,7 +80,7 @@ function LandingPage() {
 
     <div className="flex flex-wrap items-center mt-20   text-white text-center" data-aos="fade-up">
         <div className=" md:w-3/5 lg:w-1/2 px-4">
-            <img src="../../../public/assets/pexels-cottonbro-studio-3205403.jpg" alt="editor" className="inline-block object-cover rounded-lg shadow-lg shadow-black  "/>
+            <img src="/assets/pexels-cottonbro-studio-3205403.jpg" alt="editor" className="inline-block object-cover rounded-lg shadow-lg shadow-black  "/>
         </div>
         <div className="w-full md:w-2/5 lg:w-1/2 px-4 text-center md:text-left lg:pl-12">
             <h3 className="font-bold mt-8 text-3xl md:mt-0 md:text-4xl">

@@ -6,7 +6,7 @@ function ContactUs() {
       <Navbar />
       <div className="relative">
         <img
-          src="../../../public/assets/header div.jpg"
+          src="/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full"
         />

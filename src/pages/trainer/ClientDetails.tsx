@@ -79,7 +79,7 @@ function ClientDetails() {
       <Navbar />
       <div className="relative">
         <img
-          src="../../../public/assets/header div.jpg"
+          src="/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full"
         />
@@ -100,7 +100,7 @@ function ClientDetails() {
               <div className="mt-3 flex justify-center ">
                 <img
                   className="rounded-full w-40 h-40 object-cover cursor-pointer"
-                  src={data?.profile_img || "/public/assets/images.png"}
+                  src={data?.profile_img || "/assets/images.png"}
                   alt=""
                 />
               </div>

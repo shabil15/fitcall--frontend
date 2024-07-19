@@ -45,7 +45,7 @@ function TrainerLogin() {
     <div className="flex w-screen flex-wrap text-slate-800">
       <div className="flex w-full flex-col md:w-1/2">
         <div className="flex justify-center pt-12 md:justify-start md:pl-12">
-          <img className="w-28" src="/public/assets/icons/adhil-02.png" alt="" />
+          <img className="w-28" src="/assets/icons/adhil-02.png" alt="" />
         </div>
         <div className="my-auto mx-auto flex flex-col justify-center text-center px-6 md:justify-start lg:w-[28rem]">
           <p className="font-Sans text-primary text-center text-xl font-bold md:leading-tight md:text-left md:text-5xl">
@@ -116,7 +116,7 @@ function TrainerLogin() {
           </div>
         </div>
       </div>
-      <div className="relative hidden h-screen select-non bg-[url('../../../public/assets/pexels-li-sun-2294361.jpg')]  md:block md:w-1/2">
+      <div className="relative hidden h-screen select-non bg-[url('/assets/pexels-li-sun-2294361.jpg')]  md:block md:w-1/2">
         <div className="py-16 px-8 text-white xl:w-[40rem]">
           <p className="mb-4">
             {/* Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
