@@ -6,6 +6,7 @@ import { useGetTrainersMutation } from "../../slices/userApiSlice";
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import {ITrainer} from '../../@types/schema';
+import { motion } from 'framer-motion';
 
 function Trainers() {
   
@@ -64,6 +65,10 @@ function Trainers() {
         searchInput.focus();
       }
     }
+  };
+
+  const handleCardClick = (trainer:ITrainer) => {
+    navigate('/trainerDetails', { state: { data: trainer } });
   };
 
   const specialisations: string[] = [
@@ -158,26 +163,32 @@ function Trainers() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-44 md:px-14 px-3">
-        {trainers.length > 0 ? (
-          trainers.map((trainer) => (
-            <div
-              key={trainer._id}
-              onClick={() => navigate("/trainerDetails", { state: { data: trainer } })}
-              className="max-w-52 shadow-lg rounded-lg overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group"
-            >
-              <img className="w-full h-60 object-cover" src={trainer.profile_img} alt="Trainer" />
-              <div className="bg-secondary text-center py-4 transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-4">
-                <h3 className="text-xl font-semibold text-white">{trainer.name}</h3>
-                <p className="text-white text-sm">{trainer.specialisation}</p>
-                <p className="text-xs text-white">{trainer.language}</p>
-              </div>
-            </div>
-          ))
-        ) : (
-          // Render skeleton loaders when trainers are loading or not available
-          Array.from({ length: itemsPerPage }).map((_, index) => <TrainerCardSkeleton key={index} />)
-        )}
-      </div>
+      {trainers.length > 0 ? (
+      trainers.map((trainer) => (
+        <motion.div
+          key={trainer._id}
+          onClick={() => handleCardClick(trainer)}
+          className="max-w-52 shadow-lg rounded-lg overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group"
+          layoutId={`trainer-${trainer._id}`}
+        >
+          <motion.img
+            layoutId={`trainer-img-${trainer._id}`}
+            className="w-full h-60 object-cover"
+            src={trainer.profile_img}
+            alt="Trainer"
+          />
+          <div className="bg-secondary text-center py-4 transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-4">
+            <h3 className="text-xl font-semibold text-white">{trainer.name}</h3>
+            <p className="text-white text-sm">{trainer.specialisation}</p>
+            <p className="text-xs text-white">{trainer.language}</p>
+          </div>
+        </motion.div>
+      ))
+      ):(
+        Array.from({ length: itemsPerPage }).map((_, index) => <TrainerCardSkeleton key={index} />)
+      )
+    }
+    </div>
 
       <div className="pagingation text-center text-primary">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>

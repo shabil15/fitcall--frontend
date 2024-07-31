@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import RatingStars from '../../components/users/rating/RatingStars';
 import Review from '../../components/users/rating/Review';
+import { motion } from 'framer-motion';
+
 function TrainerProfile() {
   const [activeTab, setActiveTab] = useState(1);
   const [getAverageRating] = useGetAverageRatingMutation();
@@ -90,8 +92,10 @@ function TrainerProfile() {
       </div>
 
       <div className="md:flex md:text-center align-center md:px-52">
-        <img
+      <motion.img
+          layoutId={`trainer-img-${data._id}`}
           src={data?.profile_img}
+
           alt="user Profile Image"
           className="h-60 w-48 object-cover rounded-lg shadow-xl mt-16 "
         />
