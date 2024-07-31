@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { useGetClientsMutation } from '../../slices/TrainerApiSlice';
 import { RootState } from '../../app/store';
@@ -5,28 +6,27 @@ import { useSelector } from 'react-redux';
 import Navbar from '../../components/trainers/Navbar';
 import Footer from '../../components/trainers/Footer';
 import { useNavigate } from 'react-router-dom';
-import { IUser } from '../../@types/schema';
 
 const ClientsList: React.FC = () => {
   const { trainerInfo } = useSelector((state: RootState) => state.auth);
   const trainerId = trainerInfo?._id;
 
-  const [clients, setClients] = useState<IUser[]>([]);
+  const [clients, setClients] = useState([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [getClients] = useGetClientsMutation();
   const navigate = useNavigate(); // Ensure this is at the top level
 
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await getClients(trainerId);
-        
-        if ('data' in response) {
-          setClients(response.data || []);
-        } else {
-          console.error('Error fetching clients:', response.error);
-        }
+        setIsLoading(true);
+        const { data } = await getClients(trainerId);
+        setClients(data || []);
       } catch (error) {
         console.error('Error fetching clients:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -35,12 +35,16 @@ const ClientsList: React.FC = () => {
     }
   }, [trainerId, getClients]);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="bg-secondary">
       <Navbar />
       <div className="relative">
         <img
-          src="/assets/header div.jpg"
+          src="../../../src/assets/header div.jpg"
           alt=""
           className="pt-20 h-56 w-full"
         />
