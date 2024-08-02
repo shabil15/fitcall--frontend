@@ -34,7 +34,7 @@ const MySessions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io("https://brandkicks.shop");
     socketRef.current = socket;
 
     socket.on("connect", () => {

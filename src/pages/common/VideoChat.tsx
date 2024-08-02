@@ -28,7 +28,7 @@ const VideoChat = () => {
     }
 
     const initSocket = () => {
-      const socket = io("http://localhost:3000");
+      const socket = io("https://brandkicks.shop");
       socketRef.current = socket;
 
       socket.on("connect", () => {
